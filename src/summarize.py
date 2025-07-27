@@ -7,10 +7,10 @@ import time
 
 def enhance_movie_data(input_file: str = None, output_file: str = None) -> List[Dict]:
     if not input_file:
-        input_file = os.path.join('data', 'showtimes.json')
+        input_file = os.path.join('..', 'data', 'showtimes.json')
     
     if not output_file:
-        output_file = os.path.join('data', 'enhanced_showtimes.json')
+        output_file = os.path.join('..', 'data', 'enhanced_showtimes.json')
     
     # Load existing data
     if not os.path.exists(input_file):

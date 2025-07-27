@@ -6,7 +6,7 @@ from theaters.theater_registry import theater_registry
 
 class CentralizedScraper:
     def __init__(self):
-        self.data_file = os.path.join('data', 'showtimes.json')
+        self.data_file = os.path.join('..', 'data', 'showtimes.json')
     
     def scrape_all_theaters(self) -> List[Dict]:
         all_movies = []
