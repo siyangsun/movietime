@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>it's movie time!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Maiden%20Orange');
+        
+        /* Layout constants */
+        :root {
+            --container-max-width: 1400px;
+            --container-padding: 30px 40px;
+            --grid-gap: 30px;
+            --poster-width: 320px;
+            --poster-height: 480px;
+            --shadow-blur: 30px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Maiden Orange', serif;
+            line-height: 1.7;
+            color: #3d3d3d;
+            background: #f4f1ed url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="20" cy="20" r="1" fill="%23d4d0c7" opacity="0.3"/><circle cx="80" cy="40" r="1" fill="%23c8c3b8" opacity="0.2"/><circle cx="40" cy="70" r="1" fill="%23d4d0c7" opacity="0.4"/><circle cx="90" cy="90" r="1" fill="%23c8c3b8" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: var(--container-padding);
+            background: rgba(255, 253, 248, 0.85);
+            border: 2px dashed #8b7d6b;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(139, 125, 107, 0.2);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 2px dotted #a68b5b;
+            position: relative;
+        }
+        
+        header::before {
+            content: "✦ ✧ ✦";
+            display: block;
+            color: #8b7d6b;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            font-size: 2.4em;
+            color: #5d4e37;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-transform: lowercase;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 1em;
+            color: #8b7d6b;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .last-updated {
+            font-size: 0.85em;
+            color: #a68b5b;
+            margin-top: 15px;
+            padding: 8px 15px;
+            background: #f9f7f4;
+            border: 1px solid #d4cfc7;
+            border-radius: 15px;
+            display: inline-block;
+        }
+        
+        .theater-section {
+            margin-bottom: 50px;
+            background: #fffef9;
+            border: 2px solid #d4cfc7;
+            border-radius: 25px;
+            padding: 25px;
+            position: relative;
+        }
+        
+        .theater-section::before {
+            content: "◦ ◦ ◦";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fffef9;
+            padding: 0 15px;
+            color: #a68b5b;
+            font-size: 1.2em;
+        }
+        
+        .theater-name {
+            font-size: 1.6em;
+            color: #5d4e37;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 700;
+            text-transform: lowercase;
+            letter-spacing: 1px;
+        }
+        
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--grid-gap);
+            margin-top: 20px;
+        }
+        
+        /* Responsive grid adjustments */
+        @media (max-width: 1300px) {
+            .movies-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .movies-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+        }
+        
+        .movie-card {
+            background: #f9f7f4;
+            border: 1px dashed #c8c3b8;
+            border-radius: 20px;
+            padding: 25px;
+            position: relative;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .movie-card:hover {
+            background: #fefcf7;
+            border-color: #a68b5b;
+        }
+        
+        .movie-card::before {
+            content: "";
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: #d4a574;
+            font-size: 1.2em;
+        }
+        
+        .movie-header {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        
+        .movie-poster {
+            flex-shrink: 0;
+            width: var(--poster-width);
+            height: var(--poster-height);
+            border-radius: 15px;
+            object-fit: cover;
+            border: 4px solid #d4cfc7;
+            background: #f0ebe4;
+            box-shadow: 0 8px 20px rgba(139, 125, 107, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .movie-poster:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px var(--shadow-blur) rgba(139, 125, 107, 0.5);
+        }
+        
+        .movie-info {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .movie-title {
+            font-size: 1.3em;
+            color: #5d4e37;
+            margin-bottom: 8px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .movie-year {
+            font-size: 0.85em;
+            color: #a68b5b;
+            margin-bottom: 5px;
+        }
+        
+        .movie-genres {
+            font-size: 0.8em;
+            color: #8b7d6b;
+            margin-bottom: 8px;
+        }
+        
+        .summary {
+            font-style: italic;
+            color: #6b5d4f;
+            margin-bottom: 15px;
+            line-height: 1.7;
+            padding: 12px 16px;
+            background: #fefcf7;
+            border: 1px dotted #d4a574;
+            border-radius: 15px;
+            position: relative;
+        }
+        
+        .summary::before {
+            content: "~";
+            position: absolute;
+            top: -8px;
+            left: 20px;
+            background: #fefcf7;
+            padding: 0 8px;
+            color: #d4a574;
+        }
+        
+        .original-description {
+            color: #7a6f61;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            line-height: 1.6;
+            padding: 10px;
+            background: rgba(212, 207, 199, 0.1);
+            border-radius: 10px;
+        }
+        
+        .tags {
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #f0ebe4;
+            color: #8b7d6b;
+            border: 1px solid #d4cfc7;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            margin-right: 6px;
+            margin-bottom: 4px;
+            text-transform: lowercase;
+            font-weight: 400;
+        }
+        
+        .visual-style {
+            font-size: 0.85em;
+            color: #a68b5b;
+            font-style: italic;
+            margin-bottom: 15px;
+            padding: 8px 12px;
+            background: rgba(166, 139, 91, 0.1);
+            border-radius: 10px;
+            border-left: 3px solid #d4a574;
+        }
+        
+        .showtimes {
+            margin-top: 18px;
+            padding-top: 12px;
+            border-top: 1px dotted #d4cfc7;
+        }
+        
+        .showtimes-label {
+            font-weight: 700;
+            color: #5d4e37;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+        
+        .showtime {
+            display: inline-block;
+            background: #8b7d6b;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 15px;
+            margin-right: 8px;
+            margin-bottom: 6px;
+            font-weight: 400;
+            font-size: 0.85em;
+        }
+        
+        .showtime-link {
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .showtime-link:hover {
+            background: #5d4e37;
+            color: #fff;
+            transform: translateY(-1px);
+        }
+        
+        .no-showtimes {
+            color: #b08968;
+            font-style: italic;
+            font-size: 0.9em;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            color: #a68b5b;
+            font-size: 0.85em;
+            border-top: 2px dotted #d4cfc7;
+        }
+        
+        footer::before {
+            content: "✧ ✦ ✧";
+            display: block;
+            color: #d4a574;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .footer-links {
+            margin-top: 15px;
+        }
+        
+        .footer-links a {
+            color: #8b7d6b;
+            text-decoration: none;
+            margin: 0 12px;
+            border-bottom: 1px dotted #c8c3b8;
+        }
+        
+        .footer-links a:hover {
+            color: #5d4e37;
+            border-bottom-color: #5d4e37;
+        }
+        
+        @media (max-width: 900px) {
+            .container {
+                margin: 10px;
+                padding: 20px 25px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .theater-name {
+                font-size: 1.4em;
+            }
+            
+            .movie-card {
+                padding: 20px;
+            }
+            
+            .movie-header {
+                gap: 15px;
+            }
+            
+            .movie-poster {
+                width: 240px;
+                height: 360px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .movie-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .movie-poster {
+                width: 200px;
+                height: 300px;
+                margin-bottom: 15px;
+            }
+            
+            .movie-info {
+                width: 100%;
+            }
+        }
+        
+        .stats {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1em;
+            color: #8b7d6b;
+            padding: 10px 15px;
+            background: rgba(212, 167, 116, 0.1);
+            border-radius: 15px;
+            border: 1px dotted #d4a574;
+        }
+        
+        .highlight {
+            color: #b08968;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>it's movie time!</h1>
+            <div class="stats">
+                currently tracking <span class="highlight">{{ total_movies }}</span> films 
+                across <span class="highlight">{{ theaters|length }}</span> local theaters
+            </div>
+            {% if last_updated %}
+            <div class="last-updated">last updated: {{ last_updated }}</div>
+            {% endif %}
+        </header>
+
+        {% for theater_name, movies in theaters.items() %}
+        <section class="theater-section">
+            <h2 class="theater-name">{{ theater_name }}</h2>
+            
+            {% if movies %}
+            <div class="movies-grid">
+                {% for movie in movies %}
+                <div class="movie-card">
+                    <div class="movie-header">
+                        {% if movie.poster_url %}
+                        <img src="{{ movie.poster_url }}" alt="{{ movie.title }} poster" class="movie-poster">
+                        {% endif %}
+                        
+                        <div class="movie-info">
+                            <h3 class="movie-title">{{ movie.title }}</h3>
+                            
+                            {% if movie.imdb_year %}
+                            <div class="movie-year">{{ movie.imdb_year }}</div>
+                            {% endif %}
+                            
+                            {% if movie.imdb_genres %}
+                            <div class="movie-genres">{{ movie.imdb_genres|join(', ') }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    {% if movie.summary %}
+                    <div class="summary">
+                        {{ movie.summary }}
+                    </div>
+                    {% endif %}
+                    
+                    {% if movie.imdb_plot %}
+                    <div class="original-description">
+                        {{ movie.imdb_plot[:200] }}{% if movie.imdb_plot|length > 200 %}...{% endif %}
+                    </div>
+                    {% elif movie.description %}
+                    <div class="original-description">
+                        {{ movie.description[:200] }}{% if movie.description|length > 200 %}...{% endif %}
+                    </div>
+                    {% endif %}
+                    
+                    {% if movie.tags %}
+                    <div class="tags">
+                        {% for tag in movie.tags %}
+                        <span class="tag">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    
+                    {% if movie.visual_style %}
+                    <div class="visual-style">
+                        {{ movie.visual_style }}
+                    </div>
+                    {% endif %}
+                    
+                    <div class="showtimes">
+                        <div class="showtimes-label">Showtimes:</div>
+                        {% if movie.showtime_links %}
+                            {% for showtime_info in movie.showtime_links %}
+                            {% if showtime_info.url %}
+                            <a href="{{ showtime_info.url }}" target="_blank" class="showtime showtime-link">{{ showtime_info.time }}</a>
+                            {% else %}
+                            <span class="showtime">{{ showtime_info.time }}</span>
+                            {% endif %}
+                            {% endfor %}
+                        {% elif movie.showtimes %}
+                            {% for showtime in movie.showtimes %}
+                            <span class="showtime">{{ showtime }}</span>
+                            {% endfor %}
+                        {% else %}
+                            <span class="no-showtimes">Check theater website for times</span>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p style="text-align: center; color: #7f8c8d; font-style: italic;">
+                No current showtimes available
+            </p>
+            {% endif %}
+        </section>
+        {% endfor %}
+        
+        {% if not theaters %}
+        <section class="theater-section">
+            <p style="text-align: center; color: #7f8c8d; font-style: italic; font-size: 1.2em;">
+                No theater data available at this time. Please check back later.
+            </p>
+        </section>
+        {% endif %}
+    </div>
+
+    <footer>
+        <p>showtimes updated daily ~ check theater sites for latest info</p>
+        <div class="footer-links">
+            {% for theater_name, movies in theaters.items() %}
+                {% if movies and movies[0].showtime_links and movies[0].showtime_links[0].url %}
+                <a href="{{ movies[0].showtime_links[0].url }}" target="_blank">{{ theater_name }}</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </footer>
+</body>
+</html>
