@@ -2,8 +2,8 @@ name: Update Independent Cinema Site
 
 on:
   schedule:
-    # Run daily at 6 AM UTC (adjust for your timezone)
-    - cron: '0 6 * * *'
+    # Run daily at 10 AM UTC (adjust for your timezone)
+    - cron: '0 10 * * *'
   workflow_dispatch: # Allow manual triggering
   push:
     branches: [ main ]
