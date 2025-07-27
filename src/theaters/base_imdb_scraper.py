@@ -1,4 +1,3 @@
-# base IMDB theater scraper
 from typing import List, Dict, Optional
 import json
 import re
@@ -8,17 +7,15 @@ import traceback
 from theaters.base_theater import BaseTheaterScraper
 from imdb_api import IMDBAPIClient
 
-# Scraping constants
-IMDB_LOCATION_CODE = "US/10006"  # NYC area code for IMDB
 MAX_MOVIES_TO_ENRICH = 50  # Limit for API calls
 MIN_SHOWTIME_LENGTH = 3  # Minimum characters for valid showtime
-
+IMDB_BASE_URL = "https://www.imdb.com/showtimes/cinema/US"
 
 class IMDBTheaterScraper(BaseTheaterScraper):
     
     def __init__(self, theater_name: str, imdb_cinema_id: str, purchase_url: str = "https://filmforum.org/now_playing", theater_description: str = ""):
         # Construct IMDB showtimes URL
-        imdb_url = f"https://www.imdb.com/showtimes/cinema/US/{imdb_cinema_id}/{IMDB_LOCATION_CODE}/"
+        imdb_url = f"{IMDB_BASE_URL}/{imdb_cinema_id}/"
         
         super().__init__(
             theater_name=theater_name,

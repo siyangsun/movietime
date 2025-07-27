@@ -1,4 +1,3 @@
-# centralized scraper using theater registry
 import json
 import os
 from datetime import datetime

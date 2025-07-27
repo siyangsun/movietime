@@ -1,4 +1,4 @@
-# basic flow of nightly job
+## basic flow of nightly job
 - scrape showtimes from each theater from imdb
 - manually input theater metadata from consts
 - get movie metadata from imdb API

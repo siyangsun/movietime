@@ -1,4 +1,3 @@
-# base theater scraper
 from typing import List, Dict, Optional
 import requests
 from bs4 import BeautifulSoup

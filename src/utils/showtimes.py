@@ -3,7 +3,6 @@ Time and showtime processing utilities for theater scrapers
 """
 import re
 from typing import List, Optional, Set
-from datetime import datetime, time
 
 
 class ShowtimeExtractor:
