@@ -173,7 +173,6 @@ def build_complete_site():
     print("Complete site building pipeline finished!")
 
 if __name__ == "__main__":
-    
     if len(sys.argv) > 1 and sys.argv[1] == "--complete":
         build_complete_site()
     else:

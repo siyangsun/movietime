@@ -14,7 +14,6 @@ IMDB_BASE_URL = "https://www.imdb.com/showtimes/cinema/US"
 class IMDBTheaterScraper(BaseTheaterScraper):
     
     def __init__(self, theater_name: str, imdb_cinema_id: str, purchase_url: str = "https://filmforum.org/now_playing", theater_description: str = ""):
-        # Construct IMDB showtimes URL
         imdb_url = f"{IMDB_BASE_URL}/{imdb_cinema_id}/"
         
         super().__init__(

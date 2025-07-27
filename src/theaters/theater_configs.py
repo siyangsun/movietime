@@ -10,10 +10,6 @@ DEFAULT_TIMEOUT = 3  # seconds
 DEFAULT_RETRY_ATTEMPTS = 1
 DEFAULT_RATE_LIMIT_DELAY = 1.0  # seconds
 
-# IMDB URL generation constant
-IMDB_LOCATION_CODE = "US/10006"  # NYC area code for IMDB
-
-
 @dataclass
 class TheaterLocation:
     """Theater location information"""
@@ -167,7 +163,8 @@ THEATER_CONFIGS: Dict[str, TheaterConfig] = {
 
 def get_imdb_url(imdb_cinema_id: str) -> str:
     """Generate IMDB showtimes URL from cinema ID"""
-    return f"https://www.imdb.com/showtimes/cinema/US/{imdb_cinema_id}/{IMDB_LOCATION_CODE}/"
+    from theaters.base_imdb_scraper import IMDB_BASE_URL
+    return f"{IMDB_BASE_URL}/{imdb_cinema_id}/"
 
 
 def create_theater_scraper(theater_id: str):
