@@ -2,10 +2,11 @@
 import sys
 import json
 import os
-from datetime import datetime
+from datetime import datetime, time
 from typing import Dict, List
 from jinja2 import Environment, FileSystemLoader
 from collections import defaultdict
+import re
 import theaters.scraper as scraper
 import summarize
 
@@ -49,6 +50,126 @@ class SiteBuilder:
         except:
             return iso_string
     
+    def parse_showtime(self, showtime_str: str) -> time:
+        """Parse showtime string to time object for sorting"""
+        try:
+            # Handle formats like "12:00 PM", "2:40 pm", "9:55 PM"
+            showtime_str = showtime_str.strip().upper()
+            # Remove any extra spaces
+            showtime_str = re.sub(r'\s+', ' ', showtime_str)
+            
+            # Try to parse time
+            for fmt in ['%I:%M %p', '%I:%M%p', '%H:%M']:
+                try:
+                    parsed = datetime.strptime(showtime_str, fmt).time()
+                    return parsed
+                except ValueError:
+                    continue
+            
+            # If parsing fails, return midnight as fallback
+            return time(0, 0)
+        except:
+            return time(0, 0)
+    
+    def get_earliest_showtime(self, movie: Dict) -> time:
+        """Get the earliest showtime for a movie for sorting purposes"""
+        earliest = time(23, 59)  # Start with latest possible time
+        
+        # Check showtime_links first
+        if movie.get('showtime_links'):
+            for showtime_info in movie['showtime_links']:
+                parsed_time = self.parse_showtime(showtime_info.get('time', ''))
+                if parsed_time < earliest:
+                    earliest = parsed_time
+        
+        # Check showtimes if no showtime_links
+        elif movie.get('showtimes'):
+            for showtime in movie['showtimes']:
+                parsed_time = self.parse_showtime(showtime)
+                if parsed_time < earliest:
+                    earliest = parsed_time
+        
+        return earliest
+    
+    def organize_by_time(self, movies: List[Dict]) -> List[Dict]:
+        """Sort movies by their earliest showtime"""
+        # Add earliest_showtime to each movie for sorting
+        for movie in movies:
+            movie['_earliest_showtime'] = self.get_earliest_showtime(movie)
+        
+        # Sort by earliest showtime
+        sorted_movies = sorted(movies, key=lambda x: x['_earliest_showtime'])
+        
+        # Remove the helper field
+        for movie in sorted_movies:
+            if '_earliest_showtime' in movie:
+                del movie['_earliest_showtime']
+        
+        return sorted_movies
+    
+    def create_showtimes_timeline(self, movies: List[Dict]) -> List[Dict]:
+        """Create a chronological timeline grouped by distinct showtimes"""
+        from collections import defaultdict
+        
+        # First collect all showtime entries
+        timeline_entries = []
+        
+        for movie in movies:
+            # Process showtime_links first (preferred)
+            if movie.get('showtime_links'):
+                for showtime_info in movie['showtime_links']:
+                    time_str = showtime_info.get('time', '')
+                    url = showtime_info.get('url', '')
+                    parsed_time = self.parse_showtime(time_str)
+                    
+                    timeline_entries.append({
+                        'time': time_str,
+                        'parsed_time': parsed_time,
+                        'url': url,
+                        'movie': movie
+                    })
+            
+            # Process regular showtimes if no showtime_links
+            elif movie.get('showtimes'):
+                for showtime in movie['showtimes']:
+                    parsed_time = self.parse_showtime(showtime)
+                    
+                    timeline_entries.append({
+                        'time': showtime,
+                        'parsed_time': parsed_time,
+                        'url': '',
+                        'movie': movie
+                    })
+        
+        # Group entries by time string (case-insensitive)
+        time_groups = defaultdict(list)
+        for entry in timeline_entries:
+            time_key = entry['time'].upper().strip()
+            time_groups[time_key].append(entry)
+        
+        # Create grouped timeline entries
+        grouped_timeline = []
+        for time_key, entries in time_groups.items():
+            # Use the first entry's parsed time for sorting
+            parsed_time = entries[0]['parsed_time']
+            
+            grouped_timeline.append({
+                'time': entries[0]['time'],  # Use first entry's time format
+                'parsed_time': parsed_time,
+                'movies': [entry['movie'] for entry in entries],
+                'urls': [entry['url'] for entry in entries]  # Keep URLs for each movie
+            })
+        
+        # Sort by parsed time
+        grouped_timeline.sort(key=lambda x: x['parsed_time'])
+        
+        # Remove the helper field
+        for entry in grouped_timeline:
+            if 'parsed_time' in entry:
+                del entry['parsed_time']
+        
+        return grouped_timeline
+    
     def build_site(self):
         print("Building static site...")
         
@@ -63,35 +184,59 @@ class SiteBuilder:
             print("No movies found in data")
             return False
         
-        # Organize data
-        theaters = self.organize_by_theater(movies)
-        
-        # Prepare template context
-        context = {
-            'theaters': theaters,
-            'total_movies': len(movies),
-            'last_updated': self.format_datetime(data.get('scraped_at', '')),
-            'generated_at': datetime.now().strftime('%B %d, %Y at %I:%M %p')
-        }
-        
         # Ensure output directory exists
         os.makedirs(self.output_dir, exist_ok=True)
         
-        # Render template
+        success_count = 0
+        
         try:
-            template = self.env.get_template('index.html')
-            html_content = template.render(**context)
+            # Build theater-organized page (original index.html)
+            theaters = self.organize_by_theater(movies)
             
-            # Write to output file
+            theater_context = {
+                'theaters': theaters,
+                'total_movies': len(movies),
+                'last_updated': self.format_datetime(data.get('scraped_at', '')),
+                'generated_at': datetime.now().strftime('%B %d, %Y at %I:%M %p')
+            }
+            
+            template = self.env.get_template('index.html')
+            html_content = template.render(**theater_context)
+            
             output_file = os.path.join(self.output_dir, 'index.html')
             with open(output_file, 'w', encoding='utf-8') as f:
                 f.write(html_content)
             
-            print(f"Site built successfully: {output_file}")
+            print(f"Theater page built: {output_file}")
+            success_count += 1
+            
+            # Build timeline page (by-time.html)
+            showtimes_timeline = self.create_showtimes_timeline(movies)
+            unique_theaters = set(movie.get('theater', 'Unknown') for movie in movies)
+            
+            time_context = {
+                'showtimes_timeline': showtimes_timeline,
+                'total_movies': len(movies),
+                'theater_count': len(unique_theaters),
+                'last_updated': self.format_datetime(data.get('scraped_at', '')),
+                'generated_at': datetime.now().strftime('%B %d, %Y at %I:%M %p')
+            }
+            
+            time_template = self.env.get_template('by-time.html')
+            time_html_content = time_template.render(**time_context)
+            
+            time_output_file = os.path.join(self.output_dir, 'by-time.html')
+            with open(time_output_file, 'w', encoding='utf-8') as f:
+                f.write(time_html_content)
+            
+            print(f"Time-sorted page built: {time_output_file}")
+            success_count += 1
+            
+            print(f"Site build complete! Generated {success_count} pages")
             print(f"Total movies: {len(movies)}")
             print(f"Theaters: {', '.join(theaters.keys())}")
             
-            return True
+            return success_count > 0
             
         except Exception as e:
             print(f"Error building site: {e}")
@@ -100,24 +245,50 @@ class SiteBuilder:
     def create_fallback_site(self):
         print("Creating fallback site...")
         
-        context = {
+        os.makedirs(self.output_dir, exist_ok=True)
+        success_count = 0
+        
+        # Fallback context for theater page
+        theater_context = {
             'theaters': {},
             'total_movies': 0,
             'last_updated': None,
             'generated_at': datetime.now().strftime('%B %d, %Y at %I:%M %p')
         }
         
+        # Fallback context for time page
+        time_context = {
+            'showtimes_timeline': [],
+            'total_movies': 0,
+            'theater_count': 0,
+            'last_updated': None,
+            'generated_at': datetime.now().strftime('%B %d, %Y at %I:%M %p')
+        }
+        
         try:
+            # Create fallback theater page
             template = self.env.get_template('index.html')
-            html_content = template.render(**context)
+            html_content = template.render(**theater_context)
             
-            os.makedirs(self.output_dir, exist_ok=True)
             output_file = os.path.join(self.output_dir, 'index.html')
             with open(output_file, 'w', encoding='utf-8') as f:
                 f.write(html_content)
             
-            print(f"Fallback site created: {output_file}")
-            return True
+            print(f"Fallback theater page created: {output_file}")
+            success_count += 1
+            
+            # Create fallback time page
+            time_template = self.env.get_template('by-time.html')
+            time_html_content = time_template.render(**time_context)
+            
+            time_output_file = os.path.join(self.output_dir, 'by-time.html')
+            with open(time_output_file, 'w', encoding='utf-8') as f:
+                f.write(time_html_content)
+            
+            print(f"Fallback time page created: {time_output_file}")
+            success_count += 1
+            
+            return success_count > 0
             
         except Exception as e:
             print(f"Error creating fallback site: {e}")
