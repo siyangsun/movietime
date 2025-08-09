@@ -105,6 +105,31 @@
             display: inline-block;
         }
 
+        .navigation {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .nav-link {
+            color: var(--color-secondary);
+            text-decoration: none;
+            padding: 8px 15px;
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            background: var(--color-surface-alt);
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 0 5px;
+        }
+        
+        .nav-link:hover {
+            background: var(--color-primary);
+            color: var(--color-white);
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+        }
+
         .table-of-contents {
             background: var(--color-surface);
             border: 2px solid var(--color-border);
@@ -518,12 +543,16 @@
     <div class="container" id="top">
         <header>
             <h1>it's movie time!</h1>
+            <div class="navigation" style="margin-bottom: 15px;">
+                <a href="index.html" class="nav-link">by theater (current)</a>
+                <a href="by-time.html" class="nav-link">→ by time</a>
+            </div>
             <div class="stats">
-                currently tracking <span class="highlight">48</span> films 
+                currently tracking <span class="highlight">44</span> films 
                 across <span class="highlight">6</span> local theaters
             </div>
             
-            <div class="last-updated">last updated: July 30, 2025 at 08:38 AM</div>
+            <div class="last-updated">last updated: August 09, 2025 at 10:38 AM</div>
             
         </header>
 
@@ -556,101 +585,11 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMjA5NzgxODE2NF5BMl5BanBnXkFtZTcwNTI1NTI0OQ@@._V1_.jpg" alt="Before Midnight poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMTY4NzcwODg3Nl5BMl5BanBnXkFtZTcwNTEwOTMyMw@@._V1_.jpg" alt="Eternal Sunshine of the Spotless Mind poster" class="movie-poster">
                         
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">Before Midnight</h3>
-                            
-                            
-                            <div class="movie-year">2013</div>
-                            
-                            
-                            
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    <div class="original-description">
-                        IMDB: 7.9/10 (180,656 votes) | Rated R
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    <div class="showtimes">
-                        <div class="showtimes-label">Showtimes:</div>
-                        
-                            
-                            
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">12:00 PM</a>
-                            
-                            
-                            
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">7:20 PM</a>
-                            
-                            
-                        
-                    </div>
-                </div>
-                
-                <div class="movie-card">
-                    <div class="movie-header">
-                        
-                        <img src="https://m.media-amazon.com/images/M/MV5BZDZhZmI1ZTUtYWI3NC00NTMwLTk3NWMtNDc0OGNjM2I0ZjlmXkEyXkFqcGc@._V1_.jpg" alt="Before Sunrise poster" class="movie-poster">
-                        
-                        
-                        <div class="movie-info">
-                            <h3 class="movie-title">Before Sunrise</h3>
-                            
-                            
-                            <div class="movie-year">1995</div>
-                            
-                            
-                            
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    <div class="original-description">
-                        IMDB: 8.1/10 (363,139 votes) | Rated R
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    <div class="showtimes">
-                        <div class="showtimes-label">Showtimes:</div>
-                        
-                            
-                            
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">2:40 PM</a>
-                            
-                            
-                            
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">9:55 PM</a>
-                            
-                            
-                        
-                    </div>
-                </div>
-                
-                <div class="movie-card">
-                    <div class="movie-header">
-                        
-                        <img src="https://m.media-amazon.com/images/M/MV5BMTQ1MjAwNTM5Ml5BMl5BanBnXkFtZTYwNDM0MTc3._V1_.jpg" alt="Before Sunset poster" class="movie-poster">
-                        
-                        
-                        <div class="movie-info">
-                            <h3 class="movie-title">Before Sunset</h3>
+                            <h3 class="movie-title">Eternal Sunshine of the Spotless Mind</h3>
                             
                             
                             <div class="movie-year">2004</div>
@@ -664,7 +603,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 8.1/10 (305,054 votes) | Rated R
+                        IMDB: 8.3/10 (1,147,838 votes) | Rated R
                     </div>
                     
                     
@@ -677,7 +616,11 @@
                         
                             
                             
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">5:10 PM</a>
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">7:05 PM</a>
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">9:40 PM</a>
                             
                             
                         
@@ -687,11 +630,11 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMDRkMWNjNTUtNTM0Yi00NjM4LTkxNGMtOGIyYmE0NjQzYzhlXkEyXkFqcGc@._V1_.jpg" alt="Diciannove poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BN2U1MGQ4NTAtNmU0OS00ODM1LWI4YWUtZjNjMThmOGQ0YmViXkEyXkFqcGc@._V1_.jpg" alt="Hola Frida poster" class="movie-poster">
                         
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">Diciannove</h3>
+                            <h3 class="movie-title">Hola Frida</h3>
                             
                             
                             <div class="movie-year">2024</div>
@@ -705,7 +648,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 6.5/10 (180 votes)
+                        IMDB: 7/10 (64 votes)
                     </div>
                     
                     
@@ -718,11 +661,80 @@
                         
                             
                             
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">11:10 AM</a>
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">10:00 AM</a>
                             
                             
                             
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">1:45 PM</a>
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">12:20 PM</a>
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">2:45 PM</a>
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">5:50 PM</a>
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">8:00 PM</a>
+                            
+                            
+                        
+                    </div>
+                </div>
+                
+                <div class="movie-card">
+                    <div class="movie-header">
+                        
+                        <img src="https://m.media-amazon.com/images/M/MV5BNWMxOGMwYmEtMjQ3Ny00YTMzLTllYjktNGUyMTljNDkwYTE5XkEyXkFqcGc@._V1_.jpg" alt="It&#39;s Never Over, Jeff Buckley poster" class="movie-poster">
+                        
+                        
+                        <div class="movie-info">
+                            <h3 class="movie-title">It&#39;s Never Over, Jeff Buckley</h3>
+                            
+                            
+                            <div class="movie-year">2025</div>
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    <div class="original-description">
+                        IMDB: 8/10 (122 votes)
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="showtimes">
+                        <div class="showtimes-label">Showtimes:</div>
+                        
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">10:00 PM</a>
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">11:00 AM</a>
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">11:45 AM</a>
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">1:40 PM</a>
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">2:40 PM</a>
                             
                             
                             
@@ -730,11 +742,19 @@
                             
                             
                             
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">5:00 PM</a>
+                            
+                            
+                            
                             <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">7:00 PM</a>
                             
                             
                             
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">9:35 PM</a>
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">8:10 PM</a>
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">9:40 PM</a>
                             
                             
                         
@@ -744,14 +764,14 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMDdiZmZiNmUtZWU3Yi00NmY0LWJmN2UtOTRiOWI3Y2Y2YWU4XkEyXkFqcGc@._V1_.jpg" alt="Don&#39;t Let&#39;s Go to the Dogs Tonight poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BZmYyNGMzYWUtY2I1OC00MTI3LTg4NzEtMWZhZmRhNzY0MDRkXkEyXkFqcGc@._V1_.jpg" alt="North Star poster" class="movie-poster">
                         
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">Don&#39;t Let&#39;s Go to the Dogs Tonight</h3>
+                            <h3 class="movie-title">North Star</h3>
                             
                             
-                            <div class="movie-year">2024</div>
+                            <div class="movie-year">2023</div>
                             
                             
                             
@@ -762,7 +782,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 7.2/10 (280 votes) | Rated R
+                        IMDB: 5.6/10 (197 votes) | Rated R
                     </div>
                     
                     
@@ -775,11 +795,27 @@
                         
                             
                             
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">10:00 AM</a>
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">10:05 PM</a>
+                            
+                            
+                            
                             <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">11:15 AM</a>
                             
                             
                             
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">1:45 PM</a>
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">12:20 PM</a>
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">1:40 PM</a>
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">2:40 PM</a>
                             
                             
                             
@@ -787,68 +823,11 @@
                             
                             
                             
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">6:35 PM</a>
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">5:00 PM</a>
                             
                             
                             
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">9:00 PM</a>
-                            
-                            
-                        
-                    </div>
-                </div>
-                
-                <div class="movie-card">
-                    <div class="movie-header">
-                        
-                        <img src="https://m.media-amazon.com/images/M/MV5BOTNmYzY0MWQtZGZmNy00Y2Y4LWFmMDQtMTZjYTdiYzEwZGQ2XkEyXkFqcGc@._V1_.jpg" alt="Le fabuleux destin d&#39;Amélie Poulain poster" class="movie-poster">
-                        
-                        
-                        <div class="movie-info">
-                            <h3 class="movie-title">Le fabuleux destin d&#39;Amélie Poulain</h3>
-                            
-                            
-                            <div class="movie-year">2001</div>
-                            
-                            
-                            
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    <div class="original-description">
-                        IMDB: 8.3/10 (822,862 votes) | Rated R
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    <div class="showtimes">
-                        <div class="showtimes-label">Showtimes:</div>
-                        
-                            
-                            
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">10:45 AM</a>
-                            
-                            
-                            
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">1:30 PM</a>
-                            
-                            
-                            
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">4:15 PM</a>
-                            
-                            
-                            
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">7:05 PM</a>
-                            
-                            
-                            
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">9:50 PM</a>
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">7:20 PM</a>
                             
                             
                         
@@ -876,7 +855,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 7.7/10 (1,701 votes) | Rated R
+                        IMDB: 7.4/10 (3,150 votes) | Rated R
                     </div>
                     
                     
@@ -893,76 +872,19 @@
                             
                             
                             
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">12:00 PM</a>
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">11:10 AM</a>
                             
                             
                             
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">2:30 PM</a>
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">1:55 PM</a>
                             
                             
                             
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">5:00 PM</a>
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">4:35 PM</a>
                             
                             
                             
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">7:30 PM</a>
-                            
-                            
-                        
-                    </div>
-                </div>
-                
-                <div class="movie-card">
-                    <div class="movie-header">
-                        
-                        <img src="https://m.media-amazon.com/images/M/MV5BNTJmODQzYmItNTZlMy00Mjg0LTk1NjctYjM4ZGI0NTM3ZTVjXkEyXkFqcGc@._V1_.jpg" alt="The Phoenician Scheme poster" class="movie-poster">
-                        
-                        
-                        <div class="movie-info">
-                            <h3 class="movie-title">The Phoenician Scheme</h3>
-                            
-                            
-                            <div class="movie-year">2025</div>
-                            
-                            
-                            
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    <div class="original-description">
-                        IMDB: 6.7/10 (34,655 votes) | Rated PG-13
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    <div class="showtimes">
-                        <div class="showtimes-label">Showtimes:</div>
-                        
-                            
-                            
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">11:45 AM</a>
-                            
-                            
-                            
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">2:15 PM</a>
-                            
-                            
-                            
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">4:45 PM</a>
-                            
-                            
-                            
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">7:15 PM</a>
-                            
-                            
-                            
-                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">9:45 PM</a>
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="showtime showtime-link">7:25 PM</a>
                             
                             
                         
@@ -986,14 +908,10 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BNGNiZmY3ZDMtNDJmOS00ZmNhLWE3YjItY2VkNzE4NzYxOGUzXkEyXkFqcGc@._V1_.jpg" alt="2000 Meters to Andriivka poster" class="movie-poster">
-                        
                         
                         <div class="movie-info">
                             <h3 class="movie-title">2000 Meters to Andriivka</h3>
                             
-                            
-                            <div class="movie-year">2025</div>
                             
                             
                             
@@ -1004,7 +922,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 8.5/10 (234 votes)
+                        IMDB: 8.5/10 (271 votes)
                     </div>
                     
                     
@@ -1017,19 +935,11 @@
                         
                             
                             
-                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">1:00 PM</a>
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">1:20 PM</a>
                             
                             
                             
-                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">3:15 PM</a>
-                            
-                            
-                            
-                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">5:30 PM</a>
-                            
-                            
-                            
-                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">7:50 PM</a>
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">6:00 PM</a>
                             
                             
                         
@@ -1039,15 +949,48 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BM2M2ZWQ4MDctMmEwZi00MDM1LTg1ODgtMTc2Y2Y4ZTg4NzdmXkEyXkFqcGc@._V1_.jpg" alt="El jockey poster" class="movie-poster">
+                        
+                        <div class="movie-info">
+                            <h3 class="movie-title">Brazil</h3>
+                            
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    <div class="original-description">
+                        IMDB: 7.8/10 (218,034 votes) | Rated R
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="showtimes">
+                        <div class="showtimes-label">Showtimes:</div>
+                        
+                            
+                            
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">5:15 PM</a>
+                            
+                            
+                        
+                    </div>
+                </div>
+                
+                <div class="movie-card">
+                    <div class="movie-header">
                         
                         
                         <div class="movie-info">
                             <h3 class="movie-title">El jockey</h3>
                             
                             
-                            <div class="movie-year">2024</div>
-                            
                             
                             
                         </div>
@@ -1057,7 +1000,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 6.4/10 (2,046 votes)
+                        IMDB: 6.4/10 (2,073 votes)
                     </div>
                     
                     
@@ -1070,11 +1013,11 @@
                         
                             
                             
-                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">4:30 PM</a>
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">3:45 PM</a>
                             
                             
                             
-                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">8:50 PM</a>
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">8:15 PM</a>
                             
                             
                         
@@ -1084,14 +1027,10 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BYWM2ZGI4YWUtOTIxYS00ZDAzLWFjYmUtZDVkM2Y0Mzc5MWI5XkEyXkFqcGc@._V1_.jpg" alt="Familiar Touch poster" class="movie-poster">
-                        
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">Familiar Touch</h3>
+                            <h3 class="movie-title">J&#39;accuse</h3>
                             
-                            
-                            <div class="movie-year">2024</div>
                             
                             
                             
@@ -1102,7 +1041,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 7.2/10 (390 votes)
+                        IMDB: 7.2/10 (22,463 votes)
                     </div>
                     
                     
@@ -1115,7 +1054,19 @@
                         
                             
                             
-                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">12:20 PM</a>
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">12:15 PM</a>
+                            
+                            
+                            
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">3:00 PM</a>
+                            
+                            
+                            
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">5:45 PM</a>
+                            
+                            
+                            
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">8:30 PM</a>
                             
                             
                         
@@ -1125,14 +1076,10 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BNjMxMWI2NTItYTAzNC00MGRhLTlkOGItZjA0YmFmNzE5MmU0XkEyXkFqcGc@._V1_.jpg" alt="Hearts of Darkness: A Filmmaker&#39;s Apocalypse poster" class="movie-poster">
-                        
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">Hearts of Darkness: A Filmmaker&#39;s Apocalypse</h3>
+                            <h3 class="movie-title">Ran</h3>
                             
-                            
-                            <div class="movie-year">1991</div>
                             
                             
                             
@@ -1143,7 +1090,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 8.1/10 (24,719 votes) | Rated R
+                        IMDB: 8.2/10 (145,950 votes) | Rated R
                     </div>
                     
                     
@@ -1159,10 +1106,6 @@
                             <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">2:00 PM</a>
                             
                             
-                            
-                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">6:40 PM</a>
-                            
-                            
                         
                     </div>
                 </div>
@@ -1170,14 +1113,10 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BZTk4OGEwNDQtOGI2MC00MTU2LTk0YTEtNmU5NTIxMWNkNDhlXkEyXkFqcGc@._V1_.jpg" alt="Ikiru poster" class="movie-poster">
-                        
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">Ikiru</h3>
+                            <h3 class="movie-title">Tengoku to jigoku</h3>
                             
-                            
-                            <div class="movie-year">1952</div>
                             
                             
                             
@@ -1188,7 +1127,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 8.3/10 (97,991 votes) | Rated Not Rated
+                        IMDB: 8.4/10 (62,531 votes) | Rated Not Rated
                     </div>
                     
                     
@@ -1201,7 +1140,7 @@
                         
                             
                             
-                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">3:20 PM</a>
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">8:10 PM</a>
                             
                             
                         
@@ -1211,14 +1150,10 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BOGNmMGQ4YTQtYjA2My00ZDMyLWIzYzYtYmNhOGRjM2RjNTZjXkEyXkFqcGc@._V1_.jpg" alt="Kakushi-toride no san-akunin poster" class="movie-poster">
-                        
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">Kakushi-toride no san-akunin</h3>
+                            <h3 class="movie-title">Who Killed Teddy Bear</h3>
                             
-                            
-                            <div class="movie-year">1958</div>
                             
                             
                             
@@ -1229,7 +1164,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 8/10 (44,478 votes) | Rated Not Rated
+                        IMDB: 6.7/10 (1,206 votes) | Rated Not Rated
                     </div>
                     
                     
@@ -1242,212 +1177,23 @@
                         
                             
                             
-                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">1:30 PM</a>
-                            
-                            
-                        
-                    </div>
-                </div>
-                
-                <div class="movie-card">
-                    <div class="movie-header">
-                        
-                        <img src="https://m.media-amazon.com/images/M/MV5BYTdlYjFlZTAtMTA5Yy00Y2UzLWI0ZjEtYWI2Njk0NTI4OGZlXkEyXkFqcGc@._V1_.jpg" alt="Kumonosu-jô poster" class="movie-poster">
-                        
-                        
-                        <div class="movie-info">
-                            <h3 class="movie-title">Kumonosu-jô</h3>
-                            
-                            
-                            <div class="movie-year">1957</div>
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">12:30 PM</a>
                             
                             
                             
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    <div class="original-description">
-                        IMDB: 8/10 (58,554 votes) | Rated Not Rated
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    <div class="showtimes">
-                        <div class="showtimes-label">Showtimes:</div>
-                        
-                            
-                            
-                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">1:00 PM</a>
-                            
-                            
-                        
-                    </div>
-                </div>
-                
-                <div class="movie-card">
-                    <div class="movie-header">
-                        
-                        <img src="https://m.media-amazon.com/images/M/MV5BZDlkYjViMDAtYjkxNy00ZDk1LWE5MmUtNDc4NDU3ZWJmOTYzXkEyXkFqcGc@._V1_.jpg" alt="Rashômon poster" class="movie-poster">
-                        
-                        
-                        <div class="movie-info">
-                            <h3 class="movie-title">Rashômon</h3>
-                            
-                            
-                            <div class="movie-year">1950</div>
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">2:40 PM</a>
                             
                             
                             
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    <div class="original-description">
-                        IMDB: 8.1/10 (191,183 votes) | Rated Not Rated
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    <div class="showtimes">
-                        <div class="showtimes-label">Showtimes:</div>
-                        
-                            
-                            
-                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">4:20 PM</a>
-                            
-                            
-                        
-                    </div>
-                </div>
-                
-                <div class="movie-card">
-                    <div class="movie-header">
-                        
-                        <img src="https://m.media-amazon.com/images/M/MV5BZjliMWExOTMtZDQ3ZS00NWU3LWIyN2EtMjllNzk3ZTNlYzg4XkEyXkFqcGc@._V1_.jpg" alt="Shichinin no samurai poster" class="movie-poster">
-                        
-                        
-                        <div class="movie-info">
-                            <h3 class="movie-title">Shichinin no samurai</h3>
-                            
-                            
-                            <div class="movie-year">1954</div>
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">4:50 PM</a>
                             
                             
                             
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    <div class="original-description">
-                        IMDB: 8.6/10 (388,639 votes) | Rated Not Rated
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    <div class="showtimes">
-                        <div class="showtimes-label">Showtimes:</div>
-                        
-                            
-                            
-                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">6:30 PM</a>
-                            
-                            
-                        
-                    </div>
-                </div>
-                
-                <div class="movie-card">
-                    <div class="movie-header">
-                        
-                        <img src="https://m.media-amazon.com/images/M/MV5BYzllNDdhYmEtMGI5YS00YTk0LTlmNzMtNmM0MjNjYjBiN2JkXkEyXkFqcGc@._V1_.jpg" alt="Tsubaki Sanjûrô poster" class="movie-poster">
-                        
-                        
-                        <div class="movie-info">
-                            <h3 class="movie-title">Tsubaki Sanjûrô</h3>
-                            
-                            
-                            <div class="movie-year">1962</div>
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">7:00 PM</a>
                             
                             
                             
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    <div class="original-description">
-                        IMDB: 8/10 (43,114 votes) | Rated Not Rated
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    <div class="showtimes">
-                        <div class="showtimes-label">Showtimes:</div>
-                        
-                            
-                            
-                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">8:45 PM</a>
-                            
-                            
-                        
-                    </div>
-                </div>
-                
-                <div class="movie-card">
-                    <div class="movie-header">
-                        
-                        <img src="https://m.media-amazon.com/images/M/MV5BYzFkODA1N2QtY2UyMC00NTMwLWEyNzctMmE3YjIzNzE1MzY4XkEyXkFqcGc@._V1_.jpg" alt="Yôjinbô poster" class="movie-poster">
-                        
-                        
-                        <div class="movie-info">
-                            <h3 class="movie-title">Yôjinbô</h3>
-                            
-                            
-                            <div class="movie-year">1961</div>
-                            
-                            
-                            
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    <div class="original-description">
-                        IMDB: 8.2/10 (139,148 votes) | Rated Not Rated
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    <div class="showtimes">
-                        <div class="showtimes-label">Showtimes:</div>
-                        
-                            
-                            
-                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">6:20 PM</a>
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="showtime showtime-link">9:10 PM</a>
                             
                             
                         
@@ -1471,14 +1217,10 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BZjkxZWJiNTUtYjQwYS00MTBlLTgwODQtM2FkNWMyMjMwOGZiXkEyXkFqcGc@._V1_.jpg" alt="Heist poster" class="movie-poster">
-                        
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">Heist</h3>
+                            <h3 class="movie-title">Brigitte et Brigitte</h3>
                             
-                            
-                            <div class="movie-year">2017</div>
                             
                             
                             
@@ -1489,7 +1231,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 6.1/10 (33,852 votes) | Rated R
+                        IMDB: 6.3/10 (214 votes)
                     </div>
                     
                     
@@ -1502,7 +1244,7 @@
                         
                             
                             
-                            <a href="https://www.filmlinc.org/now-playing/" target="_blank" class="showtime showtime-link">6:30 PM</a>
+                            <a href="https://www.filmlinc.org/now-playing/" target="_blank" class="showtime showtime-link">3:15 PM</a>
                             
                             
                         
@@ -1512,14 +1254,10 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BOTY4OTVmMzgtNTBkYi00NjI1LWIzOWItNGIwNTM1ZTEzMzc5XkEyXkFqcGc@._V1_.jpg" alt="The Conversation poster" class="movie-poster">
-                        
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">The Conversation</h3>
+                            <h3 class="movie-title">La comédie du travail</h3>
                             
-                            
-                            <div class="movie-year">1974</div>
                             
                             
                             
@@ -1530,7 +1268,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 7.7/10 (132,356 votes) | Rated PG
+                        IMDB: 6.6/10 (77 votes)
                     </div>
                     
                     
@@ -1543,7 +1281,7 @@
                         
                             
                             
-                            <a href="https://www.filmlinc.org/now-playing/" target="_blank" class="showtime showtime-link">4:00 PM</a>
+                            <a href="https://www.filmlinc.org/now-playing/" target="_blank" class="showtime showtime-link">5:15 PM</a>
                             
                             
                         
@@ -1553,14 +1291,10 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMTQ2NzUxMTAxN15BMl5BanBnXkFtZTcwMzEyMTIwMg@@._V1_.jpg" alt="Twilight poster" class="movie-poster">
-                        
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">Twilight</h3>
+                            <h3 class="movie-title">La Terre de la folie</h3>
                             
-                            
-                            <div class="movie-year">2008</div>
                             
                             
                             
@@ -1571,7 +1305,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 5.3/10 (511,129 votes) | Rated PG-13
+                        IMDB: 6.4/10 (146 votes)
                     </div>
                     
                     
@@ -1584,7 +1318,44 @@
                         
                             
                             
-                            <a href="https://www.filmlinc.org/now-playing/" target="_blank" class="showtime showtime-link">8:45 PM</a>
+                            <a href="https://www.filmlinc.org/now-playing/" target="_blank" class="showtime showtime-link">1:00 PM</a>
+                            
+                            
+                        
+                    </div>
+                </div>
+                
+                <div class="movie-card">
+                    <div class="movie-header">
+                        
+                        
+                        <div class="movie-info">
+                            <h3 class="movie-title">Une aventure de Billy le Kid</h3>
+                            
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    <div class="original-description">
+                        IMDB: 5.4/10 (190 votes)
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="showtimes">
+                        <div class="showtimes-label">Showtimes:</div>
+                        
+                            
+                            
+                            <a href="https://www.filmlinc.org/now-playing/" target="_blank" class="showtime showtime-link">8:00 PM</a>
                             
                             
                         
@@ -1608,14 +1379,10 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMzY4MGEwODMtZTVjOS00OTUxLTliYjQtMGRiNGE5YmI3NTBhXkEyXkFqcGc@._V1_.jpg" alt="Death &amp; Taxes poster" class="movie-poster">
-                        
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">Death &amp; Taxes</h3>
+                            <h3 class="movie-title">Boys Go to Jupiter</h3>
                             
-                            
-                            <div class="movie-year">2024</div>
                             
                             
                             
@@ -1626,7 +1393,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 9.3/10 (34 votes)
+                        IMDB: 6.7/10 (137 votes)
                     </div>
                     
                     
@@ -1639,7 +1406,23 @@
                         
                             
                             
-                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">7:05 PM</a>
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">12:45 PM</a>
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">2:55 PM</a>
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">5:10 PM</a>
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">7:30 PM</a>
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">9:50 PM</a>
                             
                             
                         
@@ -1649,68 +1432,48 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BN2Q4NjllMDgtOTk2Zi00YzM1LWJmOTMtNmRiZDgyZGJmMjQzXkEyXkFqcGc@._V1_.jpg" alt="Fa yeung nin wah poster" class="movie-poster">
+                        
+                        <div class="movie-info">
+                            <h3 class="movie-title">Commando</h3>
+                            
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    <div class="original-description">
+                        IMDB: 6.7/10 (183,353 votes) | Rated R
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="showtimes">
+                        <div class="showtimes-label">Showtimes:</div>
+                        
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">11:59 PM</a>
+                            
+                            
+                        
+                    </div>
+                </div>
+                
+                <div class="movie-card">
+                    <div class="movie-header">
                         
                         
                         <div class="movie-info">
                             <h3 class="movie-title">Fa yeung nin wah</h3>
                             
                             
-                            <div class="movie-year">2000</div>
-                            
-                            
-                            
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    <div class="original-description">
-                        IMDB: 8.1/10 (179,798 votes) | Rated PG
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    <div class="showtimes">
-                        <div class="showtimes-label">Showtimes:</div>
-                        
-                            
-                            
-                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">11:30 AM</a>
-                            
-                            
-                            
-                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">2:05 PM</a>
-                            
-                            
-                            
-                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">4:40 PM</a>
-                            
-                            
-                            
-                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">9:45 PM</a>
-                            
-                            
-                        
-                    </div>
-                </div>
-                
-                <div class="movie-card">
-                    <div class="movie-header">
-                        
-                        <img src="https://m.media-amazon.com/images/M/MV5BNDFhYWMxOTUtODc2MS00ZDdlLWE0MjQtMzA1Njc2MGU2MWQyXkEyXkFqcGc@._V1_.jpg" alt="Folktales poster" class="movie-poster">
-                        
-                        
-                        <div class="movie-info">
-                            <h3 class="movie-title">Folktales</h3>
-                            
-                            
-                            <div class="movie-year">2025</div>
-                            
                             
                             
                         </div>
@@ -1720,60 +1483,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 7.4/10 (78 votes)
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    <div class="showtimes">
-                        <div class="showtimes-label">Showtimes:</div>
-                        
-                            
-                            
-                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">1:40 PM</a>
-                            
-                            
-                            
-                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">4:20 PM</a>
-                            
-                            
-                            
-                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">7:10 PM</a>
-                            
-                            
-                            
-                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">9:40 PM</a>
-                            
-                            
-                        
-                    </div>
-                </div>
-                
-                <div class="movie-card">
-                    <div class="movie-header">
-                        
-                        <img src="https://m.media-amazon.com/images/M/MV5BZWI2OWRmMGQtYmIxNS00MjgxLWIyMjUtMGY4NmQ2OWQyMmMwXkEyXkFqcGc@._V1_.jpg" alt="Koyaanisqatsi poster" class="movie-poster">
-                        
-                        
-                        <div class="movie-info">
-                            <h3 class="movie-title">Koyaanisqatsi</h3>
-                            
-                            
-                            <div class="movie-year">1982</div>
-                            
-                            
-                            
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    <div class="original-description">
-                        IMDB: 8.2/10 (43,539 votes) | Rated Not Rated
+                        IMDB: 8.1/10 (180,193 votes) | Rated PG
                     </div>
                     
                     
@@ -1789,6 +1499,14 @@
                             <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">11:15 AM</a>
                             
                             
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">4:20 PM</a>
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">9:30 PM</a>
+                            
+                            
                         
                     </div>
                 </div>
@@ -1796,14 +1514,10 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BN2YzNzFkYTItODBjYS00YmRlLThjOTEtYmYzNmI4ZTI1NjBhXkEyXkFqcGc@._V1_.jpg" alt="Kuraudo poster" class="movie-poster">
-                        
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">Kuraudo</h3>
+                            <h3 class="movie-title">Folktales</h3>
                             
-                            
-                            <div class="movie-year">2024</div>
                             
                             
                             
@@ -1814,7 +1528,48 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 6.3/10 (1,928 votes)
+                        IMDB: 7.4/10 (94 votes)
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="showtimes">
+                        <div class="showtimes-label">Showtimes:</div>
+                        
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">10:35 AM</a>
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">5:00 PM</a>
+                            
+                            
+                        
+                    </div>
+                </div>
+                
+                <div class="movie-card">
+                    <div class="movie-header">
+                        
+                        
+                        <div class="movie-info">
+                            <h3 class="movie-title">Kuraudo</h3>
+                            
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    <div class="original-description">
+                        IMDB: 6.4/10 (2,130 votes)
                     </div>
                     
                     
@@ -1835,15 +1590,15 @@
                             
                             
                             
-                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">4:05 PM</a>
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">4:00 PM</a>
                             
                             
                             
-                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">6:55 PM</a>
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">6:50 PM</a>
                             
                             
                             
-                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">9:40 PM</a>
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">9:35 PM</a>
                             
                             
                         
@@ -1853,14 +1608,10 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMjIyOTkyMDE5N15BMl5BanBnXkFtZTcwNjIwNzQwMw@@._V1_.jpg" alt="Kynodontas poster" class="movie-poster">
-                        
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">Kynodontas</h3>
+                            <h3 class="movie-title">Kôkaku Kidôtai</h3>
                             
-                            
-                            <div class="movie-year">2009</div>
                             
                             
                             
@@ -1871,7 +1622,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 7.1/10 (118,263 votes) | Rated Not Rated
+                        IMDB: 7.9/10 (167,151 votes) | Rated TV-MA
                     </div>
                     
                     
@@ -1884,7 +1635,7 @@
                         
                             
                             
-                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">11:20 AM</a>
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">11:59 PM</a>
                             
                             
                         
@@ -1896,7 +1647,7 @@
                         
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">Little, Big, and Far</h3>
+                            <h3 class="movie-title">L&#39;histoire de Souleymane</h3>
                             
                             
                             
@@ -1908,7 +1659,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 7.2/10 (19 votes)
+                        IMDB: 7.6/10 (4,465 votes)
                     </div>
                     
                     
@@ -1921,7 +1672,64 @@
                         
                             
                             
-                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">4:10 PM</a>
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">10:40 AM</a>
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">2:50 PM</a>
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">7:25 PM</a>
+                            
+                            
+                        
+                    </div>
+                </div>
+                
+                <div class="movie-card">
+                    <div class="movie-header">
+                        
+                        
+                        <div class="movie-info">
+                            <h3 class="movie-title">Les amants du Pont-Neuf</h3>
+                            
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    <div class="original-description">
+                        IMDB: 7.6/10 (16,480 votes) | Rated R
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="showtimes">
+                        <div class="showtimes-label">Showtimes:</div>
+                        
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">12:40 PM</a>
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">3:35 PM</a>
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">6:30 PM</a>
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">9:25 PM</a>
                             
                             
                         
@@ -1945,7 +1753,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 7.8/10 (34 votes)
+                        IMDB: 7.8/10 (36 votes)
                     </div>
                     
                     
@@ -1958,19 +1766,7 @@
                         
                             
                             
-                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">1:45 PM</a>
-                            
-                            
-                            
-                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">4:15 PM</a>
-                            
-                            
-                            
-                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">6:45 PM</a>
-                            
-                            
-                            
-                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">9:15 PM</a>
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">12:35 PM</a>
                             
                             
                         
@@ -1982,7 +1778,7 @@
                         
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">Psycho Beach Party</h3>
+                            <h3 class="movie-title">The Decline of Western Civilization Part III</h3>
                             
                             
                             
@@ -1994,7 +1790,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 6.1/10 (7,020 votes) | Rated Unrated
+                        IMDB: 7.2/10 (1,806 votes) | Rated R
                     </div>
                     
                     
@@ -2007,48 +1803,7 @@
                         
                             
                             
-                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">7:00 PM</a>
-                            
-                            
-                        
-                    </div>
-                </div>
-                
-                <div class="movie-card">
-                    <div class="movie-header">
-                        
-                        <img src="https://m.media-amazon.com/images/M/MV5BMjhkZjViY2MtNGQ4ZC00ODc1LThhYzktZWYxM2EzZWQ5MjdhXkEyXkFqcGc@._V1_.jpg" alt="Seses poster" class="movie-poster">
-                        
-                        
-                        <div class="movie-info">
-                            <h3 class="movie-title">Seses</h3>
-                            
-                            
-                            <div class="movie-year">2024</div>
-                            
-                            
-                            
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    <div class="original-description">
-                        IMDB: 6.1/10 (585 votes)
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    <div class="showtimes">
-                        <div class="showtimes-label">Showtimes:</div>
-                        
-                            
-                            
-                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">9:10 PM</a>
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="showtime showtime-link">11:50 PM</a>
                             
                             
                         
@@ -2072,14 +1827,10 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMDA4Zjg3MjEtYjc2NC00Zjg5LWE2NDMtYWJjNjY3MDYyZDNmXkEyXkFqcGc@._V1_.jpg" alt="Gorge coeur ventre poster" class="movie-poster">
-                        
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">Gorge coeur ventre</h3>
+                            <h3 class="movie-title">Belly</h3>
                             
-                            
-                            <div class="movie-year">2016</div>
                             
                             
                             
@@ -2090,7 +1841,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 6.5/10 (130 votes)
+                        IMDB: 6.2/10 (13,348 votes) | Rated R
                     </div>
                     
                     
@@ -2103,7 +1854,7 @@
                         
                             
                             
-                            <a href="https://metrograph.com/nyc/" target="_blank" class="showtime showtime-link">4:15 PM</a>
+                            <a href="https://metrograph.com/nyc/" target="_blank" class="showtime showtime-link">10:30 PM</a>
                             
                             
                         
@@ -2113,14 +1864,10 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BOTQxMjM4ODEtZDM5NS00MGJiLWJlMDktMDgwMTdiYTU5NjE1XkEyXkFqcGc@._V1_.jpg" alt="Il dono poster" class="movie-poster">
-                        
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">Il dono</h3>
+                            <h3 class="movie-title">Far from Heaven</h3>
                             
-                            
-                            <div class="movie-year">2003</div>
                             
                             
                             
@@ -2131,7 +1878,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 6.8/10 (272 votes)
+                        IMDB: 7.3/10 (50,720 votes) | Rated PG-13
                     </div>
                     
                     
@@ -2144,7 +1891,7 @@
                         
                             
                             
-                            <a href="https://metrograph.com/nyc/" target="_blank" class="showtime showtime-link">6:00 PM</a>
+                            <a href="https://metrograph.com/nyc/" target="_blank" class="showtime showtime-link">3:00 PM</a>
                             
                             
                         
@@ -2156,7 +1903,7 @@
                         
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">Les demoiselles de Rochefort</h3>
+                            <h3 class="movie-title">How Green Was My Valley</h3>
                             
                             
                             
@@ -2168,7 +1915,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 7.7/10 (13,136 votes) | Rated G
+                        IMDB: 7.7/10 (28,194 votes) | Rated Approved
                     </div>
                     
                     
@@ -2181,7 +1928,7 @@
                         
                             
                             
-                            <a href="https://metrograph.com/nyc/" target="_blank" class="showtime showtime-link">6:30 PM</a>
+                            <a href="https://metrograph.com/nyc/" target="_blank" class="showtime showtime-link">2:40 PM</a>
                             
                             
                         
@@ -2191,14 +1938,10 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BNDMyODU3ODk3Ml5BMl5BanBnXkFtZTgwNDc1ODkwNjE@._V1_.jpg" alt="Magic Mike XXL poster" class="movie-poster">
-                        
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">Magic Mike XXL</h3>
+                            <h3 class="movie-title">Il buono, il brutto, il cattivo</h3>
                             
-                            
-                            <div class="movie-year">2015</div>
                             
                             
                             
@@ -2209,7 +1952,44 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 5.6/10 (62,847 votes) | Rated R
+                        IMDB: 8.8/10 (864,156 votes) | Rated R
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="showtimes">
+                        <div class="showtimes-label">Showtimes:</div>
+                        
+                            
+                            
+                            <a href="https://metrograph.com/nyc/" target="_blank" class="showtime showtime-link">11:45 AM</a>
+                            
+                            
+                        
+                    </div>
+                </div>
+                
+                <div class="movie-card">
+                    <div class="movie-header">
+                        
+                        
+                        <div class="movie-info">
+                            <h3 class="movie-title">Instrument</h3>
+                            
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    <div class="original-description">
+                        IMDB: 7.9/10 (1,073 votes) | Rated Not Rated
                     </div>
                     
                     
@@ -2232,14 +2012,10 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BNzEzZDRiMzMtYTBiNy00YmIyLWEyYjQtODRlNDRmYWNjMWZhXkEyXkFqcGc@._V1_.jpg" alt="Santa Sangre poster" class="movie-poster">
-                        
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">Santa Sangre</h3>
+                            <h3 class="movie-title">La chambre verte</h3>
                             
-                            
-                            <div class="movie-year">1989</div>
                             
                             
                             
@@ -2250,7 +2026,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 7.5/10 (24,862 votes) | Rated NC-17
+                        IMDB: 6.9/10 (3,442 votes) | Rated PG
                     </div>
                     
                     
@@ -2263,7 +2039,7 @@
                         
                             
                             
-                            <a href="https://metrograph.com/nyc/" target="_blank" class="showtime showtime-link">9:45 PM</a>
+                            <a href="https://metrograph.com/nyc/" target="_blank" class="showtime showtime-link">6:50 PM</a>
                             
                             
                         
@@ -2273,14 +2049,10 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BNDUzYjY0NmUtMDM4OS00Y2Q5LWJiODYtNTk0ZTk0YjZhMTg1XkEyXkFqcGc@._V1_.jpg" alt="Scarface poster" class="movie-poster">
-                        
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">Scarface</h3>
+                            <h3 class="movie-title">Macumba</h3>
                             
-                            
-                            <div class="movie-year">1983</div>
                             
                             
                             
@@ -2291,7 +2063,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 8.3/10 (976,821 votes) | Rated R
+                        IMDB: 5.8/10 (10 votes)
                     </div>
                     
                     
@@ -2304,7 +2076,7 @@
                         
                             
                             
-                            <a href="https://metrograph.com/nyc/" target="_blank" class="showtime showtime-link">9:00 PM</a>
+                            <a href="https://metrograph.com/nyc/" target="_blank" class="showtime showtime-link">8:45 PM</a>
                             
                             
                         
@@ -2314,14 +2086,10 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BZTllZDYyNjEtY2RmMS00NmJhLWI4ODAtMTQ0NWFiZTJhZjA0XkEyXkFqcGc@._V1_.jpg" alt="Some Like It Hot poster" class="movie-poster">
-                        
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">Some Like It Hot</h3>
+                            <h3 class="movie-title">Mala Noche</h3>
                             
-                            
-                            <div class="movie-year">1959</div>
                             
                             
                             
@@ -2332,7 +2100,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 8.2/10 (297,510 votes) | Rated Approved
+                        IMDB: 6.5/10 (4,526 votes) | Rated Not Rated
                     </div>
                     
                     
@@ -2345,7 +2113,81 @@
                         
                             
                             
-                            <a href="https://metrograph.com/nyc/" target="_blank" class="showtime showtime-link">3:30 PM</a>
+                            <a href="https://metrograph.com/nyc/" target="_blank" class="showtime showtime-link">5:00 PM</a>
+                            
+                            
+                        
+                    </div>
+                </div>
+                
+                <div class="movie-card">
+                    <div class="movie-header">
+                        
+                        
+                        <div class="movie-info">
+                            <h3 class="movie-title">One Hour Photo</h3>
+                            
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    <div class="original-description">
+                        IMDB: 6.8/10 (137,015 votes) | Rated R
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="showtimes">
+                        <div class="showtimes-label">Showtimes:</div>
+                        
+                            
+                            
+                            <a href="https://metrograph.com/nyc/" target="_blank" class="showtime showtime-link">10:35 PM</a>
+                            
+                            
+                        
+                    </div>
+                </div>
+                
+                <div class="movie-card">
+                    <div class="movie-header">
+                        
+                        
+                        <div class="movie-info">
+                            <h3 class="movie-title">Zola</h3>
+                            
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    <div class="original-description">
+                        IMDB: 6.4/10 (19,405 votes) | Rated R
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="showtimes">
+                        <div class="showtimes-label">Showtimes:</div>
+                        
+                            
+                            
+                            <a href="https://metrograph.com/nyc/" target="_blank" class="showtime showtime-link">5:15 PM</a>
                             
                             
                         
@@ -2369,14 +2211,10 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BNjgwYTI0YjctMWYzNS00MmI1LWI5YTctNmE1YjBkNDFlNWMxXkEyXkFqcGc@._V1_.jpg" alt="28 Years Later poster" class="movie-poster">
-                        
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">28 Years Later</h3>
+                            <h3 class="movie-title">CatVideoFest 2025</h3>
                             
-                            
-                            <div class="movie-year">2025</div>
                             
                             
                             
@@ -2387,7 +2225,293 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 7.1/10 (74,123 votes) | Rated R
+                        IMDB: 6.6/10 (20 votes)
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="showtimes">
+                        <div class="showtimes-label">Showtimes:</div>
+                        
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">11:00 AM</a>
+                            
+                            
+                        
+                    </div>
+                </div>
+                
+                <div class="movie-card">
+                    <div class="movie-header">
+                        
+                        
+                        <div class="movie-info">
+                            <h3 class="movie-title">Freakier Friday</h3>
+                            
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    <div class="original-description">
+                        IMDB: 7.1/10 (2,031 votes) | Rated PG
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="showtimes">
+                        <div class="showtimes-label">Showtimes:</div>
+                        
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">11:15 AM</a>
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">1:30 PM</a>
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">4:25 PM</a>
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">7:05 PM</a>
+                            
+                            
+                        
+                    </div>
+                </div>
+                
+                <div class="movie-card">
+                    <div class="movie-header">
+                        
+                        
+                        <div class="movie-info">
+                            <h3 class="movie-title">Superman</h3>
+                            
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    <div class="original-description">
+                        IMDB: 7.5/10 (196,994 votes) | Rated PG-13
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="showtimes">
+                        <div class="showtimes-label">Showtimes:</div>
+                        
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">12:15 PM</a>
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">3:15 PM</a>
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">6:15 PM</a>
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">9:15 PM</a>
+                            
+                            
+                        
+                    </div>
+                </div>
+                
+                <div class="movie-card">
+                    <div class="movie-header">
+                        
+                        
+                        <div class="movie-info">
+                            <h3 class="movie-title">The Bad Guys 2</h3>
+                            
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    <div class="original-description">
+                        IMDB: 7.2/10 (3,303 votes) | Rated PG
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="showtimes">
+                        <div class="showtimes-label">Showtimes:</div>
+                        
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">11:00 AM</a>
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">1:10 PM</a>
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">2:45 PM</a>
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">5:15 PM</a>
+                            
+                            
+                        
+                    </div>
+                </div>
+                
+                <div class="movie-card">
+                    <div class="movie-header">
+                        
+                        
+                        <div class="movie-info">
+                            <h3 class="movie-title">The Fantastic Four: First Steps</h3>
+                            
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    <div class="original-description">
+                        IMDB: 7.3/10 (103,222 votes) | Rated PG-13
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="showtimes">
+                        <div class="showtimes-label">Showtimes:</div>
+                        
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">11:30 AM</a>
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">3:00 PM</a>
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">6:45 PM</a>
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">9:30 PM</a>
+                            
+                            
+                        
+                    </div>
+                </div>
+                
+                <div class="movie-card">
+                    <div class="movie-header">
+                        
+                        
+                        <div class="movie-info">
+                            <h3 class="movie-title">The Naked Gun</h3>
+                            
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    <div class="original-description">
+                        IMDB: 7/10 (18,707 votes) | Rated PG-13
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="showtimes">
+                        <div class="showtimes-label">Showtimes:</div>
+                        
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">10:15 PM</a>
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">2:00 PM</a>
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">4:10 PM</a>
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">7:20 PM</a>
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">9:00 PM</a>
+                            
+                            
+                        
+                    </div>
+                </div>
+                
+                <div class="movie-card">
+                    <div class="movie-header">
+                        
+                        
+                        <div class="movie-info">
+                            <h3 class="movie-title">Together</h3>
+                            
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    <div class="original-description">
+                        IMDB: 7/10 (10,024 votes) | Rated R
                     </div>
                     
                     
@@ -2403,286 +2527,12 @@
                             <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">10:00 PM</a>
                             
                             
-                        
-                    </div>
-                </div>
-                
-                <div class="movie-card">
-                    <div class="movie-header">
-                        
-                        <img src="https://m.media-amazon.com/images/M/MV5BNmM0Yzc1ZjAtZTg4My00NDI3LWEwMzAtY2ZkNzMxMWMwOTFlXkEyXkFqcGc@._V1_.jpg" alt="Eddington poster" class="movie-poster">
-                        
-                        
-                        <div class="movie-info">
-                            <h3 class="movie-title">Eddington</h3>
                             
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">2:15 PM</a>
                             
-                            <div class="movie-year">2025</div>
                             
                             
-                            
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    <div class="original-description">
-                        IMDB: 7.1/10 (7,605 votes) | Rated R
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    <div class="showtimes">
-                        <div class="showtimes-label">Showtimes:</div>
-                        
-                            
-                            
-                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">3:00 PM</a>
-                            
-                            
-                            
-                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">6:15 PM</a>
-                            
-                            
-                            
-                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">9:00 PM</a>
-                            
-                            
-                        
-                    </div>
-                </div>
-                
-                <div class="movie-card">
-                    <div class="movie-header">
-                        
-                        <img src="https://m.media-amazon.com/images/M/MV5BZTYwYjJhNzYtY2ZiZS00ZmYxLWJkZjctYjRlNGIxYjI3ZTU0XkEyXkFqcGc@._V1_.jpg" alt="F1 poster" class="movie-poster">
-                        
-                        
-                        <div class="movie-info">
-                            <h3 class="movie-title">F1</h3>
-                            
-                            
-                            <div class="movie-year">2025</div>
-                            
-                            
-                            
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    <div class="original-description">
-                        IMDB: 7.9/10 (130,918 votes) | Rated PG-13
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    <div class="showtimes">
-                        <div class="showtimes-label">Showtimes:</div>
-                        
-                            
-                            
-                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">3:15 PM</a>
-                            
-                            
-                            
-                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">5:15 PM</a>
-                            
-                            
-                            
-                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">8:45 PM</a>
-                            
-                            
-                        
-                    </div>
-                </div>
-                
-                <div class="movie-card">
-                    <div class="movie-header">
-                        
-                        <img src="https://m.media-amazon.com/images/M/MV5BMDE1N2EzMjAtMDY1My00YWE5LWEyYjYtYmE3YjZjNzQwNDhmXkEyXkFqcGc@._V1_.jpg" alt="Jurassic World: Rebirth poster" class="movie-poster">
-                        
-                        
-                        <div class="movie-info">
-                            <h3 class="movie-title">Jurassic World: Rebirth</h3>
-                            
-                            
-                            <div class="movie-year">2025</div>
-                            
-                            
-                            
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    <div class="original-description">
-                        IMDB: 6.2/10 (72,885 votes) | Rated PG-13
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    <div class="showtimes">
-                        <div class="showtimes-label">Showtimes:</div>
-                        
-                            
-                            
-                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">4:00 PM</a>
-                            
-                            
-                            
-                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">7:00 PM</a>
-                            
-                            
-                        
-                    </div>
-                </div>
-                
-                <div class="movie-card">
-                    <div class="movie-header">
-                        
-                        <img src="https://m.media-amazon.com/images/M/MV5BMDMyNDViNTMtMmQwYy00ZWUzLThjODYtZWNiOTMzMWFjMzg1XkEyXkFqcGc@._V1_.jpg" alt="Smurfs poster" class="movie-poster">
-                        
-                        
-                        <div class="movie-info">
-                            <h3 class="movie-title">Smurfs</h3>
-                            
-                            
-                            <div class="movie-year">2025</div>
-                            
-                            
-                            
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    <div class="original-description">
-                        IMDB: 4.3/10 (2,589 votes) | Rated PG
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    <div class="showtimes">
-                        <div class="showtimes-label">Showtimes:</div>
-                        
-                            
-                            
-                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">2:45 PM</a>
-                            
-                            
-                            
-                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">5:00 PM</a>
-                            
-                            
-                            
-                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">6:45 PM</a>
-                            
-                            
-                        
-                    </div>
-                </div>
-                
-                <div class="movie-card">
-                    <div class="movie-header">
-                        
-                        <img src="https://m.media-amazon.com/images/M/MV5BOGMwZGJiM2EtMzEwZC00YTYzLWIxNzYtMmJmZWNlZjgxZTMwXkEyXkFqcGc@._V1_.jpg" alt="Superman poster" class="movie-poster">
-                        
-                        
-                        <div class="movie-info">
-                            <h3 class="movie-title">Superman</h3>
-                            
-                            
-                            <div class="movie-year">2025</div>
-                            
-                            
-                            
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    <div class="original-description">
-                        IMDB: 7.6/10 (178,372 votes) | Rated PG-13
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    <div class="showtimes">
-                        <div class="showtimes-label">Showtimes:</div>
-                        
-                            
-                            
-                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">3:30 PM</a>
-                            
-                            
-                            
-                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">5:30 PM</a>
-                            
-                            
-                            
-                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">9:45 PM</a>
-                            
-                            
-                        
-                    </div>
-                </div>
-                
-                <div class="movie-card">
-                    <div class="movie-header">
-                        
-                        <img src="https://m.media-amazon.com/images/M/MV5BOGM5MzA3MDAtYmEwMi00ZDNiLTg4MDgtMTZjOTc0ZGMyNTIwXkEyXkFqcGc@._V1_.jpg" alt="The Fantastic Four: First Steps poster" class="movie-poster">
-                        
-                        
-                        <div class="movie-info">
-                            <h3 class="movie-title">The Fantastic Four: First Steps</h3>
-                            
-                            
-                            <div class="movie-year">2025</div>
-                            
-                            
-                            
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    <div class="original-description">
-                        IMDB: 7.5/10 (68,802 votes) | Rated PG-13
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    <div class="showtimes">
-                        <div class="showtimes-label">Showtimes:</div>
-                        
-                            
-                            
-                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">2:45 PM</a>
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">4:45 PM</a>
                             
                             
                             
@@ -2690,7 +2540,7 @@
                             
                             
                             
-                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">8:30 PM</a>
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">7:45 PM</a>
                             
                             
                         
@@ -2700,14 +2550,10 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BYjk1ODQ4NTgtNjAyZi00NjMyLTg4MzktOWQ3YTU3N2MxMTdlXkEyXkFqcGc@._V1_.jpg" alt="To Live and Die in L.A. poster" class="movie-poster">
-                        
                         
                         <div class="movie-info">
-                            <h3 class="movie-title">To Live and Die in L.A.</h3>
+                            <h3 class="movie-title">Weapons</h3>
                             
-                            
-                            <div class="movie-year">1985</div>
                             
                             
                             
@@ -2718,7 +2564,7 @@
                     
                     
                     <div class="original-description">
-                        IMDB: 7.3/10 (44,681 votes) | Rated R
+                        IMDB: 8/10 (12,618 votes) | Rated R
                     </div>
                     
                     
@@ -2731,56 +2577,23 @@
                         
                             
                             
-                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">9:15 PM</a>
-                            
-                            
-                        
-                    </div>
-                </div>
-                
-                <div class="movie-card">
-                    <div class="movie-header">
-                        
-                        <img src="https://m.media-amazon.com/images/M/MV5BOWI1Mzg0OWUtNDYxYy00Mzk3LTgxMjMtYWYxZjJhMjI4NDcyXkEyXkFqcGc@._V1_.jpg" alt="Together poster" class="movie-poster">
-                        
-                        
-                        <div class="movie-info">
-                            <h3 class="movie-title">Together</h3>
-                            
-                            
-                            <div class="movie-year">2025</div>
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">11:45 AM</a>
                             
                             
                             
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    <div class="original-description">
-                        IMDB: 6.9/10 (1,953 votes) | Rated R
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    <div class="showtimes">
-                        <div class="showtimes-label">Showtimes:</div>
-                        
-                            
-                            
-                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">2:30 PM</a>
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">3:45 PM</a>
                             
                             
                             
-                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">7:15 PM</a>
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">5:45 PM</a>
                             
                             
                             
-                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">9:30 PM</a>
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">8:45 PM</a>
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="showtime showtime-link">9:45 PM</a>
                             
                             
                         
