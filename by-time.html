@@ -1,0 +1,4533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>showtimes timeline</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Maiden%20Orange');
+        
+        /* Layout constants - timeline version */
+        :root {
+            --container-max-width: 1400px;
+            --container-padding: 20px 30px;
+            --grid-gap: 12px;
+            --poster-width: 160px;
+            --poster-height: 240px;
+            
+            /* Color palette - same as original */
+            --color-primary: #5d4e37;
+            --color-secondary: #8b7d6b;
+            --color-accent: #a68b5b;
+            --color-highlight: #d4a574;
+            --color-text: #3d3d3d;
+            --color-text-light: #6b5d4f;
+            --color-text-muted: #7a6f61;
+            --color-white: #fff;
+            --color-background: #f4f1ed;
+            --color-surface: #fffef9;
+            --color-surface-alt: #f9f7f4;
+            --color-surface-warm: #fefcf7;
+            --color-surface-darker: #f0ebe4;
+            --color-border: #d4cfc7;
+            --color-border-light: #c8c3b8;
+            --color-success: #b08968;
+            --color-info: #7f8c8d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Maiden Orange', serif;
+            line-height: 1.5;
+            color: var(--color-text);
+            background: var(--color-background) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="20" cy="20" r="1" fill="%23d4d0c7" opacity="0.3"/><circle cx="80" cy="40" r="1" fill="%23c8c3b8" opacity="0.2"/><circle cx="40" cy="70" r="1" fill="%23d4d0c7" opacity="0.4"/><circle cx="90" cy="90" r="1" fill="%23c8c3b8" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: var(--container-padding);
+            background: rgba(255, 253, 248, 0.85);
+            border: 2px dashed var(--color-secondary);
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(139, 125, 107, 0.2);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 15px 0;
+            border-bottom: 2px dotted var(--color-accent);
+        }
+        
+        header::before {
+            content: "⧖ ✦ ⧖";
+            display: block;
+            color: var(--color-secondary);
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            font-size: 2.0em;
+            color: var(--color-primary);
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-transform: lowercase;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 0.85em;
+            color: var(--color-secondary);
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .navigation {
+            margin-bottom: 15px;
+        }
+        
+        .nav-link {
+            color: var(--color-secondary);
+            text-decoration: none;
+            padding: 6px 12px;
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            background: var(--color-surface-alt);
+            font-size: 0.85em;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 0 4px;
+        }
+        
+        .nav-link:hover {
+            background: var(--color-primary);
+            color: var(--color-white);
+            border-color: var(--color-primary);
+            transform: translateY(-1px);
+        }
+        
+        .stats {
+            font-size: 0.8em;
+            color: var(--color-secondary);
+            padding: 6px 12px;
+            background: rgba(212, 167, 116, 0.1);
+            border-radius: 12px;
+            border: 1px dotted var(--color-highlight);
+            margin-bottom: 10px;
+        }
+        
+        .last-updated {
+            font-size: 0.75em;
+            color: var(--color-accent);
+            margin-top: 10px;
+            padding: 6px 12px;
+            background: var(--color-surface-alt);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            display: inline-block;
+        }
+        
+        .highlight {
+            color: var(--color-success);
+            font-weight: 700;
+        }
+        
+        .timeline {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--grid-gap);
+        }
+        
+        .time-group {
+            background: var(--color-surface);
+            border: 2px solid var(--color-border-light);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+        
+        .time-group:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(139, 125, 107, 0.2);
+        }
+        
+        .time-header {
+            background: var(--color-secondary);
+            color: var(--color-white);
+            padding: 12px 20px;
+            font-weight: 700;
+            font-size: 1.1em;
+            text-align: center;
+            position: relative;
+        }
+        
+        .time-header::after {
+            content: "◦ ◦ ◦";
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-secondary);
+            padding: 0 10px;
+            font-size: 0.8em;
+        }
+        
+        .movies-at-time {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        
+        .movie-card-small {
+            background: var(--color-surface-alt);
+            border-bottom: 1px solid var(--color-border-light);
+            padding: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+        
+        .movie-card-small:last-child {
+            border-bottom: none;
+        }
+        
+        .movie-card-small:hover {
+            background: var(--color-surface-warm);
+        }
+        
+        .movie-poster-small {
+            flex-shrink: 0;
+            width: var(--poster-width);
+            height: var(--poster-height);
+            border-radius: 8px;
+            object-fit: cover;
+            border: 2px solid var(--color-border);
+            background: var(--color-surface-darker);
+            box-shadow: 0 3px 8px rgba(139, 125, 107, 0.3);
+        }
+        
+        .movie-content {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .movie-title-small {
+            font-size: 1.0em;
+            color: var(--color-primary);
+            margin-bottom: 4px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .movie-meta-line {
+            font-size: 0.75em;
+            color: var(--color-secondary);
+            margin-bottom: 3px;
+        }
+        
+        .movie-theater-small {
+            font-size: 0.8em;
+            color: var(--color-accent);
+            font-weight: 600;
+            background: rgba(166, 139, 91, 0.15);
+            padding: 2px 6px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+        
+        .movie-summary-small {
+            font-size: 0.8em;
+            color: var(--color-text-light);
+            line-height: 1.4;
+            margin: 6px 0;
+            font-style: italic;
+            padding: 6px 8px;
+            background: rgba(212, 167, 116, 0.08);
+            border-radius: 6px;
+            border-left: 2px solid var(--color-highlight);
+        }
+        
+        .movie-description-small {
+            font-size: 0.75em;
+            color: var(--color-text-muted);
+            line-height: 1.3;
+            margin: 4px 0;
+        }
+        
+        .tags-small {
+            margin: 6px 0 4px 0;
+        }
+        
+        .tag-small {
+            display: inline-block;
+            background: var(--color-surface-darker);
+            color: var(--color-secondary);
+            border: 1px solid var(--color-border);
+            padding: 1px 4px;
+            border-radius: 4px;
+            font-size: 0.65em;
+            margin-right: 3px;
+            margin-bottom: 2px;
+            text-transform: lowercase;
+        }
+        
+        .visual-style-small {
+            font-size: 0.7em;
+            color: var(--color-accent);
+            font-style: italic;
+            margin: 4px 0;
+            padding: 4px 6px;
+            background: rgba(166, 139, 91, 0.08);
+            border-radius: 4px;
+            border-left: 2px solid var(--color-highlight);
+        }
+        
+        .booking-link {
+            font-size: 0.75em;
+            color: var(--color-primary);
+            text-decoration: none;
+            padding: 4px 8px;
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            background: var(--color-surface-warm);
+            transition: all 0.2s ease;
+            display: inline-block;
+            margin-top: 4px;
+        }
+        
+        .booking-link:hover {
+            background: var(--color-primary);
+            color: var(--color-white);
+            border-color: var(--color-primary);
+            transform: translateY(-1px);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 25px;
+            padding: 15px;
+            color: var(--color-accent);
+            font-size: 0.75em;
+            border-top: 2px dotted var(--color-border);
+        }
+        
+        footer::before {
+            content: "✧ ✦ ✧";
+            display: block;
+            color: var(--color-highlight);
+            margin-bottom: 8px;
+            font-size: 1.0em;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .movies-at-time {
+                flex-direction: column;
+            }
+            
+            .movie-card-small {
+                flex-direction: column;
+                text-align: left;
+                min-width: auto;
+                border-right: none;
+            }
+            
+            .movie-poster-small {
+                width: 120px;
+                height: 180px;
+                align-self: flex-start;
+            }
+            
+            h1 {
+                font-size: 1.6em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                margin: 10px;
+                padding: 15px 20px;
+            }
+            
+            .movie-card-small {
+                padding: 12px;
+            }
+            
+            .movie-poster-small {
+                width: 100px;
+                height: 150px;
+            }
+        }
+        
+        .no-showtimes {
+            color: var(--color-info);
+            font-style: italic;
+            font-size: 0.9em;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>showtimes timeline</h1>
+            <div class="subtitle">all films grouped by showtime</div>
+            <div class="navigation">
+                <a href="index.html" class="nav-link">← by theater</a>
+                <a href="by-time.html" class="nav-link">timeline (current)</a>
+            </div>
+            <div class="stats">
+                <span class="highlight">77</span> distinct showtimes
+                across <span class="highlight">6</span> theaters
+            </div>
+            
+            <div class="last-updated">updated: August 09, 2025 at 03:01 PM</div>
+            
+        </header>
+
+        
+        <div class="timeline">
+            
+            <div class="time-group">
+                <div class="time-header">10:00 AM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BN2U1MGQ4NTAtNmU0OS00ODM1LWI4YWUtZjNjMThmOGQ0YmViXkEyXkFqcGc@._V1_.jpg" alt="Hola Frida poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Hola Frida</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2024
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7/10 (64 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BZmYyNGMzYWUtY2I1OC00MTI3LTg4NzEtMWZhZmRhNzY0MDRkXkEyXkFqcGc@._V1_.jpg" alt="North Star poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">North Star</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2023
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 5.6/10 (197 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">10:35 AM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Folktales</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.4/10 (94 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">10:40 AM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">L&#39;histoire de Souleymane</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.6/10 (4,465 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">10:45 AM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Kuraudo</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.4/10 (2,130 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">11:00 AM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BNWMxOGMwYmEtMjQ3Ny00YTMzLTllYjktNGUyMTljNDkwYTE5XkEyXkFqcGc@._V1_.jpg" alt="It&#39;s Never Over, Jeff Buckley poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">It&#39;s Never Over, Jeff Buckley</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2025
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8/10 (122 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">CatVideoFest 2025</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.6/10 (20 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">The Bad Guys 2</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.2/10 (3,303 votes) | Rated PG
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">11:10 AM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BMzJhZWNiMTktNjdiMi00ZTFkLTg5OTAtYzdiZjZjNDBlMmFhXkEyXkFqcGc@._V1_.jpg" alt="Sorry, Baby poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Sorry, Baby</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2025
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.4/10 (3,150 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">11:15 AM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BZmYyNGMzYWUtY2I1OC00MTI3LTg4NzEtMWZhZmRhNzY0MDRkXkEyXkFqcGc@._V1_.jpg" alt="North Star poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">North Star</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2023
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 5.6/10 (197 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Fa yeung nin wah</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8.1/10 (180,193 votes) | Rated PG
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Freakier Friday</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.1/10 (2,031 votes) | Rated PG
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">11:30 AM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">The Fantastic Four: First Steps</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.3/10 (103,222 votes) | Rated PG-13
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">11:45 AM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BNWMxOGMwYmEtMjQ3Ny00YTMzLTllYjktNGUyMTljNDkwYTE5XkEyXkFqcGc@._V1_.jpg" alt="It&#39;s Never Over, Jeff Buckley poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">It&#39;s Never Over, Jeff Buckley</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2025
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8/10 (122 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Il buono, il brutto, il cattivo</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Metrograph</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8.8/10 (864,156 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://metrograph.com/nyc/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Weapons</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8/10 (12,618 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">12:15 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">J&#39;accuse</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Film Forum</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.2/10 (22,463 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Superman</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.5/10 (196,994 votes) | Rated PG-13
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">12:20 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BN2U1MGQ4NTAtNmU0OS00ODM1LWI4YWUtZjNjMThmOGQ0YmViXkEyXkFqcGc@._V1_.jpg" alt="Hola Frida poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Hola Frida</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2024
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7/10 (64 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BZmYyNGMzYWUtY2I1OC00MTI3LTg4NzEtMWZhZmRhNzY0MDRkXkEyXkFqcGc@._V1_.jpg" alt="North Star poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">North Star</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2023
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 5.6/10 (197 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">12:30 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Who Killed Teddy Bear</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Film Forum</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.7/10 (1,206 votes) | Rated Not Rated
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">12:35 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Monk in Pieces</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.8/10 (36 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">12:40 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Les amants du Pont-Neuf</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.6/10 (16,480 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">12:45 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Boys Go to Jupiter</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.7/10 (137 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">1:00 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">La Terre de la folie</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Film at Lincoln Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.4/10 (146 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.filmlinc.org/now-playing/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">1:10 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">The Bad Guys 2</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.2/10 (3,303 votes) | Rated PG
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">1:15 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Kuraudo</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.4/10 (2,130 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">1:20 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">2000 Meters to Andriivka</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Film Forum</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8.5/10 (271 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">1:30 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Freakier Friday</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.1/10 (2,031 votes) | Rated PG
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">1:40 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BNWMxOGMwYmEtMjQ3Ny00YTMzLTllYjktNGUyMTljNDkwYTE5XkEyXkFqcGc@._V1_.jpg" alt="It&#39;s Never Over, Jeff Buckley poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">It&#39;s Never Over, Jeff Buckley</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2025
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8/10 (122 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BZmYyNGMzYWUtY2I1OC00MTI3LTg4NzEtMWZhZmRhNzY0MDRkXkEyXkFqcGc@._V1_.jpg" alt="North Star poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">North Star</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2023
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 5.6/10 (197 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">1:55 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BMzJhZWNiMTktNjdiMi00ZTFkLTg5OTAtYzdiZjZjNDBlMmFhXkEyXkFqcGc@._V1_.jpg" alt="Sorry, Baby poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Sorry, Baby</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2025
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.4/10 (3,150 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">2:00 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Ran</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Film Forum</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8.2/10 (145,950 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">The Naked Gun</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7/10 (18,707 votes) | Rated PG-13
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">2:15 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Together</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7/10 (10,024 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">2:40 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BNWMxOGMwYmEtMjQ3Ny00YTMzLTllYjktNGUyMTljNDkwYTE5XkEyXkFqcGc@._V1_.jpg" alt="It&#39;s Never Over, Jeff Buckley poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">It&#39;s Never Over, Jeff Buckley</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2025
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8/10 (122 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BZmYyNGMzYWUtY2I1OC00MTI3LTg4NzEtMWZhZmRhNzY0MDRkXkEyXkFqcGc@._V1_.jpg" alt="North Star poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">North Star</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2023
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 5.6/10 (197 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Who Killed Teddy Bear</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Film Forum</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.7/10 (1,206 votes) | Rated Not Rated
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">How Green Was My Valley</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Metrograph</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.7/10 (28,194 votes) | Rated Approved
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://metrograph.com/nyc/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">2:45 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BN2U1MGQ4NTAtNmU0OS00ODM1LWI4YWUtZjNjMThmOGQ0YmViXkEyXkFqcGc@._V1_.jpg" alt="Hola Frida poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Hola Frida</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2024
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7/10 (64 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">The Bad Guys 2</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.2/10 (3,303 votes) | Rated PG
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">2:50 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">L&#39;histoire de Souleymane</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.6/10 (4,465 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">2:55 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Boys Go to Jupiter</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.7/10 (137 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">3:00 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">J&#39;accuse</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Film Forum</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.2/10 (22,463 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Far from Heaven</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Metrograph</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.3/10 (50,720 votes) | Rated PG-13
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://metrograph.com/nyc/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">The Fantastic Four: First Steps</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.3/10 (103,222 votes) | Rated PG-13
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">3:15 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Brigitte et Brigitte</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Film at Lincoln Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.3/10 (214 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.filmlinc.org/now-playing/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Superman</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.5/10 (196,994 votes) | Rated PG-13
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">3:35 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Les amants du Pont-Neuf</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.6/10 (16,480 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">3:45 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">El jockey</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Film Forum</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.4/10 (2,073 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Weapons</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8/10 (12,618 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">4:00 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Kuraudo</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.4/10 (2,130 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">4:10 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BZmYyNGMzYWUtY2I1OC00MTI3LTg4NzEtMWZhZmRhNzY0MDRkXkEyXkFqcGc@._V1_.jpg" alt="North Star poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">North Star</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2023
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 5.6/10 (197 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">The Naked Gun</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7/10 (18,707 votes) | Rated PG-13
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">4:20 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BNWMxOGMwYmEtMjQ3Ny00YTMzLTllYjktNGUyMTljNDkwYTE5XkEyXkFqcGc@._V1_.jpg" alt="It&#39;s Never Over, Jeff Buckley poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">It&#39;s Never Over, Jeff Buckley</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2025
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8/10 (122 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Fa yeung nin wah</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8.1/10 (180,193 votes) | Rated PG
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">4:25 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Freakier Friday</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.1/10 (2,031 votes) | Rated PG
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">4:35 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BMzJhZWNiMTktNjdiMi00ZTFkLTg5OTAtYzdiZjZjNDBlMmFhXkEyXkFqcGc@._V1_.jpg" alt="Sorry, Baby poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Sorry, Baby</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2025
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.4/10 (3,150 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">4:45 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Together</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7/10 (10,024 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">4:50 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Who Killed Teddy Bear</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Film Forum</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.7/10 (1,206 votes) | Rated Not Rated
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">5:00 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BNWMxOGMwYmEtMjQ3Ny00YTMzLTllYjktNGUyMTljNDkwYTE5XkEyXkFqcGc@._V1_.jpg" alt="It&#39;s Never Over, Jeff Buckley poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">It&#39;s Never Over, Jeff Buckley</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2025
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8/10 (122 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BZmYyNGMzYWUtY2I1OC00MTI3LTg4NzEtMWZhZmRhNzY0MDRkXkEyXkFqcGc@._V1_.jpg" alt="North Star poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">North Star</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2023
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 5.6/10 (197 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Folktales</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.4/10 (94 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Mala Noche</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Metrograph</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.5/10 (4,526 votes) | Rated Not Rated
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://metrograph.com/nyc/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">5:10 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Boys Go to Jupiter</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.7/10 (137 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">5:15 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Brazil</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Film Forum</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.8/10 (218,034 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">La comédie du travail</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Film at Lincoln Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.6/10 (77 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.filmlinc.org/now-playing/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Zola</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Metrograph</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.4/10 (19,405 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://metrograph.com/nyc/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">The Bad Guys 2</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.2/10 (3,303 votes) | Rated PG
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">5:45 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">J&#39;accuse</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Film Forum</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.2/10 (22,463 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Weapons</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8/10 (12,618 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">5:50 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BN2U1MGQ4NTAtNmU0OS00ODM1LWI4YWUtZjNjMThmOGQ0YmViXkEyXkFqcGc@._V1_.jpg" alt="Hola Frida poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Hola Frida</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2024
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7/10 (64 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">6:00 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">2000 Meters to Andriivka</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Film Forum</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8.5/10 (271 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">6:15 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Superman</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.5/10 (196,994 votes) | Rated PG-13
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">6:30 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Les amants du Pont-Neuf</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.6/10 (16,480 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Together</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7/10 (10,024 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">6:45 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">The Fantastic Four: First Steps</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.3/10 (103,222 votes) | Rated PG-13
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">6:50 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Kuraudo</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.4/10 (2,130 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">La chambre verte</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Metrograph</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.9/10 (3,442 votes) | Rated PG
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://metrograph.com/nyc/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">7:00 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BNWMxOGMwYmEtMjQ3Ny00YTMzLTllYjktNGUyMTljNDkwYTE5XkEyXkFqcGc@._V1_.jpg" alt="It&#39;s Never Over, Jeff Buckley poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">It&#39;s Never Over, Jeff Buckley</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2025
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8/10 (122 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Who Killed Teddy Bear</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Film Forum</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.7/10 (1,206 votes) | Rated Not Rated
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">7:05 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BMTY4NzcwODg3Nl5BMl5BanBnXkFtZTcwNTEwOTMyMw@@._V1_.jpg" alt="Eternal Sunshine of the Spotless Mind poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Eternal Sunshine of the Spotless Mind</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2004
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8.3/10 (1,147,838 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Freakier Friday</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.1/10 (2,031 votes) | Rated PG
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">7:20 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BZmYyNGMzYWUtY2I1OC00MTI3LTg4NzEtMWZhZmRhNzY0MDRkXkEyXkFqcGc@._V1_.jpg" alt="North Star poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">North Star</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2023
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 5.6/10 (197 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">The Naked Gun</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7/10 (18,707 votes) | Rated PG-13
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">7:25 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BMzJhZWNiMTktNjdiMi00ZTFkLTg5OTAtYzdiZjZjNDBlMmFhXkEyXkFqcGc@._V1_.jpg" alt="Sorry, Baby poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Sorry, Baby</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2025
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.4/10 (3,150 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">L&#39;histoire de Souleymane</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.6/10 (4,465 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">7:30 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Boys Go to Jupiter</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.7/10 (137 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">7:40 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Instrument</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Metrograph</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.9/10 (1,073 votes) | Rated Not Rated
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://metrograph.com/nyc/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">7:45 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Together</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7/10 (10,024 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">8:00 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BN2U1MGQ4NTAtNmU0OS00ODM1LWI4YWUtZjNjMThmOGQ0YmViXkEyXkFqcGc@._V1_.jpg" alt="Hola Frida poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Hola Frida</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2024
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7/10 (64 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Une aventure de Billy le Kid</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Film at Lincoln Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 5.4/10 (190 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.filmlinc.org/now-playing/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">8:10 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BNWMxOGMwYmEtMjQ3Ny00YTMzLTllYjktNGUyMTljNDkwYTE5XkEyXkFqcGc@._V1_.jpg" alt="It&#39;s Never Over, Jeff Buckley poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">It&#39;s Never Over, Jeff Buckley</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2025
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8/10 (122 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Tengoku to jigoku</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Film Forum</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8.4/10 (62,531 votes) | Rated Not Rated
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">8:15 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">El jockey</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Film Forum</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.4/10 (2,073 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">8:30 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">J&#39;accuse</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Film Forum</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.2/10 (22,463 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">8:45 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Macumba</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Metrograph</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 5.8/10 (10 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://metrograph.com/nyc/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Weapons</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8/10 (12,618 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">9:00 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">The Naked Gun</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7/10 (18,707 votes) | Rated PG-13
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">9:10 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Who Killed Teddy Bear</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Film Forum</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.7/10 (1,206 votes) | Rated Not Rated
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://filmforum.org/now_playing" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">9:15 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Superman</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.5/10 (196,994 votes) | Rated PG-13
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">9:25 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Les amants du Pont-Neuf</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.6/10 (16,480 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">9:30 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Fa yeung nin wah</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8.1/10 (180,193 votes) | Rated PG
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">The Fantastic Four: First Steps</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.3/10 (103,222 votes) | Rated PG-13
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">9:35 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Kuraudo</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.4/10 (2,130 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">9:40 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BMTY4NzcwODg3Nl5BMl5BanBnXkFtZTcwNTEwOTMyMw@@._V1_.jpg" alt="Eternal Sunshine of the Spotless Mind poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Eternal Sunshine of the Spotless Mind</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2004
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8.3/10 (1,147,838 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BNWMxOGMwYmEtMjQ3Ny00YTMzLTllYjktNGUyMTljNDkwYTE5XkEyXkFqcGc@._V1_.jpg" alt="It&#39;s Never Over, Jeff Buckley poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">It&#39;s Never Over, Jeff Buckley</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2025
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8/10 (122 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">9:45 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Weapons</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8/10 (12,618 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">9:50 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Boys Go to Jupiter</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.7/10 (137 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">10:00 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BNWMxOGMwYmEtMjQ3Ny00YTMzLTllYjktNGUyMTljNDkwYTE5XkEyXkFqcGc@._V1_.jpg" alt="It&#39;s Never Over, Jeff Buckley poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">It&#39;s Never Over, Jeff Buckley</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2025
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 8/10 (122 votes)
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BMzJhZWNiMTktNjdiMi00ZTFkLTg5OTAtYzdiZjZjNDBlMmFhXkEyXkFqcGc@._V1_.jpg" alt="Sorry, Baby poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Sorry, Baby</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2025
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.4/10 (3,150 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Together</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7/10 (10,024 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">10:05 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        <img loading="lazy" src="https://m.media-amazon.com/images/M/MV5BZmYyNGMzYWUtY2I1OC00MTI3LTg4NzEtMWZhZmRhNzY0MDRkXkEyXkFqcGc@._V1_.jpg" alt="North Star poster" class="movie-poster-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">North Star</div>
+                            
+                            
+                            <div class="movie-meta-line">
+                                2023
+                                
+                                
+                            </div>
+                            
+                            
+                            <div class="movie-theater-small">Angelika Film Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 5.6/10 (197 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://angelikafilmcenter.com/nyc" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">10:15 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">The Naked Gun</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Nitehawk Cinema Prospect Park</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7/10 (18,707 votes) | Rated PG-13
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://nitehawkcinema.com/prospectpark/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">10:30 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Belly</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Metrograph</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.2/10 (13,348 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://metrograph.com/nyc/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">10:35 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">One Hour Photo</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">Metrograph</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.8/10 (137,015 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://metrograph.com/nyc/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">11:50 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">The Decline of Western Civilization Part III</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.2/10 (1,806 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="time-group">
+                <div class="time-header">11:59 PM</div>
+                <div class="movies-at-time">
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Commando</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 6.7/10 (183,353 votes) | Rated R
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card-small">
+                        
+                        
+                        <div class="movie-content">
+                            <div class="movie-title-small">Kôkaku Kidôtai</div>
+                            
+                            
+                            
+                            <div class="movie-theater-small">IFC Center</div>
+                            
+                            
+                            
+                            
+                            <div class="movie-description-small">
+                                IMDB: 7.9/10 (167,151 votes) | Rated TV-MA
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <a href="https://www.ifccenter.com/films/" target="_blank" class="booking-link">book tickets</a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <footer>
+        <p>grouped by showtime ~ updated daily</p>
+    </footer>
+</body>
+</html>
