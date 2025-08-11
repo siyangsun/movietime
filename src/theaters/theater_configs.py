@@ -73,6 +73,23 @@ THEATER_CONFIGS: Dict[str, TheaterConfig] = {
         features=['art_house', 'independent', 'imdb_showtimes'],
         scraping=ScrapingConfig()
     ),
+
+    'angelika_east': TheaterConfig(
+        theater_id='angelika_east',
+        theater_name='Village East by Angelika',
+        imdb_cinema_id='ci0003464',
+        purchase_url='https://angelikafilmcenter.com/villageeast/signature-programming',
+        theater_description='Independent and art house cinema in East Village',
+        location=TheaterLocation(
+            street_address='181-189 2nd Ave',
+            neighborhood='East Village',
+            city='New York',
+            state='NY',
+            zip_code='10003'
+        ),
+        features=['art_house', 'independent', 'imdb_showtimes'],
+        scraping=ScrapingConfig()
+    ),
     
     'film_forum': TheaterConfig(
         theater_id='film_forum',
@@ -144,12 +161,29 @@ THEATER_CONFIGS: Dict[str, TheaterConfig] = {
 
     'film_at_lincoln': TheaterConfig(
         theater_id='film_at_lincoln',
-        theater_name='Film at Lincoln Center',
+        theater_name='Film at Lincoln Center - Walter Reade',
         imdb_cinema_id='ci0003556',
         purchase_url='https://www.filmlinc.org/now-playing/',
         theater_description='Film center in Lincoln Square',
         location=TheaterLocation(
             street_address='165 W 65th St',
+            neighborhood='Lincoln Square',
+            city='New York',
+            state='NY',
+            zip_code='10023'
+        ),
+        features=['art_house', 'independent', 'documentaries', 'imdb_showtimes'],
+        scraping=ScrapingConfig()
+    ),
+
+    'film_at_lincoln_ebm': TheaterConfig(
+        theater_id='film_at_lincoln_ebm',
+        theater_name='Film at Lincoln Center - EBM',
+        imdb_cinema_id='ci12617789',
+        purchase_url='https://www.filmlinc.org/now-playing/',
+        theater_description='Film center in Lincoln Square',
+        location=TheaterLocation(
+            street_address='144 W 65th St',
             neighborhood='Lincoln Square',
             city='New York',
             state='NY',
