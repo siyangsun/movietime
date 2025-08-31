@@ -1,27 +1,65 @@
 {
-  "scraped_at": "2025-08-30T10:19:59.604702",
-  "total_movies": 65,
+  "scraped_at": "2025-08-31T10:20:25.671701",
+  "total_movies": 57,
   "theaters": [
+    "Village East by Angelika",
     "Angelika Film Center",
     "Metrograph",
     "IFC Center",
-    "Film Forum",
-    "Village East by Angelika",
     "Film at Lincoln Center - EBM",
-    "Nitehawk Cinema Prospect Park",
-    "Film at Lincoln Center - Walter Reade"
+    "Film Forum",
+    "Film at Lincoln Center - Walter Reade",
+    "Nitehawk Cinema Prospect Park"
   ],
   "movies": [
     {
       "title": "A Little Prayer",
-      "description": "IMDB: 7.3/10 (227 votes) | Rated R",
+      "description": "IMDB: 7.3/10 (235 votes) | Rated R",
+      "showtimes": [
+        "11:45 am",
+        "2:10 pm",
+        "4:30 pm",
+        "7:10 pm",
+        "9:30 pm"
+      ],
+      "showtime_links": [
+        {
+          "time": "11:45 AM",
+          "url": "https://angelikafilmcenter.com/nyc"
+        },
+        {
+          "time": "2:10 PM",
+          "url": "https://angelikafilmcenter.com/nyc"
+        },
+        {
+          "time": "4:30 PM",
+          "url": "https://angelikafilmcenter.com/nyc"
+        },
+        {
+          "time": "7:10 PM",
+          "url": "https://angelikafilmcenter.com/nyc"
+        },
+        {
+          "time": "9:30 PM",
+          "url": "https://angelikafilmcenter.com/nyc"
+        }
+      ],
+      "theater": "Angelika Film Center",
+      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003467/",
+      "scraped_at": "2025-08-31T10:20:13.850470",
+      "imdb_url": "https://www.imdb.com/title/tt22004186/",
+      "rating": "7.3/10 (235 votes)",
+      "content_rating": "R"
+    },
+    {
+      "title": "It's Never Over, Jeff Buckley",
+      "description": "IMDB: 8.1/10 (423 votes)",
       "showtimes": [
         "10:00 am",
-        "12:10 pm",
-        "2:20 pm",
-        "4:40 pm",
+        "1:00 pm",
+        "4:00 pm",
         "7:00 pm",
-        "9:50 pm"
+        "10:00 pm"
       ],
       "showtime_links": [
         {
@@ -29,91 +67,32 @@
           "url": "https://angelikafilmcenter.com/nyc"
         },
         {
-          "time": "12:10 PM",
+          "time": "10:00 PM",
           "url": "https://angelikafilmcenter.com/nyc"
         },
         {
-          "time": "2:20 PM",
+          "time": "1:00 PM",
           "url": "https://angelikafilmcenter.com/nyc"
         },
         {
-          "time": "4:40 PM",
+          "time": "4:00 PM",
           "url": "https://angelikafilmcenter.com/nyc"
         },
         {
           "time": "7:00 PM",
           "url": "https://angelikafilmcenter.com/nyc"
-        },
-        {
-          "time": "9:50 PM",
-          "url": "https://angelikafilmcenter.com/nyc"
         }
       ],
       "theater": "Angelika Film Center",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003467/",
-      "scraped_at": "2025-08-30T10:19:45.188269",
-      "imdb_url": "https://www.imdb.com/title/tt22004186/",
-      "rating": "7.3/10 (227 votes)",
-      "content_rating": "R"
-    },
-    {
-      "title": "It's Never Over, Jeff Buckley",
-      "description": "IMDB: 8.1/10 (405 votes)",
-      "showtimes": [
-        "11:00 am",
-        "12:00 pm",
-        "3:00 pm",
-        "8:35 pm"
-      ],
-      "showtime_links": [
-        {
-          "time": "11:00 AM",
-          "url": "https://angelikafilmcenter.com/nyc"
-        },
-        {
-          "time": "12:00 PM",
-          "url": "https://angelikafilmcenter.com/nyc"
-        },
-        {
-          "time": "3:00 PM",
-          "url": "https://angelikafilmcenter.com/nyc"
-        },
-        {
-          "time": "8:35 PM",
-          "url": "https://angelikafilmcenter.com/nyc"
-        }
-      ],
-      "theater": "Angelika Film Center",
-      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003467/",
-      "scraped_at": "2025-08-30T10:19:44.188752",
+      "scraped_at": "2025-08-31T10:20:13.658300",
       "imdb_url": "https://www.imdb.com/title/tt34966650/",
-      "rating": "8.1/10 (405 votes)",
-      "content_rating": "",
-      "poster_url": "https://m.media-amazon.com/images/M/MV5BNWMxOGMwYmEtMjQ3Ny00YTMzLTllYjktNGUyMTljNDkwYTE5XkEyXkFqcGc@._V1_.jpg",
-      "imdb_plot": "",
-      "imdb_genres": [],
-      "imdb_director": "",
-      "imdb_year": "2025",
-      "imdb_runtime": "",
-      "imdb_api_rating": "8.1",
-      "imdb_metadata": {
-        "imdb_id": "tt34966650",
-        "title": "It's Never Over, Jeff Buckley",
-        "year": "2025",
-        "poster_url": "https://m.media-amazon.com/images/M/MV5BNWMxOGMwYmEtMjQ3Ny00YTMzLTllYjktNGUyMTljNDkwYTE5XkEyXkFqcGc@._V1_.jpg",
-        "plot": "",
-        "genres": [],
-        "director": "",
-        "actors": "",
-        "runtime": "",
-        "rating": "8.1",
-        "votes": "405",
-        "imdb_url": "https://www.imdb.com/title/tt34966650/"
-      }
+      "rating": "8.1/10 (423 votes)",
+      "content_rating": ""
     },
     {
       "title": "J'accuse",
-      "description": "IMDB: 7.2/10 (22,559 votes)",
+      "description": "IMDB: 7.2/10 (22,565 votes)",
       "showtimes": [
         "12:30 pm",
         "3:30 pm",
@@ -140,80 +119,21 @@
       ],
       "theater": "Angelika Film Center",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003467/",
-      "scraped_at": "2025-08-30T10:19:45.205505",
+      "scraped_at": "2025-08-31T10:20:13.953124",
       "imdb_url": "https://www.imdb.com/title/tt2398149/",
-      "rating": "7.2/10 (22,559 votes)",
+      "rating": "7.2/10 (22,565 votes)",
       "content_rating": ""
     },
     {
       "title": "Love, Brooklyn",
-      "description": "IMDB: 6.3/10 (130 votes)",
-      "showtimes": [
-        "2:00 pm",
-        "5:30 pm",
-        "7:15 pm",
-        "8:00 pm",
-        "10:05 pm"
-      ],
-      "showtime_links": [
-        {
-          "time": "10:05 PM",
-          "url": "https://angelikafilmcenter.com/nyc"
-        },
-        {
-          "time": "2:00 PM",
-          "url": "https://angelikafilmcenter.com/nyc"
-        },
-        {
-          "time": "5:30 PM",
-          "url": "https://angelikafilmcenter.com/nyc"
-        },
-        {
-          "time": "7:15 PM",
-          "url": "https://angelikafilmcenter.com/nyc"
-        },
-        {
-          "time": "8:00 PM",
-          "url": "https://angelikafilmcenter.com/nyc"
-        }
-      ],
-      "theater": "Angelika Film Center",
-      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003467/",
-      "scraped_at": "2025-08-30T10:19:44.447232",
-      "imdb_url": "https://www.imdb.com/title/tt34880924/",
-      "rating": "6.3/10 (130 votes)",
-      "content_rating": "",
-      "poster_url": "https://m.media-amazon.com/images/M/MV5BYTE1MWJhMWYtMWFhNy00MTYzLWI2NjgtZWQ1NjMzOGM0ODAyXkEyXkFqcGc@._V1_.jpg",
-      "imdb_plot": "",
-      "imdb_genres": [],
-      "imdb_director": "",
-      "imdb_year": "2025",
-      "imdb_runtime": "",
-      "imdb_api_rating": "6.3",
-      "imdb_metadata": {
-        "imdb_id": "tt34880924",
-        "title": "Love, Brooklyn",
-        "year": "2025",
-        "poster_url": "https://m.media-amazon.com/images/M/MV5BYTE1MWJhMWYtMWFhNy00MTYzLWI2NjgtZWQ1NjMzOGM0ODAyXkEyXkFqcGc@._V1_.jpg",
-        "plot": "",
-        "genres": [],
-        "director": "",
-        "actors": "",
-        "runtime": "",
-        "rating": "6.3",
-        "votes": "130",
-        "imdb_url": "https://www.imdb.com/title/tt34880924/"
-      }
-    },
-    {
-      "title": "Relay",
-      "description": "IMDB: 7.3/10 (1,882 votes) | Rated R",
+      "description": "IMDB: 6.2/10 (132 votes)",
       "showtimes": [
         "10:00 am",
-        "12:30 pm",
-        "3:00 pm",
-        "4:30 pm",
-        "6:00 pm"
+        "12:20 pm",
+        "2:45 pm",
+        "5:10 pm",
+        "7:35 pm",
+        "10:00 pm"
       ],
       "showtime_links": [
         {
@@ -221,53 +141,75 @@
           "url": "https://angelikafilmcenter.com/nyc"
         },
         {
-          "time": "12:30 PM",
+          "time": "10:00 PM",
           "url": "https://angelikafilmcenter.com/nyc"
         },
         {
-          "time": "3:00 PM",
+          "time": "12:20 PM",
           "url": "https://angelikafilmcenter.com/nyc"
         },
         {
-          "time": "4:30 PM",
+          "time": "2:45 PM",
           "url": "https://angelikafilmcenter.com/nyc"
         },
         {
-          "time": "6:00 PM",
+          "time": "5:10 PM",
+          "url": "https://angelikafilmcenter.com/nyc"
+        },
+        {
+          "time": "7:35 PM",
           "url": "https://angelikafilmcenter.com/nyc"
         }
       ],
       "theater": "Angelika Film Center",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003467/",
-      "scraped_at": "2025-08-30T10:19:43.018622",
+      "scraped_at": "2025-08-31T10:20:13.754335",
+      "imdb_url": "https://www.imdb.com/title/tt34880924/",
+      "rating": "6.2/10 (132 votes)",
+      "content_rating": ""
+    },
+    {
+      "title": "Relay",
+      "description": "IMDB: 7.3/10 (1,989 votes) | Rated R",
+      "showtimes": [
+        "11:30 am",
+        "2:10 pm",
+        "4:45 pm",
+        "7:20 pm",
+        "9:55 pm"
+      ],
+      "showtime_links": [
+        {
+          "time": "11:30 AM",
+          "url": "https://angelikafilmcenter.com/nyc"
+        },
+        {
+          "time": "2:10 PM",
+          "url": "https://angelikafilmcenter.com/nyc"
+        },
+        {
+          "time": "4:45 PM",
+          "url": "https://angelikafilmcenter.com/nyc"
+        },
+        {
+          "time": "7:20 PM",
+          "url": "https://angelikafilmcenter.com/nyc"
+        },
+        {
+          "time": "9:55 PM",
+          "url": "https://angelikafilmcenter.com/nyc"
+        }
+      ],
+      "theater": "Angelika Film Center",
+      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003467/",
+      "scraped_at": "2025-08-31T10:20:13.472379",
       "imdb_url": "https://www.imdb.com/title/tt11539996/",
-      "rating": "7.3/10 (1,882 votes)",
-      "content_rating": "R",
-      "poster_url": "https://m.media-amazon.com/images/M/MV5BYzFhMjljODMtYTY3MS00NmFiLWEzOTAtNTczZjQ1NGMwMjE4XkEyXkFqcGc@._V1_.jpg",
-      "imdb_plot": "",
-      "imdb_genres": [],
-      "imdb_director": "",
-      "imdb_year": "2024",
-      "imdb_runtime": "",
-      "imdb_api_rating": "7.3",
-      "imdb_metadata": {
-        "imdb_id": "tt11539996",
-        "title": "Relay",
-        "year": "2024",
-        "poster_url": "https://m.media-amazon.com/images/M/MV5BYzFhMjljODMtYTY3MS00NmFiLWEzOTAtNTczZjQ1NGMwMjE4XkEyXkFqcGc@._V1_.jpg",
-        "plot": "",
-        "genres": [],
-        "director": "",
-        "actors": "",
-        "runtime": "",
-        "rating": "7.3",
-        "votes": "1882",
-        "imdb_url": "https://www.imdb.com/title/tt11539996/"
-      }
+      "rating": "7.3/10 (1,989 votes)",
+      "content_rating": "R"
     },
     {
       "title": "Splitsville",
-      "description": "IMDB: 7.1/10 (562 votes) | Rated R",
+      "description": "IMDB: 7/10 (620 votes) | Rated R",
       "showtimes": [
         "12:00 pm",
         "2:30 pm",
@@ -299,35 +241,14 @@
       ],
       "theater": "Angelika Film Center",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003467/",
-      "scraped_at": "2025-08-30T10:19:43.772026",
+      "scraped_at": "2025-08-31T10:20:13.609470",
       "imdb_url": "https://www.imdb.com/title/tt33247023/",
-      "rating": "7.1/10 (562 votes)",
-      "content_rating": "R",
-      "poster_url": "https://m.media-amazon.com/images/M/MV5BODA3YTA1YzEtMDhjNy00ODFjLTlmYTItMjYzZWNhYzFmZjE2XkEyXkFqcGc@._V1_.jpg",
-      "imdb_plot": "",
-      "imdb_genres": [],
-      "imdb_director": "",
-      "imdb_year": "2025",
-      "imdb_runtime": "",
-      "imdb_api_rating": "7.1",
-      "imdb_metadata": {
-        "imdb_id": "tt33247023",
-        "title": "Splitsville",
-        "year": "2025",
-        "poster_url": "https://m.media-amazon.com/images/M/MV5BODA3YTA1YzEtMDhjNy00ODFjLTlmYTItMjYzZWNhYzFmZjE2XkEyXkFqcGc@._V1_.jpg",
-        "plot": "",
-        "genres": [],
-        "director": "",
-        "actors": "",
-        "runtime": "",
-        "rating": "7.1",
-        "votes": "562",
-        "imdb_url": "https://www.imdb.com/title/tt33247023/"
-      }
+      "rating": "7/10 (620 votes)",
+      "content_rating": "R"
     },
     {
       "title": "Brazil",
-      "description": "IMDB: 7.8/10 (218,450 votes) | Rated R",
+      "description": "IMDB: 7.8/10 (218,473 votes) | Rated R",
       "showtimes": [
         "1:00 pm",
         "4:00 pm",
@@ -349,71 +270,52 @@
       ],
       "theater": "Film Forum",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003551/",
-      "scraped_at": "2025-08-30T10:19:49.534140",
+      "scraped_at": "2025-08-31T10:20:17.048924",
       "imdb_url": "https://www.imdb.com/title/tt0088846/",
-      "rating": "7.8/10 (218,450 votes)",
+      "rating": "7.8/10 (218,473 votes)",
       "content_rating": "R"
     },
     {
-      "title": "Coffy",
-      "description": "IMDB: 6.8/10 (14,242 votes) | Rated R",
+      "title": "Dung fong sam hap",
+      "description": "IMDB: 6.6/10 (5,077 votes) | Rated R",
       "showtimes": [
-        "3:15 pm"
+        "3:30 pm"
       ],
       "showtime_links": [
         {
-          "time": "3:15 PM",
+          "time": "3:30 PM",
           "url": "https://filmforum.org/now_playing"
         }
       ],
       "theater": "Film Forum",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003551/",
-      "scraped_at": "2025-08-30T10:19:49.682923",
-      "imdb_url": "https://www.imdb.com/title/tt0069897/",
-      "rating": "6.8/10 (14,242 votes)",
+      "scraped_at": "2025-08-31T10:20:17.292147",
+      "imdb_url": "https://www.imdb.com/title/tt0105619/",
+      "rating": "6.6/10 (5,077 votes)",
       "content_rating": "R"
     },
     {
-      "title": "Foxy Brown",
-      "description": "IMDB: 6.5/10 (13,548 votes) | Rated R",
+      "title": "Long men kezhan",
+      "description": "IMDB: 7.4/10 (4,025 votes) | Rated Not Rated",
       "showtimes": [
-        "5:20 pm"
+        "1:00 pm"
       ],
       "showtime_links": [
         {
-          "time": "5:20 PM",
+          "time": "1:00 PM",
           "url": "https://filmforum.org/now_playing"
         }
       ],
       "theater": "Film Forum",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003551/",
-      "scraped_at": "2025-08-30T10:19:49.590428",
-      "imdb_url": "https://www.imdb.com/title/tt0071517/",
-      "rating": "6.5/10 (13,548 votes)",
-      "content_rating": "R"
-    },
-    {
-      "title": "Jackie Brown",
-      "description": "IMDB: 7.5/10 (394,126 votes) | Rated R",
-      "showtimes": [
-        "7:30 pm"
-      ],
-      "showtime_links": [
-        {
-          "time": "7:30 PM",
-          "url": "https://filmforum.org/now_playing"
-        }
-      ],
-      "theater": "Film Forum",
-      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003551/",
-      "scraped_at": "2025-08-30T10:19:49.467763",
-      "imdb_url": "https://www.imdb.com/title/tt0119396/",
-      "rating": "7.5/10 (394,126 votes)",
-      "content_rating": "R"
+      "scraped_at": "2025-08-31T10:20:17.188046",
+      "imdb_url": "https://www.imdb.com/title/tt0060635/",
+      "rating": "7.4/10 (4,025 votes)",
+      "content_rating": "Not Rated"
     },
     {
       "title": "Sanatorium Under the Sign of the Hourglass",
-      "description": "IMDB: 5.5/10 (148 votes)",
+      "description": "IMDB: 5.5/10 (149 votes)",
       "showtimes": [
         "12:20 pm",
         "2:15 pm",
@@ -445,33 +347,33 @@
       ],
       "theater": "Film Forum",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003551/",
-      "scraped_at": "2025-08-30T10:19:49.784617",
+      "scraped_at": "2025-08-31T10:20:17.386791",
       "imdb_url": "https://www.imdb.com/title/tt33069917/",
-      "rating": "5.5/10 (148 votes)",
+      "rating": "5.5/10 (149 votes)",
       "content_rating": ""
     },
     {
-      "title": "The Big Doll House",
-      "description": "IMDB: 5.8/10 (3,361 votes) | Rated R",
+      "title": "Wo hu cang long",
+      "description": "IMDB: 7.9/10 (290,130 votes) | Rated PG-13",
       "showtimes": [
-        "1:00 pm"
+        "5:30 pm"
       ],
       "showtime_links": [
         {
-          "time": "1:00 PM",
+          "time": "5:30 PM",
           "url": "https://filmforum.org/now_playing"
         }
       ],
       "theater": "Film Forum",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003551/",
-      "scraped_at": "2025-08-30T10:19:49.885102",
-      "imdb_url": "https://www.imdb.com/title/tt0066830/",
-      "rating": "5.8/10 (3,361 votes)",
-      "content_rating": "R"
+      "scraped_at": "2025-08-31T10:20:17.101506",
+      "imdb_url": "https://www.imdb.com/title/tt0190332/",
+      "rating": "7.9/10 (290,130 votes)",
+      "content_rating": "PG-13"
     },
     {
       "title": "Fa yeung nin wah",
-      "description": "IMDB: 8.1/10 (181,032 votes) | Rated PG",
+      "description": "IMDB: 8.1/10 (181,084 votes) | Rated PG",
       "showtimes": [
         "1:15 pm",
         "6:15 pm",
@@ -493,9 +395,9 @@
       ],
       "theater": "Film at Lincoln Center - EBM",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci12617789/",
-      "scraped_at": "2025-08-30T10:19:59.388287",
+      "scraped_at": "2025-08-31T10:20:25.435305",
       "imdb_url": "https://www.imdb.com/title/tt0118694/",
-      "rating": "8.1/10 (181,032 votes)",
+      "rating": "8.1/10 (181,084 votes)",
       "content_rating": "PG"
     },
     {
@@ -527,14 +429,14 @@
       ],
       "theater": "Film at Lincoln Center - EBM",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci12617789/",
-      "scraped_at": "2025-08-30T10:19:59.506694",
+      "scraped_at": "2025-08-31T10:20:25.569689",
       "imdb_url": "https://www.imdb.com/title/tt28419037/",
       "rating": "6.3/10 (454 votes)",
       "content_rating": ""
     },
     {
       "title": "Natsu no niwa: The Friends",
-      "description": "IMDB: 7.5/10 (487 votes)",
+      "description": "IMDB: 7.5/10 (489 votes)",
       "showtimes": [
         "3:45 pm"
       ],
@@ -546,92 +448,71 @@
       ],
       "theater": "Film at Lincoln Center - EBM",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci12617789/",
-      "scraped_at": "2025-08-30T10:19:59.456823",
+      "scraped_at": "2025-08-31T10:20:25.472323",
       "imdb_url": "https://www.imdb.com/title/tt0110630/",
-      "rating": "7.5/10 (487 votes)",
+      "rating": "7.5/10 (489 votes)",
       "content_rating": ""
     },
     {
-      "title": "Signs",
-      "description": "IMDB: 6.8/10 (404,622 votes) | Rated PG-13",
+      "title": "Knock at the Cabin",
+      "description": "IMDB: 6.1/10 (137,062 votes) | Rated R",
       "showtimes": [
-        "6:30 pm"
+        "1:00 pm"
       ],
       "showtime_links": [
         {
-          "time": "6:30 PM",
+          "time": "1:00 PM",
           "url": "https://www.filmlinc.org/now-playing/"
         }
       ],
       "theater": "Film at Lincoln Center - Walter Reade",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003556/",
-      "scraped_at": "2025-08-30T10:19:57.847146",
-      "imdb_url": "https://www.imdb.com/title/tt0286106/",
-      "rating": "6.8/10 (404,622 votes)",
+      "scraped_at": "2025-08-31T10:20:24.674726",
+      "imdb_url": "https://www.imdb.com/title/tt15679400/",
+      "rating": "6.1/10 (137,062 votes)",
+      "content_rating": "R"
+    },
+    {
+      "title": "Unbreakable",
+      "description": "IMDB: 7.3/10 (460,120 votes) | Rated PG-13",
+      "showtimes": [
+        "5:30 pm"
+      ],
+      "showtime_links": [
+        {
+          "time": "5:30 PM",
+          "url": "https://www.filmlinc.org/now-playing/"
+        }
+      ],
+      "theater": "Film at Lincoln Center - Walter Reade",
+      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003556/",
+      "scraped_at": "2025-08-31T10:20:24.635875",
+      "imdb_url": "https://www.imdb.com/title/tt0217869/",
+      "rating": "7.3/10 (460,120 votes)",
       "content_rating": "PG-13"
     },
     {
-      "title": "Antichrist",
-      "description": "IMDB: 6.5/10 (142,196 votes) | Rated Not Rated",
+      "title": "Boyhood",
+      "description": "IMDB: 7.9/10 (377,197 votes) | Rated R",
       "showtimes": [
-        "7:05 pm"
+        "1:45 pm"
       ],
       "showtime_links": [
         {
-          "time": "7:05 PM",
+          "time": "1:45 PM",
           "url": "https://www.ifccenter.com/films/"
         }
       ],
       "theater": "IFC Center",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
-      "scraped_at": "2025-08-30T10:19:54.271504",
-      "imdb_url": "https://www.imdb.com/title/tt0870984/",
-      "rating": "6.5/10 (142,196 votes)",
-      "content_rating": "Not Rated"
-    },
-    {
-      "title": "Beyond the Valley of the Dolls",
-      "description": "IMDB: 6.1/10 (12,685 votes) | Rated NC-17",
-      "showtimes": [
-        "11:30 pm"
-      ],
-      "showtime_links": [
-        {
-          "time": "11:30 PM",
-          "url": "https://www.ifccenter.com/films/"
-        }
-      ],
-      "theater": "IFC Center",
-      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
-      "scraped_at": "2025-08-30T10:19:56.325825",
-      "imdb_url": "https://www.imdb.com/title/tt0065466/",
-      "rating": "6.1/10 (12,685 votes)",
-      "content_rating": "NC-17",
-      "poster_url": "https://m.media-amazon.com/images/M/MV5BMjIyNzdiZWQtYmM3MS00YWJkLWI0ZGMtMzg1NTFmZjNkZmMwXkEyXkFqcGc@._V1_.jpg",
-      "imdb_plot": "",
-      "imdb_genres": [],
-      "imdb_director": "",
-      "imdb_year": "1970",
-      "imdb_runtime": "",
-      "imdb_api_rating": "6.1",
-      "imdb_metadata": {
-        "imdb_id": "tt0065466",
-        "title": "Beyond the Valley of the Dolls",
-        "year": "1970",
-        "poster_url": "https://m.media-amazon.com/images/M/MV5BMjIyNzdiZWQtYmM3MS00YWJkLWI0ZGMtMzg1NTFmZjNkZmMwXkEyXkFqcGc@._V1_.jpg",
-        "plot": "",
-        "genres": [],
-        "director": "",
-        "actors": "",
-        "runtime": "",
-        "rating": "6.1",
-        "votes": "12685",
-        "imdb_url": "https://www.imdb.com/title/tt0065466/"
-      }
+      "scraped_at": "2025-08-31T10:20:22.602846",
+      "imdb_url": "https://www.imdb.com/title/tt1065073/",
+      "rating": "7.9/10 (377,197 votes)",
+      "content_rating": "R"
     },
     {
       "title": "Boys Go to Jupiter",
-      "description": "IMDB: 7/10 (200 votes)",
+      "description": "IMDB: 7/10 (202 votes)",
       "showtimes": [
         "2:55 pm",
         "7:45 pm"
@@ -648,246 +529,14 @@
       ],
       "theater": "IFC Center",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
-      "scraped_at": "2025-08-30T10:19:55.564006",
+      "scraped_at": "2025-08-31T10:20:22.993151",
       "imdb_url": "https://www.imdb.com/title/tt31021863/",
-      "rating": "7/10 (200 votes)",
-      "content_rating": "",
-      "poster_url": "https://m.media-amazon.com/images/M/MV5BOTEyNzI0M2YtZjNiYy00OGJkLWFkMmUtMTAyNWE2NDczM2RlXkEyXkFqcGc@._V1_.jpg",
-      "imdb_plot": "",
-      "imdb_genres": [],
-      "imdb_director": "",
-      "imdb_year": "2024",
-      "imdb_runtime": "",
-      "imdb_api_rating": "7",
-      "imdb_metadata": {
-        "imdb_id": "tt31021863",
-        "title": "Boys Go to Jupiter",
-        "year": "2024",
-        "poster_url": "https://m.media-amazon.com/images/M/MV5BOTEyNzI0M2YtZjNiYy00OGJkLWFkMmUtMTAyNWE2NDczM2RlXkEyXkFqcGc@._V1_.jpg",
-        "plot": "",
-        "genres": [],
-        "director": "",
-        "actors": "",
-        "runtime": "",
-        "rating": "7",
-        "votes": "200",
-        "imdb_url": "https://www.imdb.com/title/tt31021863/"
-      }
-    },
-    {
-      "title": "Candyman",
-      "description": "IMDB: 6.7/10 (106,447 votes) | Rated R",
-      "showtimes": [
-        "11:55 pm"
-      ],
-      "showtime_links": [
-        {
-          "time": "11:55 PM",
-          "url": "https://www.ifccenter.com/films/"
-        }
-      ],
-      "theater": "IFC Center",
-      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
-      "scraped_at": "2025-08-30T10:19:54.495647",
-      "imdb_url": "https://www.imdb.com/title/tt0103919/",
-      "rating": "6.7/10 (106,447 votes)",
-      "content_rating": "R"
-    },
-    {
-      "title": "Dip huet gai tau",
-      "description": "IMDB: 7.5/10 (12,340 votes) | Rated Not Rated",
-      "showtimes": [
-        "1:05 pm"
-      ],
-      "showtime_links": [
-        {
-          "time": "1:05 PM",
-          "url": "https://www.ifccenter.com/films/"
-        }
-      ],
-      "theater": "IFC Center",
-      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
-      "scraped_at": "2025-08-30T10:19:57.089735",
-      "imdb_url": "https://www.imdb.com/title/tt0099426/",
-      "rating": "7.5/10 (12,340 votes)",
-      "content_rating": "Not Rated"
-    },
-    {
-      "title": "Do ma daan",
-      "description": "IMDB: 7.2/10 (2,877 votes) | Rated TV-14",
-      "showtimes": [
-        "6:45 pm"
-      ],
-      "showtime_links": [
-        {
-          "time": "6:45 PM",
-          "url": "https://www.ifccenter.com/films/"
-        }
-      ],
-      "theater": "IFC Center",
-      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
-      "scraped_at": "2025-08-30T10:19:56.990568",
-      "imdb_url": "https://www.imdb.com/title/tt0090952/",
-      "rating": "7.2/10 (2,877 votes)",
-      "content_rating": "TV-14"
-    },
-    {
-      "title": "Fa yeung nin wah",
-      "description": "IMDB: 8.1/10 (181,032 votes) | Rated PG",
-      "showtimes": [
-        "1:45 pm"
-      ],
-      "showtime_links": [
-        {
-          "time": "1:45 PM",
-          "url": "https://www.ifccenter.com/films/"
-        }
-      ],
-      "theater": "IFC Center",
-      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
-      "scraped_at": "2025-08-30T10:19:53.971917",
-      "imdb_url": "https://www.imdb.com/title/tt0118694/",
-      "rating": "8.1/10 (181,032 votes)",
-      "content_rating": "PG"
-    },
-    {
-      "title": "Fay Grim",
-      "description": "IMDB: 6.1/10 (5,091 votes) | Rated R",
-      "showtimes": [
-        "9:45 pm"
-      ],
-      "showtime_links": [
-        {
-          "time": "9:45 PM",
-          "url": "https://www.ifccenter.com/films/"
-        }
-      ],
-      "theater": "IFC Center",
-      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
-      "scraped_at": "2025-08-30T10:19:57.189445",
-      "imdb_url": "https://www.imdb.com/title/tt0444628/",
-      "rating": "6.1/10 (5,091 votes)",
-      "content_rating": "R"
-    },
-    {
-      "title": "Inland Empire",
-      "description": "IMDB: 6.8/10 (67,004 votes) | Rated R",
-      "showtimes": [
-        "3:15 pm"
-      ],
-      "showtime_links": [
-        {
-          "time": "3:15 PM",
-          "url": "https://www.ifccenter.com/films/"
-        }
-      ],
-      "theater": "IFC Center",
-      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
-      "scraped_at": "2025-08-30T10:19:54.570979",
-      "imdb_url": "https://www.imdb.com/title/tt0460829/",
-      "rating": "6.8/10 (67,004 votes)",
-      "content_rating": "R"
-    },
-    {
-      "title": "Kuraudo",
-      "description": "IMDB: 6.4/10 (2,391 votes)",
-      "showtimes": [
-        "5:00 pm"
-      ],
-      "showtime_links": [
-        {
-          "time": "5:00 PM",
-          "url": "https://www.ifccenter.com/films/"
-        }
-      ],
-      "theater": "IFC Center",
-      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
-      "scraped_at": "2025-08-30T10:19:54.173589",
-      "imdb_url": "https://www.imdb.com/title/tt32828123/",
-      "rating": "6.4/10 (2,391 votes)",
+      "rating": "7/10 (202 votes)",
       "content_rating": ""
     },
     {
-      "title": "Lat sau san taam",
-      "description": "IMDB: 7.7/10 (56,771 votes) | Rated R",
-      "showtimes": [
-        "11:40 pm"
-      ],
-      "showtime_links": [
-        {
-          "time": "11:40 PM",
-          "url": "https://www.ifccenter.com/films/"
-        }
-      ],
-      "theater": "IFC Center",
-      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
-      "scraped_at": "2025-08-30T10:19:54.670706",
-      "imdb_url": "https://www.imdb.com/title/tt0104684/",
-      "rating": "7.7/10 (56,771 votes)",
-      "content_rating": "R"
-    },
-    {
-      "title": "Les amants du Pont-Neuf",
-      "description": "IMDB: 7.6/10 (16,534 votes) | Rated R",
-      "showtimes": [
-        "11:10 am"
-      ],
-      "showtime_links": [
-        {
-          "time": "11:10 AM",
-          "url": "https://www.ifccenter.com/films/"
-        }
-      ],
-      "theater": "IFC Center",
-      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
-      "scraped_at": "2025-08-30T10:19:56.674997",
-      "imdb_url": "https://www.imdb.com/title/tt0101318/",
-      "rating": "7.6/10 (16,534 votes)",
-      "content_rating": "R"
-    },
-    {
-      "title": "Les femmes au balcon",
-      "description": "IMDB: 5.8/10 (1,795 votes)",
-      "showtimes": [
-        "9:45 pm"
-      ],
-      "showtime_links": [
-        {
-          "time": "9:45 PM",
-          "url": "https://www.ifccenter.com/films/"
-        }
-      ],
-      "theater": "IFC Center",
-      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
-      "scraped_at": "2025-08-30T10:19:54.776255",
-      "imdb_url": "https://www.imdb.com/title/tt27721737/",
-      "rating": "5.8/10 (1,795 votes)",
-      "content_rating": "",
-      "poster_url": "https://m.media-amazon.com/images/M/MV5BM2Q2YTgyZTktMDM2MC00NTkxLThkZDEtOGE0NDk1MTQwYjA3XkEyXkFqcGc@._V1_.jpg",
-      "imdb_plot": "",
-      "imdb_genres": [],
-      "imdb_director": "",
-      "imdb_year": "2024",
-      "imdb_runtime": "",
-      "imdb_api_rating": "5.8",
-      "imdb_metadata": {
-        "imdb_id": "tt27721737",
-        "title": "The Balconettes",
-        "year": "2024",
-        "poster_url": "https://m.media-amazon.com/images/M/MV5BM2Q2YTgyZTktMDM2MC00NTkxLThkZDEtOGE0NDk1MTQwYjA3XkEyXkFqcGc@._V1_.jpg",
-        "plot": "",
-        "genres": [],
-        "director": "",
-        "actors": "",
-        "runtime": "",
-        "rating": "5.8",
-        "votes": "1795",
-        "imdb_url": "https://www.imdb.com/title/tt27721737/"
-      }
-    },
-    {
-      "title": "Leviathan",
-      "description": "IMDB: 5.8/10 (26,018 votes) | Rated R",
+      "title": "Do ma daan",
+      "description": "IMDB: 7.2/10 (2,879 votes) | Rated TV-14",
       "showtimes": [
         "10:45 am"
       ],
@@ -899,33 +548,185 @@
       ],
       "theater": "IFC Center",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
-      "scraped_at": "2025-08-30T10:19:56.692177",
-      "imdb_url": "https://www.imdb.com/title/tt0097737/",
-      "rating": "5.8/10 (26,018 votes)",
+      "scraped_at": "2025-08-31T10:20:23.502403",
+      "imdb_url": "https://www.imdb.com/title/tt0090952/",
+      "rating": "7.2/10 (2,879 votes)",
+      "content_rating": "TV-14"
+    },
+    {
+      "title": "Fa yeung nin wah",
+      "description": "IMDB: 8.1/10 (181,084 votes) | Rated PG",
+      "showtimes": [
+        "1:45 pm"
+      ],
+      "showtime_links": [
+        {
+          "time": "1:45 PM",
+          "url": "https://www.ifccenter.com/films/"
+        }
+      ],
+      "theater": "IFC Center",
+      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
+      "scraped_at": "2025-08-31T10:20:22.420237",
+      "imdb_url": "https://www.imdb.com/title/tt0118694/",
+      "rating": "8.1/10 (181,084 votes)",
+      "content_rating": "PG"
+    },
+    {
+      "title": "Inland Empire",
+      "description": "IMDB: 6.8/10 (67,013 votes) | Rated R",
+      "showtimes": [
+        "5:25 pm"
+      ],
+      "showtime_links": [
+        {
+          "time": "5:25 PM",
+          "url": "https://www.ifccenter.com/films/"
+        }
+      ],
+      "theater": "IFC Center",
+      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
+      "scraped_at": "2025-08-31T10:20:22.697993",
+      "imdb_url": "https://www.imdb.com/title/tt0460829/",
+      "rating": "6.8/10 (67,013 votes)",
+      "content_rating": "R"
+    },
+    {
+      "title": "Kaboom",
+      "description": "IMDB: 5.7/10 (14,230 votes) | Rated Not Rated",
+      "showtimes": [
+        "9:20 pm"
+      ],
+      "showtime_links": [
+        {
+          "time": "9:20 PM",
+          "url": "https://www.ifccenter.com/films/"
+        }
+      ],
+      "theater": "IFC Center",
+      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
+      "scraped_at": "2025-08-31T10:20:23.301269",
+      "imdb_url": "https://www.imdb.com/title/tt1523483/",
+      "rating": "5.7/10 (14,230 votes)",
+      "content_rating": "Not Rated"
+    },
+    {
+      "title": "Kuraudo",
+      "description": "IMDB: 6.4/10 (2,404 votes)",
+      "showtimes": [
+        "5:00 pm"
+      ],
+      "showtime_links": [
+        {
+          "time": "5:00 PM",
+          "url": "https://www.ifccenter.com/films/"
+        }
+      ],
+      "theater": "IFC Center",
+      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
+      "scraped_at": "2025-08-31T10:20:22.507785",
+      "imdb_url": "https://www.imdb.com/title/tt32828123/",
+      "rating": "6.4/10 (2,404 votes)",
+      "content_rating": ""
+    },
+    {
+      "title": "Lat sau san taam",
+      "description": "IMDB: 7.7/10 (56,793 votes) | Rated R",
+      "showtimes": [
+        "6:15 pm"
+      ],
+      "showtime_links": [
+        {
+          "time": "6:15 PM",
+          "url": "https://www.ifccenter.com/films/"
+        }
+      ],
+      "theater": "IFC Center",
+      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
+      "scraped_at": "2025-08-31T10:20:22.793416",
+      "imdb_url": "https://www.imdb.com/title/tt0104684/",
+      "rating": "7.7/10 (56,793 votes)",
+      "content_rating": "R"
+    },
+    {
+      "title": "Les amants du Pont-Neuf",
+      "description": "IMDB: 7.6/10 (16,535 votes) | Rated R",
+      "showtimes": [
+        "11:10 am"
+      ],
+      "showtime_links": [
+        {
+          "time": "11:10 AM",
+          "url": "https://www.ifccenter.com/films/"
+        }
+      ],
+      "theater": "IFC Center",
+      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
+      "scraped_at": "2025-08-31T10:20:23.097260",
+      "imdb_url": "https://www.imdb.com/title/tt0101318/",
+      "rating": "7.6/10 (16,535 votes)",
+      "content_rating": "R"
+    },
+    {
+      "title": "Les femmes au balcon",
+      "description": "IMDB: 5.8/10 (1,802 votes)",
+      "showtimes": [
+        "9:45 pm"
+      ],
+      "showtime_links": [
+        {
+          "time": "9:45 PM",
+          "url": "https://www.ifccenter.com/films/"
+        }
+      ],
+      "theater": "IFC Center",
+      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
+      "scraped_at": "2025-08-31T10:20:22.901747",
+      "imdb_url": "https://www.imdb.com/title/tt27721737/",
+      "rating": "5.8/10 (1,802 votes)",
+      "content_rating": ""
+    },
+    {
+      "title": "Me and You and Everyone We Know",
+      "description": "IMDB: 7.2/10 (38,274 votes) | Rated R",
+      "showtimes": [
+        "11:30 am"
+      ],
+      "showtime_links": [
+        {
+          "time": "11:30 AM",
+          "url": "https://www.ifccenter.com/films/"
+        }
+      ],
+      "theater": "IFC Center",
+      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
+      "scraped_at": "2025-08-31T10:20:23.195041",
+      "imdb_url": "https://www.imdb.com/title/tt0415978/",
+      "rating": "7.2/10 (38,274 votes)",
       "content_rating": "R"
     },
     {
       "title": "Moo-jeok-ja",
       "description": "IMDB: 5.7/10 (1,213 votes) | Rated R",
       "showtimes": [
-        "9:25 pm"
+        "3:45 pm"
       ],
       "showtime_links": [
         {
-          "time": "9:25 PM",
+          "time": "3:45 PM",
           "url": "https://www.ifccenter.com/films/"
         }
       ],
       "theater": "IFC Center",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
-      "scraped_at": "2025-08-30T10:19:57.290217",
+      "scraped_at": "2025-08-31T10:20:23.694920",
       "imdb_url": "https://www.imdb.com/title/tt1138442/",
       "rating": "5.7/10 (1,213 votes)",
       "content_rating": "R"
     },
     {
       "title": "Motel Destino",
-      "description": "IMDB: 6.5/10 (2,250 votes)",
+      "description": "IMDB: 6.5/10 (2,256 votes)",
       "showtimes": [
         "12:20 pm",
         "4:15 pm",
@@ -952,52 +753,33 @@
       ],
       "theater": "IFC Center",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
-      "scraped_at": "2025-08-30T10:19:56.888719",
+      "scraped_at": "2025-08-31T10:20:23.399306",
       "imdb_url": "https://www.imdb.com/title/tt28608358/",
-      "rating": "6.5/10 (2,250 votes)",
+      "rating": "6.5/10 (2,256 votes)",
       "content_rating": ""
     },
     {
       "title": "Mou mei san taam",
       "description": "IMDB: 6.4/10 (511 votes) | Rated TV-14",
       "showtimes": [
-        "4:05 pm"
+        "9:15 pm"
       ],
       "showtime_links": [
         {
-          "time": "4:05 PM",
+          "time": "9:15 PM",
           "url": "https://www.ifccenter.com/films/"
         }
       ],
       "theater": "IFC Center",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
-      "scraped_at": "2025-08-30T10:19:57.394809",
+      "scraped_at": "2025-08-31T10:20:23.796429",
       "imdb_url": "https://www.imdb.com/title/tt0114991/",
       "rating": "6.4/10 (511 votes)",
       "content_rating": "TV-14"
     },
     {
-      "title": "Pet Sematary",
-      "description": "IMDB: 6.5/10 (120,779 votes) | Rated R",
-      "showtimes": [
-        "11:59 pm"
-      ],
-      "showtime_links": [
-        {
-          "time": "11:59 PM",
-          "url": "https://www.ifccenter.com/films/"
-        }
-      ],
-      "theater": "IFC Center",
-      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
-      "scraped_at": "2025-08-30T10:19:54.376298",
-      "imdb_url": "https://www.imdb.com/title/tt0098084/",
-      "rating": "6.5/10 (120,779 votes)",
-      "content_rating": "R"
-    },
-    {
       "title": "Sen to Chihiro no kamikakushi",
-      "description": "IMDB: 8.6/10 (927,857 votes) | Rated PG",
+      "description": "IMDB: 8.6/10 (928,033 votes) | Rated PG",
       "showtimes": [
         "11:05 am"
       ],
@@ -1009,261 +791,147 @@
       ],
       "theater": "IFC Center",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
-      "scraped_at": "2025-08-30T10:19:53.855393",
+      "scraped_at": "2025-08-31T10:20:22.356955",
       "imdb_url": "https://www.imdb.com/title/tt0245429/",
-      "rating": "8.6/10 (927,857 votes)",
+      "rating": "8.6/10 (928,033 votes)",
       "content_rating": "PG"
     },
     {
-      "title": "The Human Centipede (First Sequence)",
-      "description": "IMDB: 4.4/10 (94,059 votes) | Rated R",
+      "title": "Sien lui yau wan",
+      "description": "IMDB: 7.3/10 (11,902 votes) | Rated Unrated",
       "showtimes": [
-        "11:59 pm"
+        "1:15 pm"
       ],
       "showtime_links": [
         {
-          "time": "11:59 PM",
+          "time": "1:15 PM",
           "url": "https://www.ifccenter.com/films/"
         }
       ],
       "theater": "IFC Center",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
-      "scraped_at": "2025-08-30T10:19:54.069457",
-      "imdb_url": "https://www.imdb.com/title/tt1467304/",
-      "rating": "4.4/10 (94,059 votes)",
-      "content_rating": "R"
-    },
-    {
-      "title": "The Killer",
-      "description": "IMDB: 6.7/10 (214,712 votes) | Rated R",
-      "showtimes": [
-        "10:45 am"
-      ],
-      "showtime_links": [
-        {
-          "time": "10:45 AM",
-          "url": "https://www.ifccenter.com/films/"
-        }
-      ],
-      "theater": "IFC Center",
-      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
-      "scraped_at": "2025-08-30T10:19:53.915618",
-      "imdb_url": "https://www.imdb.com/title/tt1136617/",
-      "rating": "6.7/10 (214,712 votes)",
-      "content_rating": "R"
-    },
-    {
-      "title": "Your Sister's Sister",
-      "description": "IMDB: 6.7/10 (28,934 votes) | Rated R",
-      "showtimes": [
-        "12:55 pm"
-      ],
-      "showtime_links": [
-        {
-          "time": "12:55 PM",
-          "url": "https://www.ifccenter.com/films/"
-        }
-      ],
-      "theater": "IFC Center",
-      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0013904/",
-      "scraped_at": "2025-08-30T10:19:56.790515",
-      "imdb_url": "https://www.imdb.com/title/tt1742336/",
-      "rating": "6.7/10 (28,934 votes)",
-      "content_rating": "R"
+      "scraped_at": "2025-08-31T10:20:23.609861",
+      "imdb_url": "https://www.imdb.com/title/tt0093978/",
+      "rating": "7.3/10 (11,902 votes)",
+      "content_rating": "Unrated"
     },
     {
       "title": "Apocalypse Now",
-      "description": "IMDB: 8.4/10 (750,393 votes) | Rated R",
+      "description": "IMDB: 8.4/10 (750,467 votes) | Rated R",
       "showtimes": [
-        "7:00 pm"
+        "11:20 am"
       ],
       "showtime_links": [
         {
-          "time": "7:00 PM",
+          "time": "11:20 AM",
           "url": "https://metrograph.com/nyc/"
         }
       ],
       "theater": "Metrograph",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci79610959/",
-      "scraped_at": "2025-08-30T10:19:52.131851",
+      "scraped_at": "2025-08-31T10:20:20.593384",
       "imdb_url": "https://www.imdb.com/title/tt0078788/",
-      "rating": "8.4/10 (750,393 votes)",
+      "rating": "8.4/10 (750,467 votes)",
       "content_rating": "R"
     },
     {
-      "title": "Cockfighter",
-      "description": "IMDB: 6.9/10 (2,797 votes) | Rated R",
+      "title": "Edward Scissorhands",
+      "description": "IMDB: 7.8/10 (551,209 votes) | Rated PG-13",
       "showtimes": [
-        "5:10 pm"
+        "9:45 pm"
       ],
       "showtime_links": [
         {
-          "time": "5:10 PM",
+          "time": "9:45 PM",
           "url": "https://metrograph.com/nyc/"
         }
       ],
       "theater": "Metrograph",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci79610959/",
-      "scraped_at": "2025-08-30T10:19:52.650519",
-      "imdb_url": "https://www.imdb.com/title/tt0071338/",
-      "rating": "6.9/10 (2,797 votes)",
+      "scraped_at": "2025-08-31T10:20:20.630807",
+      "imdb_url": "https://www.imdb.com/title/tt0099487/",
+      "rating": "7.8/10 (551,209 votes)",
+      "content_rating": "PG-13"
+    },
+    {
+      "title": "High Fidelity",
+      "description": "IMDB: 7.4/10 (196,459 votes) | Rated R",
+      "showtimes": [
+        "5:20 pm"
+      ],
+      "showtime_links": [
+        {
+          "time": "5:20 PM",
+          "url": "https://metrograph.com/nyc/"
+        }
+      ],
+      "theater": "Metrograph",
+      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci79610959/",
+      "scraped_at": "2025-08-31T10:20:20.828187",
+      "imdb_url": "https://www.imdb.com/title/tt0146882/",
+      "rating": "7.4/10 (196,459 votes)",
       "content_rating": "R"
     },
     {
-      "title": "Idioterne",
-      "description": "IMDB: 6.7/10 (35,410 votes)",
+      "title": "Mandy",
+      "description": "IMDB: 6.5/10 (96,485 votes) | Rated Not Rated",
       "showtimes": [
-        "10:50 pm"
+        "9:45 pm"
       ],
       "showtime_links": [
         {
-          "time": "10:50 PM",
+          "time": "9:45 PM",
           "url": "https://metrograph.com/nyc/"
         }
       ],
       "theater": "Metrograph",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci79610959/",
-      "scraped_at": "2025-08-30T10:19:52.352456",
-      "imdb_url": "https://www.imdb.com/title/tt0154421/",
-      "rating": "6.7/10 (35,410 votes)",
-      "content_rating": ""
-    },
-    {
-      "title": "Koko, le gorille qui parle",
-      "description": "IMDB: 7.2/10 (979 votes) | Rated Not Rated",
-      "showtimes": [
-        "6:50 pm"
-      ],
-      "showtime_links": [
-        {
-          "time": "6:50 PM",
-          "url": "https://metrograph.com/nyc/"
-        }
-      ],
-      "theater": "Metrograph",
-      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci79610959/",
-      "scraped_at": "2025-08-30T10:19:53.053570",
-      "imdb_url": "https://www.imdb.com/title/tt0076097/",
-      "rating": "7.2/10 (979 votes)",
+      "scraped_at": "2025-08-31T10:20:20.731254",
+      "imdb_url": "https://www.imdb.com/title/tt6998518/",
+      "rating": "6.5/10 (96,485 votes)",
       "content_rating": "Not Rated"
     },
     {
       "title": "Mes petites amoureuses",
-      "description": "IMDB: 7.1/10 (1,710 votes)",
+      "description": "IMDB: 7.1/10 (1,711 votes)",
       "showtimes": [
-        "11:50 am"
+        "2:45 pm"
       ],
       "showtime_links": [
         {
-          "time": "11:50 AM",
+          "time": "2:45 PM",
           "url": "https://metrograph.com/nyc/"
         }
       ],
       "theater": "Metrograph",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci79610959/",
-      "scraped_at": "2025-08-30T10:19:52.549597",
+      "scraped_at": "2025-08-31T10:20:21.235395",
       "imdb_url": "https://www.imdb.com/title/tt0071833/",
-      "rating": "7.1/10 (1,710 votes)",
-      "content_rating": ""
-    },
-    {
-      "title": "Mo yan ka sai",
-      "description": "IMDB: 6.8/10 (241 votes) | Rated Not Rated",
-      "showtimes": [
-        "5:00 pm"
-      ],
-      "showtime_links": [
-        {
-          "time": "5:00 PM",
-          "url": "https://metrograph.com/nyc/"
-        }
-      ],
-      "theater": "Metrograph",
-      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci79610959/",
-      "scraped_at": "2025-08-30T10:19:52.956429",
-      "imdb_url": "https://www.imdb.com/title/tt0282753/",
-      "rating": "6.8/10 (241 votes)",
-      "content_rating": "Not Rated"
-    },
-    {
-      "title": "Perceval le Gallois",
-      "description": "IMDB: 6.9/10 (1,663 votes) | Rated Not Rated",
-      "showtimes": [
-        "2:15 pm"
-      ],
-      "showtime_links": [
-        {
-          "time": "2:15 PM",
-          "url": "https://metrograph.com/nyc/"
-        }
-      ],
-      "theater": "Metrograph",
-      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci79610959/",
-      "scraped_at": "2025-08-30T10:19:52.857384",
-      "imdb_url": "https://www.imdb.com/title/tt0078073/",
-      "rating": "6.9/10 (1,663 votes)",
-      "content_rating": "Not Rated"
-    },
-    {
-      "title": "Possessions",
-      "description": "IMDB: 3.8/10 (900 votes)",
-      "showtimes": [
-        "10:45 pm"
-      ],
-      "showtime_links": [
-        {
-          "time": "10:45 PM",
-          "url": "https://metrograph.com/nyc/"
-        }
-      ],
-      "theater": "Metrograph",
-      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci79610959/",
-      "scraped_at": "2025-08-30T10:19:52.754699",
-      "imdb_url": "https://www.imdb.com/title/tt14853700/",
-      "rating": "3.8/10 (900 votes)",
+      "rating": "7.1/10 (1,711 votes)",
       "content_rating": ""
     },
     {
       "title": "Rabu & poppu",
       "description": "IMDB: 7.4/10 (2,311 votes)",
       "showtimes": [
-        "8:35 pm"
+        "7:30 pm"
       ],
       "showtime_links": [
         {
-          "time": "8:35 PM",
+          "time": "7:30 PM",
           "url": "https://metrograph.com/nyc/"
         }
       ],
       "theater": "Metrograph",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci79610959/",
-      "scraped_at": "2025-08-30T10:19:52.449729",
+      "scraped_at": "2025-08-31T10:20:21.128540",
       "imdb_url": "https://www.imdb.com/title/tt0168972/",
       "rating": "7.4/10 (2,311 votes)",
       "content_rating": ""
     },
     {
       "title": "Riri Shushu no subete",
-      "description": "IMDB: 7.5/10 (13,128 votes) | Rated Unrated",
-      "showtimes": [
-        "2:15 pm"
-      ],
-      "showtime_links": [
-        {
-          "time": "2:15 PM",
-          "url": "https://metrograph.com/nyc/"
-        }
-      ],
-      "theater": "Metrograph",
-      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci79610959/",
-      "scraped_at": "2025-08-30T10:19:52.208857",
-      "imdb_url": "https://www.imdb.com/title/tt0297721/",
-      "rating": "7.5/10 (13,128 votes)",
-      "content_rating": "Unrated"
-    },
-    {
-      "title": "Yi dai zong shi",
-      "description": "IMDB: 6.6/10 (38,027 votes) | Rated PG-13",
+      "description": "IMDB: 7.5/10 (13,134 votes) | Rated Unrated",
       "showtimes": [
         "12:00 pm"
       ],
@@ -1275,14 +943,52 @@
       ],
       "theater": "Metrograph",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci79610959/",
-      "scraped_at": "2025-08-30T10:19:52.247295",
-      "imdb_url": "https://www.imdb.com/title/tt1462900/",
-      "rating": "6.6/10 (38,027 votes)",
-      "content_rating": "PG-13"
+      "scraped_at": "2025-08-31T10:20:21.031286",
+      "imdb_url": "https://www.imdb.com/title/tt0297721/",
+      "rating": "7.5/10 (13,134 votes)",
+      "content_rating": "Unrated"
+    },
+    {
+      "title": "Taifû kurabu",
+      "description": "IMDB: 6.9/10 (1,383 votes)",
+      "showtimes": [
+        "5:15 pm"
+      ],
+      "showtime_links": [
+        {
+          "time": "5:15 PM",
+          "url": "https://metrograph.com/nyc/"
+        }
+      ],
+      "theater": "Metrograph",
+      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci79610959/",
+      "scraped_at": "2025-08-31T10:20:21.328907",
+      "imdb_url": "https://www.imdb.com/title/tt0088222/",
+      "rating": "6.9/10 (1,383 votes)",
+      "content_rating": ""
+    },
+    {
+      "title": "The Life Aquatic with Steve Zissou",
+      "description": "IMDB: 7.2/10 (217,973 votes) | Rated R",
+      "showtimes": [
+        "2:50 pm"
+      ],
+      "showtime_links": [
+        {
+          "time": "2:50 PM",
+          "url": "https://metrograph.com/nyc/"
+        }
+      ],
+      "theater": "Metrograph",
+      "source_url": "https://www.imdb.com/showtimes/cinema/US/ci79610959/",
+      "scraped_at": "2025-08-31T10:20:20.931556",
+      "imdb_url": "https://www.imdb.com/title/tt0362270/",
+      "rating": "7.2/10 (217,973 votes)",
+      "content_rating": "R"
     },
     {
       "title": "Caught Stealing",
-      "description": "IMDB: 7.4/10 (2,757 votes) | Rated R",
+      "description": "IMDB: 7.4/10 (4,452 votes) | Rated R",
       "showtimes": [
         "1:35 pm",
         "3:10 pm",
@@ -1314,14 +1020,14 @@
       ],
       "theater": "Nitehawk Cinema Prospect Park",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci54483726/",
-      "scraped_at": "2025-08-30T10:19:50.647155",
+      "scraped_at": "2025-08-31T10:20:18.333995",
       "imdb_url": "https://www.imdb.com/title/tt1493274/",
-      "rating": "7.4/10 (2,757 votes)",
+      "rating": "7.4/10 (4,452 votes)",
       "content_rating": "R"
     },
     {
       "title": "Freakier Friday",
-      "description": "IMDB: 6.9/10 (12,606 votes) | Rated PG",
+      "description": "IMDB: 6.9/10 (12,884 votes) | Rated PG",
       "showtimes": [
         "11:45 am",
         "2:45 pm",
@@ -1348,14 +1054,14 @@
       ],
       "theater": "Nitehawk Cinema Prospect Park",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci54483726/",
-      "scraped_at": "2025-08-30T10:19:50.548120",
+      "scraped_at": "2025-08-31T10:20:18.240841",
       "imdb_url": "https://www.imdb.com/title/tt31956415/",
-      "rating": "6.9/10 (12,606 votes)",
+      "rating": "6.9/10 (12,884 votes)",
       "content_rating": "PG"
     },
     {
       "title": "Highest 2 Lowest",
-      "description": "IMDB: 6.7/10 (2,019 votes) | Rated R",
+      "description": "IMDB: 6.7/10 (2,105 votes) | Rated R",
       "showtimes": [
         "11:15 am",
         "3:45 pm",
@@ -1382,14 +1088,14 @@
       ],
       "theater": "Nitehawk Cinema Prospect Park",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci54483726/",
-      "scraped_at": "2025-08-30T10:19:50.848552",
+      "scraped_at": "2025-08-31T10:20:18.534844",
       "imdb_url": "https://www.imdb.com/title/tt31194612/",
-      "rating": "6.7/10 (2,019 votes)",
+      "rating": "6.7/10 (2,105 votes)",
       "content_rating": "R"
     },
     {
       "title": "Honey Don't!",
-      "description": "IMDB: 5.7/10 (2,781 votes) | Rated R",
+      "description": "IMDB: 5.7/10 (2,939 votes) | Rated R",
       "showtimes": [
         "11:00 am",
         "2:15 pm",
@@ -1416,14 +1122,14 @@
       ],
       "theater": "Nitehawk Cinema Prospect Park",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci54483726/",
-      "scraped_at": "2025-08-30T10:19:50.491274",
+      "scraped_at": "2025-08-31T10:20:18.125102",
       "imdb_url": "https://www.imdb.com/title/tt30645201/",
-      "rating": "5.7/10 (2,781 votes)",
+      "rating": "5.7/10 (2,939 votes)",
       "content_rating": "R"
     },
     {
       "title": "Splitsville",
-      "description": "IMDB: 7.1/10 (562 votes) | Rated R",
+      "description": "IMDB: 7/10 (620 votes) | Rated R",
       "showtimes": [
         "1:20 pm",
         "2:30 pm",
@@ -1455,14 +1161,14 @@
       ],
       "theater": "Nitehawk Cinema Prospect Park",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci54483726/",
-      "scraped_at": "2025-08-30T10:19:50.953610",
+      "scraped_at": "2025-08-31T10:20:18.625701",
       "imdb_url": "https://www.imdb.com/title/tt33247023/",
-      "rating": "7.1/10 (562 votes)",
+      "rating": "7/10 (620 votes)",
       "content_rating": "R"
     },
     {
       "title": "The African Queen",
-      "description": "IMDB: 7.7/10 (87,417 votes) | Rated PG",
+      "description": "IMDB: 7.7/10 (87,419 votes) | Rated PG",
       "showtimes": [
         "11:00 am"
       ],
@@ -1474,9 +1180,9 @@
       ],
       "theater": "Nitehawk Cinema Prospect Park",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci54483726/",
-      "scraped_at": "2025-08-30T10:19:51.048196",
+      "scraped_at": "2025-08-31T10:20:18.724838",
       "imdb_url": "https://www.imdb.com/title/tt0043265/",
-      "rating": "7.7/10 (87,417 votes)",
+      "rating": "7.7/10 (87,419 votes)",
       "content_rating": "PG"
     },
     {
@@ -1493,14 +1199,14 @@
       ],
       "theater": "Nitehawk Cinema Prospect Park",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci54483726/",
-      "scraped_at": "2025-08-30T10:19:51.147903",
+      "scraped_at": "2025-08-31T10:20:19.832081",
       "imdb_url": "https://www.imdb.com/title/tt0112435/",
       "rating": "5.7/10 (6,884 votes)",
       "content_rating": "PG"
     },
     {
       "title": "The Roses",
-      "description": "IMDB: 7/10 (1,757 votes) | Rated R",
+      "description": "IMDB: 7.1/10 (2,982 votes) | Rated R",
       "showtimes": [
         "1:05 pm",
         "4:00 pm",
@@ -1527,14 +1233,14 @@
       ],
       "theater": "Nitehawk Cinema Prospect Park",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci54483726/",
-      "scraped_at": "2025-08-30T10:19:50.747322",
+      "scraped_at": "2025-08-31T10:20:18.439455",
       "imdb_url": "https://www.imdb.com/title/tt31973693/",
-      "rating": "7/10 (1,757 votes)",
+      "rating": "7.1/10 (2,982 votes)",
       "content_rating": "R"
     },
     {
       "title": "Weapons",
-      "description": "IMDB: 7.8/10 (87,967 votes) | Rated R",
+      "description": "IMDB: 7.8/10 (90,253 votes) | Rated R",
       "showtimes": [
         "12:00 pm",
         "4:15 pm",
@@ -1561,14 +1267,14 @@
       ],
       "theater": "Nitehawk Cinema Prospect Park",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci54483726/",
-      "scraped_at": "2025-08-30T10:19:50.433351",
+      "scraped_at": "2025-08-31T10:20:18.087947",
       "imdb_url": "https://www.imdb.com/title/tt26581740/",
-      "rating": "7.8/10 (87,967 votes)",
+      "rating": "7.8/10 (90,253 votes)",
       "content_rating": "R"
     },
     {
       "title": "Caught Stealing",
-      "description": "IMDB: 7.4/10 (2,757 votes) | Rated R",
+      "description": "IMDB: 7.4/10 (4,452 votes) | Rated R",
       "showtimes": [
         "11:30 am",
         "2:05 pm",
@@ -1600,14 +1306,14 @@
       ],
       "theater": "Village East by Angelika",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003464/",
-      "scraped_at": "2025-08-30T10:19:47.177864",
+      "scraped_at": "2025-08-31T10:20:15.113408",
       "imdb_url": "https://www.imdb.com/title/tt1493274/",
-      "rating": "7.4/10 (2,757 votes)",
+      "rating": "7.4/10 (4,452 votes)",
       "content_rating": "R"
     },
     {
       "title": "Highest 2 Lowest",
-      "description": "IMDB: 6.7/10 (2,019 votes) | Rated R",
+      "description": "IMDB: 6.7/10 (2,105 votes) | Rated R",
       "showtimes": [
         "12:45 pm",
         "3:50 pm",
@@ -1634,14 +1340,14 @@
       ],
       "theater": "Village East by Angelika",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003464/",
-      "scraped_at": "2025-08-30T10:19:47.376858",
+      "scraped_at": "2025-08-31T10:20:15.309258",
       "imdb_url": "https://www.imdb.com/title/tt31194612/",
-      "rating": "6.7/10 (2,019 votes)",
+      "rating": "6.7/10 (2,105 votes)",
       "content_rating": "R"
     },
     {
       "title": "Honey Don't!",
-      "description": "IMDB: 5.7/10 (2,781 votes) | Rated R",
+      "description": "IMDB: 5.7/10 (2,939 votes) | Rated R",
       "showtimes": [
         "11:00 am",
         "1:15 pm",
@@ -1678,48 +1384,43 @@
       ],
       "theater": "Village East by Angelika",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003464/",
-      "scraped_at": "2025-08-30T10:19:47.127519",
+      "scraped_at": "2025-08-31T10:20:15.024124",
       "imdb_url": "https://www.imdb.com/title/tt30645201/",
-      "rating": "5.7/10 (2,781 votes)",
+      "rating": "5.7/10 (2,939 votes)",
       "content_rating": "R"
     },
     {
       "title": "Jaws",
-      "description": "IMDB: 8.1/10 (712,394 votes) | Rated PG",
+      "description": "IMDB: 8.1/10 (712,764 votes) | Rated PG",
       "showtimes": [
         "1:00 pm",
-        "4:00 pm",
         "7:00 pm",
-        "9:55 pm"
+        "10:00 pm"
       ],
       "showtime_links": [
+        {
+          "time": "10:00 PM",
+          "url": "https://angelikafilmcenter.com/villageeast/signature-programming"
+        },
         {
           "time": "1:00 PM",
           "url": "https://angelikafilmcenter.com/villageeast/signature-programming"
         },
         {
-          "time": "4:00 PM",
-          "url": "https://angelikafilmcenter.com/villageeast/signature-programming"
-        },
-        {
           "time": "7:00 PM",
-          "url": "https://angelikafilmcenter.com/villageeast/signature-programming"
-        },
-        {
-          "time": "9:55 PM",
           "url": "https://angelikafilmcenter.com/villageeast/signature-programming"
         }
       ],
       "theater": "Village East by Angelika",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003464/",
-      "scraped_at": "2025-08-30T10:19:47.477019",
+      "scraped_at": "2025-08-31T10:20:15.412895",
       "imdb_url": "https://www.imdb.com/title/tt0073195/",
-      "rating": "8.1/10 (712,394 votes)",
+      "rating": "8.1/10 (712,764 votes)",
       "content_rating": "PG"
     },
     {
       "title": "The Roses",
-      "description": "IMDB: 7/10 (1,757 votes) | Rated R",
+      "description": "IMDB: 7.1/10 (2,982 votes) | Rated R",
       "showtimes": [
         "11:30 am",
         "2:00 pm",
@@ -1751,32 +1452,32 @@
       ],
       "theater": "Village East by Angelika",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003464/",
-      "scraped_at": "2025-08-30T10:19:47.284457",
+      "scraped_at": "2025-08-31T10:20:15.224548",
       "imdb_url": "https://www.imdb.com/title/tt31973693/",
-      "rating": "7/10 (1,757 votes)",
+      "rating": "7.1/10 (2,982 votes)",
       "content_rating": "R"
     },
     {
       "title": "The Toxic Avenger",
-      "description": "IMDB: 6.2/10 (35,223 votes) | Rated R",
+      "description": "IMDB: 6.2/10 (35,264 votes) | Rated R",
       "showtimes": [
-        "11:35 am",
-        "2:10 pm",
-        "4:40 pm",
+        "11:25 am",
+        "2:05 pm",
+        "4:35 pm",
         "7:10 pm",
         "9:45 pm"
       ],
       "showtime_links": [
         {
-          "time": "11:35 AM",
+          "time": "11:25 AM",
           "url": "https://angelikafilmcenter.com/villageeast/signature-programming"
         },
         {
-          "time": "2:10 PM",
+          "time": "2:05 PM",
           "url": "https://angelikafilmcenter.com/villageeast/signature-programming"
         },
         {
-          "time": "4:40 PM",
+          "time": "4:35 PM",
           "url": "https://angelikafilmcenter.com/villageeast/signature-programming"
         },
         {
@@ -1790,50 +1491,45 @@
       ],
       "theater": "Village East by Angelika",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003464/",
-      "scraped_at": "2025-08-30T10:19:47.576146",
+      "scraped_at": "2025-08-31T10:20:15.520417",
       "imdb_url": "https://www.imdb.com/title/tt0090190/",
-      "rating": "6.2/10 (35,223 votes)",
+      "rating": "6.2/10 (35,264 votes)",
       "content_rating": "R"
     },
     {
       "title": "Weapons",
-      "description": "IMDB: 7.8/10 (87,967 votes) | Rated R",
+      "description": "IMDB: 7.8/10 (90,253 votes) | Rated R",
       "showtimes": [
-        "11:00 am",
-        "1:50 pm",
-        "4:45 pm",
-        "7:40 pm",
-        "10:35 pm"
+        "11:45 am",
+        "2:45 pm",
+        "4:00 pm",
+        "8:45 pm"
       ],
       "showtime_links": [
         {
-          "time": "10:35 PM",
+          "time": "11:45 AM",
           "url": "https://angelikafilmcenter.com/villageeast/signature-programming"
         },
         {
-          "time": "11:00 AM",
+          "time": "2:45 PM",
           "url": "https://angelikafilmcenter.com/villageeast/signature-programming"
         },
         {
-          "time": "1:50 PM",
+          "time": "4:00 PM",
           "url": "https://angelikafilmcenter.com/villageeast/signature-programming"
         },
         {
-          "time": "4:45 PM",
-          "url": "https://angelikafilmcenter.com/villageeast/signature-programming"
-        },
-        {
-          "time": "7:40 PM",
+          "time": "8:45 PM",
           "url": "https://angelikafilmcenter.com/villageeast/signature-programming"
         }
       ],
       "theater": "Village East by Angelika",
       "source_url": "https://www.imdb.com/showtimes/cinema/US/ci0003464/",
-      "scraped_at": "2025-08-30T10:19:47.061660",
+      "scraped_at": "2025-08-31T10:20:14.970876",
       "imdb_url": "https://www.imdb.com/title/tt26581740/",
-      "rating": "7.8/10 (87,967 votes)",
+      "rating": "7.8/10 (90,253 votes)",
       "content_rating": "R"
     }
   ],
-  "enhanced_at": 1756549199.6069922
+  "enhanced_at": 1756635625.674812
 }
