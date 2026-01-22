@@ -85,7 +85,8 @@ class IMDBTheaterScraper(BaseTheaterScraper):
             if not work_presented or work_presented.get('@type') != 'Movie':
                 continue
             
-            movie_name = work_presented.get('name', '')
+            # Use English alternateName if available, otherwise original name  
+            movie_name = work_presented.get('alternateName', '') or work_presented.get('name', '')
             if not movie_name:
                 continue
             
