@@ -5,6 +5,7 @@ import html
 from datetime import datetime
 import traceback
 from theaters.base_theater import BaseTheaterScraper
+from theaters.selenium_browser import fetch_with_selenium, cleanup_browser
 from imdb_api import IMDBAPIClient
 
 MAX_MOVIES_TO_ENRICH = 50  # Limit for API calls
@@ -12,10 +13,10 @@ MIN_SHOWTIME_LENGTH = 3  # Minimum characters for valid showtime
 IMDB_BASE_URL = "https://www.imdb.com/showtimes/cinema/US"
 
 class IMDBTheaterScraper(BaseTheaterScraper):
-    
-    def __init__(self, theater_name: str, imdb_cinema_id: str, purchase_url: str = "https://filmforum.org/now_playing", theater_description: str = ""):
+
+    def __init__(self, theater_name: str, imdb_cinema_id: str, purchase_url: str = "https://filmforum.org/now_playing", theater_description: str = "", use_selenium: bool = True):
         imdb_url = f"{IMDB_BASE_URL}/{imdb_cinema_id}/"
-        
+
         super().__init__(
             theater_name=theater_name,
             base_url=imdb_url
@@ -24,13 +25,23 @@ class IMDBTheaterScraper(BaseTheaterScraper):
         self.purchase_url = purchase_url
         self.theater_description = theater_description
         self.api_client = IMDBAPIClient()
+        self.use_selenium = use_selenium
     
     def scrape_showtimes(self, days_ahead: int = 3) -> List[Dict]:
         movies = []
-        
+
         try:
-            soup = self._make_request(self.base_url)
-            print(f"Fetched IMDB content for {self.theater_name}")
+            if self.use_selenium:
+                # Use Selenium to bypass blocking
+                soup = fetch_with_selenium(
+                    self.base_url,
+                    wait_for_selector='script[type="application/ld+json"]',
+                    timeout=15
+                )
+                print(f"Fetched IMDB content for {self.theater_name} (via Selenium)")
+            else:
+                soup = self._make_request(self.base_url)
+                print(f"Fetched IMDB content for {self.theater_name}")
             
             # Extract JSON-LD structured data
             json_ld_data = self._extract_json_ld_data(soup)
@@ -54,20 +65,27 @@ class IMDBTheaterScraper(BaseTheaterScraper):
     def _extract_json_ld_data(self, soup) -> Optional[Dict]:
         # Look for JSON-LD script tags
         script_tags = soup.find_all('script', type='application/ld+json')
-        
-        for script in script_tags:
+        print(f"  Found {len(script_tags)} JSON-LD script tags")
+
+        for i, script in enumerate(script_tags):
             try:
-                data = json.loads(script.get_text())
-                
+                text = script.get_text()
+                print(f"  Script {i}: {len(text)} chars")
+                data = json.loads(text)
+
                 # Check if this looks like theater data
-                if (isinstance(data, dict) and 
-                    data.get('@type') == 'MovieTheater' and
-                    'event' in data):
-                    return data
-                    
-            except json.JSONDecodeError:
+                if isinstance(data, dict):
+                    dtype = data.get('@type', 'unknown')
+                    print(f"  Script {i} type: {dtype}")
+                    if dtype == 'MovieTheater' and 'event' in data:
+                        events = data.get('event', [])
+                        print(f"  Found MovieTheater with {len(events)} events")
+                        return data
+
+            except json.JSONDecodeError as e:
+                print(f"  Script {i}: JSON decode error - {e}")
                 continue
-        
+
         return None
     
     def _process_json_ld_data(self, json_ld_data: Dict) -> List[Dict]:
@@ -99,12 +117,24 @@ class IMDBTheaterScraper(BaseTheaterScraper):
             
             # Initialize movie data if first time seeing this title
             if movie_name not in movies_data:
+                # Try to get poster from JSON-LD image field
+                poster_url = ''
+                if 'image' in work_presented:
+                    img = work_presented['image']
+                    if isinstance(img, str):
+                        poster_url = img
+                    elif isinstance(img, dict):
+                        poster_url = img.get('url', '') or img.get('contentUrl', '')
+                if poster_url:
+                    print(f"  Got poster from JSON-LD for '{movie_name}'")
+
                 movies_data[movie_name] = {
                     'title': movie_name,
                     'description': self._extract_movie_description(work_presented),
                     'showtimes': [],
                     'showtime_links': [],
                     'imdb_url': work_presented.get('url', ''),
+                    'poster_url': poster_url,
                     'rating': self._extract_rating(work_presented),
                     'content_rating': work_presented.get('contentRating', '')
                 }
@@ -143,13 +173,17 @@ class IMDBTheaterScraper(BaseTheaterScraper):
             
             # Add extra metadata
             standardized['imdb_url'] = movie_data.get('imdb_url', '')
+            standardized['poster_url'] = movie_data.get('poster_url', '')
             standardized['rating'] = movie_data.get('rating', '')
             standardized['content_rating'] = movie_data.get('content_rating', '')
             
             if self.validate_movie_data(standardized):
-                # Enrich with IMDB API data
-                enriched_movie = self.api_client.enrich_movie_data(standardized)
-                movies.append(enriched_movie)
+                # Only call API if we don't have poster from JSON-LD
+                if not standardized.get('poster_url'):
+                    enriched_movie = self.api_client.enrich_movie_data(standardized)
+                    movies.append(enriched_movie)
+                else:
+                    movies.append(standardized)
         
         return movies
     

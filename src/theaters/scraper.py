@@ -3,6 +3,7 @@ import os
 from datetime import datetime
 from typing import List, Dict
 from theaters.theater_registry import theater_registry
+from theaters.selenium_browser import cleanup_browser
 
 class CentralizedScraper:
     def __init__(self):
@@ -50,14 +51,18 @@ class CentralizedScraper:
     
     def run(self):
         print("Starting centralized scraper...")
-        movies = self.scrape_all_theaters()
-        
-        if movies:
-            self.save_data(movies)
-            return movies
-        else:
-            print("No movies found. Loading previous data if available...")
-            return self.load_data()
+        try:
+            movies = self.scrape_all_theaters()
+
+            if movies:
+                self.save_data(movies)
+                return movies
+            else:
+                print("No movies found. Loading previous data if available...")
+                return self.load_data()
+        finally:
+            # Clean up Selenium browser
+            cleanup_browser()
 
 def main():
     scraper = CentralizedScraper()

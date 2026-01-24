@@ -96,18 +96,30 @@ class IMDBAPIClient:
             
             if response.status_code == 200:
                 data = response.json()
-                
+                print(f"  API response keys: {list(data.keys())}")
+
                 # Look for the best match in search results using new API format
                 if 'titles' in data and data['titles']:
                     # Take the first result
                     movie_result = data['titles'][0]
-                    
+                    print(f"  Result keys: {list(movie_result.keys())}")
+
+                    # Extract poster URL - try multiple paths
+                    poster_url = ''
+                    if 'primaryImage' in movie_result:
+                        img = movie_result['primaryImage']
+                        if isinstance(img, dict):
+                            poster_url = img.get('url', '')
+                        elif isinstance(img, str):
+                            poster_url = img
+                    print(f"  Poster URL: {poster_url[:50] if poster_url else 'NONE'}...")
+
                     # Extract movie data directly from search result
                     movie_data = {
                         'imdb_id': movie_result.get('id', ''),
                         'title': movie_result.get('primaryTitle', ''),
                         'year': str(movie_result.get('startYear', '')),
-                        'poster_url': movie_result.get('primaryImage', {}).get('url', ''),
+                        'poster_url': poster_url,
                         'plot': '',  # Not available in search results
                         'genres': [],  # Not available in search results
                         'director': '',  # Not available in search results
@@ -117,7 +129,7 @@ class IMDBAPIClient:
                         'votes': str(movie_result.get('rating', {}).get('voteCount', '')),
                         'imdb_url': f"https://www.imdb.com/title/{movie_result.get('id', '')}/"
                     }
-                    
+
                     return movie_data
                 
             else:
