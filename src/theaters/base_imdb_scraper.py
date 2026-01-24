@@ -117,12 +117,24 @@ class IMDBTheaterScraper(BaseTheaterScraper):
             
             # Initialize movie data if first time seeing this title
             if movie_name not in movies_data:
+                # Try to get poster from JSON-LD image field
+                poster_url = ''
+                if 'image' in work_presented:
+                    img = work_presented['image']
+                    if isinstance(img, str):
+                        poster_url = img
+                    elif isinstance(img, dict):
+                        poster_url = img.get('url', '') or img.get('contentUrl', '')
+                if poster_url:
+                    print(f"  Got poster from JSON-LD for '{movie_name}'")
+
                 movies_data[movie_name] = {
                     'title': movie_name,
                     'description': self._extract_movie_description(work_presented),
                     'showtimes': [],
                     'showtime_links': [],
                     'imdb_url': work_presented.get('url', ''),
+                    'poster_url': poster_url,
                     'rating': self._extract_rating(work_presented),
                     'content_rating': work_presented.get('contentRating', '')
                 }
@@ -161,13 +173,17 @@ class IMDBTheaterScraper(BaseTheaterScraper):
             
             # Add extra metadata
             standardized['imdb_url'] = movie_data.get('imdb_url', '')
+            standardized['poster_url'] = movie_data.get('poster_url', '')
             standardized['rating'] = movie_data.get('rating', '')
             standardized['content_rating'] = movie_data.get('content_rating', '')
             
             if self.validate_movie_data(standardized):
-                # Enrich with IMDB API data
-                enriched_movie = self.api_client.enrich_movie_data(standardized)
-                movies.append(enriched_movie)
+                # Only call API if we don't have poster from JSON-LD
+                if not standardized.get('poster_url'):
+                    enriched_movie = self.api_client.enrich_movie_data(standardized)
+                    movies.append(enriched_movie)
+                else:
+                    movies.append(standardized)
         
         return movies
     
