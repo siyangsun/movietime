@@ -5,6 +5,7 @@ import html
 from datetime import datetime
 import traceback
 from theaters.base_theater import BaseTheaterScraper
+from theaters.selenium_browser import fetch_with_selenium, cleanup_browser
 from imdb_api import IMDBAPIClient
 
 MAX_MOVIES_TO_ENRICH = 50  # Limit for API calls
@@ -12,10 +13,10 @@ MIN_SHOWTIME_LENGTH = 3  # Minimum characters for valid showtime
 IMDB_BASE_URL = "https://www.imdb.com/showtimes/cinema/US"
 
 class IMDBTheaterScraper(BaseTheaterScraper):
-    
-    def __init__(self, theater_name: str, imdb_cinema_id: str, purchase_url: str = "https://filmforum.org/now_playing", theater_description: str = ""):
+
+    def __init__(self, theater_name: str, imdb_cinema_id: str, purchase_url: str = "https://filmforum.org/now_playing", theater_description: str = "", use_selenium: bool = True):
         imdb_url = f"{IMDB_BASE_URL}/{imdb_cinema_id}/"
-        
+
         super().__init__(
             theater_name=theater_name,
             base_url=imdb_url
@@ -24,13 +25,23 @@ class IMDBTheaterScraper(BaseTheaterScraper):
         self.purchase_url = purchase_url
         self.theater_description = theater_description
         self.api_client = IMDBAPIClient()
+        self.use_selenium = use_selenium
     
     def scrape_showtimes(self, days_ahead: int = 3) -> List[Dict]:
         movies = []
-        
+
         try:
-            soup = self._make_request(self.base_url)
-            print(f"Fetched IMDB content for {self.theater_name}")
+            if self.use_selenium:
+                # Use Selenium to bypass blocking
+                soup = fetch_with_selenium(
+                    self.base_url,
+                    wait_for_selector='script[type="application/ld+json"]',
+                    timeout=15
+                )
+                print(f"Fetched IMDB content for {self.theater_name} (via Selenium)")
+            else:
+                soup = self._make_request(self.base_url)
+                print(f"Fetched IMDB content for {self.theater_name}")
             
             # Extract JSON-LD structured data
             json_ld_data = self._extract_json_ld_data(soup)
@@ -54,20 +65,27 @@ class IMDBTheaterScraper(BaseTheaterScraper):
     def _extract_json_ld_data(self, soup) -> Optional[Dict]:
         # Look for JSON-LD script tags
         script_tags = soup.find_all('script', type='application/ld+json')
-        
-        for script in script_tags:
+        print(f"  Found {len(script_tags)} JSON-LD script tags")
+
+        for i, script in enumerate(script_tags):
             try:
-                data = json.loads(script.get_text())
-                
+                text = script.get_text()
+                print(f"  Script {i}: {len(text)} chars")
+                data = json.loads(text)
+
                 # Check if this looks like theater data
-                if (isinstance(data, dict) and 
-                    data.get('@type') == 'MovieTheater' and
-                    'event' in data):
-                    return data
-                    
-            except json.JSONDecodeError:
+                if isinstance(data, dict):
+                    dtype = data.get('@type', 'unknown')
+                    print(f"  Script {i} type: {dtype}")
+                    if dtype == 'MovieTheater' and 'event' in data:
+                        events = data.get('event', [])
+                        print(f"  Found MovieTheater with {len(events)} events")
+                        return data
+
+            except json.JSONDecodeError as e:
+                print(f"  Script {i}: JSON decode error - {e}")
                 continue
-        
+
         return None
     
     def _process_json_ld_data(self, json_ld_data: Dict) -> List[Dict]:
