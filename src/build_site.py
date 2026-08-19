@@ -183,21 +183,24 @@ class SiteBuilder:
         if not movies:
             print("No movies found in data")
             return False
-        
+
+        failed_theaters = data.get('failed_theaters', [])
+
         # Ensure output directory exists
         os.makedirs(self.output_dir, exist_ok=True)
-        
+
         success_count = 0
-        
+
         try:
             # Build theater-organized page (original index.html)
             theaters = self.organize_by_theater(movies)
-            
+
             theater_context = {
                 'theaters': theaters,
                 'total_movies': len(movies),
                 'last_updated': self.format_datetime(data.get('scraped_at', '')),
-                'generated_at': datetime.now().strftime('%B %d, %Y at %I:%M %p')
+                'generated_at': datetime.now().strftime('%B %d, %Y at %I:%M %p'),
+                'failed_theaters': failed_theaters
             }
             
             template = self.env.get_template('index.html')
@@ -219,7 +222,8 @@ class SiteBuilder:
                 'total_movies': len(movies),
                 'theater_count': len(unique_theaters),
                 'last_updated': self.format_datetime(data.get('scraped_at', '')),
-                'generated_at': datetime.now().strftime('%B %d, %Y at %I:%M %p')
+                'generated_at': datetime.now().strftime('%B %d, %Y at %I:%M %p'),
+                'failed_theaters': failed_theaters
             }
             
             time_template = self.env.get_template('by-time.html')

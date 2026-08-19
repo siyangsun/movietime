@@ -66,7 +66,8 @@ class TheaterRegistry:
         Scrape all registered theaters
         """
         results = {}
-        
+        self.failed_theaters: List[str] = []
+
         for theater_id in self._theaters.keys():
             try:
                 scraper = self.get_scraper(theater_id)
@@ -76,7 +77,8 @@ class TheaterRegistry:
             except Exception as e:
                 print(f"Error scraping {theater_id}: {e}")
                 results[theater_id] = []
-        
+                self.failed_theaters.append(theater_id)
+
         return results
 
 # Global registry instance

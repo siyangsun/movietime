@@ -4,6 +4,7 @@ from datetime import datetime
 from typing import List, Dict
 from theaters.theater_registry import theater_registry
 from theaters.selenium_browser import cleanup_browser
+from theaters.theater_configs import get_theater_config, THEATER_CONFIGS
 
 class CentralizedScraper:
     def __init__(self):
@@ -11,18 +12,22 @@ class CentralizedScraper:
     
     def scrape_all_theaters(self) -> List[Dict]:
         all_movies = []
-        
-        # Get results from theater registry
+
         theater_results = theater_registry.scrape_all()
-        
+
+        # Capture failed theaters with friendly names
+        self.failed_theaters = []
+        for tid in getattr(theater_registry, 'failed_theaters', []):
+            name = THEATER_CONFIGS[tid].theater_name if tid in THEATER_CONFIGS else tid
+            self.failed_theaters.append({'id': tid, 'name': name})
+
         for theater_id, movies in theater_results.items():
             if movies:
                 all_movies.extend(movies)
                 print(f"Added {len(movies)} movies from {theater_id}")
-        
-        # Sort by theater name, then by title  
+
         all_movies.sort(key=lambda x: (x.get('theater', ''), x.get('title', '')))
-        
+
         print(f"Total movies scraped: {len(all_movies)}")
         return all_movies
     
@@ -34,6 +39,7 @@ class CentralizedScraper:
             'scraped_at': datetime.now().isoformat(),
             'total_movies': len(movies),
             'theaters': list(set(movie.get('theater', 'Unknown') for movie in movies)),
+            'failed_theaters': getattr(self, 'failed_theaters', []),
             'movies': movies
         }
         

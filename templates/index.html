@@ -537,6 +537,32 @@
             color: var(--color-success);
             font-weight: 700;
         }
+
+        .failed-theaters {
+            background: rgba(160, 80, 60, 0.08);
+            border: 1px dashed #b06050;
+            border-radius: 15px;
+            padding: 12px 20px;
+            margin-top: 15px;
+            font-size: 0.88em;
+            color: #8a4035;
+            display: inline-block;
+        }
+
+        .failed-theaters-label {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .failed-theater-tag {
+            display: inline-block;
+            background: rgba(160, 80, 60, 0.12);
+            border: 1px solid #c07060;
+            border-radius: 10px;
+            padding: 3px 10px;
+            margin: 3px 4px;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
@@ -553,6 +579,15 @@
             </div>
             {% if last_updated %}
             <div class="last-updated">last updated: {{ last_updated }}</div>
+            {% endif %}
+
+            {% if failed_theaters %}
+            <div class="failed-theaters">
+                <div class="failed-theaters-label">couldn't get data today for:</div>
+                {% for theater in failed_theaters %}
+                <span class="failed-theater-tag">{{ theater.name }}</span>
+                {% endfor %}
+            </div>
             {% endif %}
         </header>
 

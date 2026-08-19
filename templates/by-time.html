@@ -170,6 +170,32 @@
             color: var(--color-success);
             font-weight: 700;
         }
+
+        .failed-theaters {
+            background: rgba(160, 80, 60, 0.08);
+            border: 1px dashed #b06050;
+            border-radius: 15px;
+            padding: 10px 18px;
+            margin-top: 12px;
+            font-size: 0.82em;
+            color: #8a4035;
+            display: inline-block;
+        }
+
+        .failed-theaters-label {
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .failed-theater-tag {
+            display: inline-block;
+            background: rgba(160, 80, 60, 0.12);
+            border: 1px solid #c07060;
+            border-radius: 10px;
+            padding: 3px 10px;
+            margin: 3px 4px;
+            font-size: 0.9em;
+        }
         
         .timeline {
             display: grid;
@@ -450,7 +476,16 @@
             {% if last_updated %}
             <div class="last-updated">updated: {{ last_updated }}</div>
             {% endif %}
-            
+
+            {% if failed_theaters %}
+            <div class="failed-theaters">
+                <div class="failed-theaters-label">couldn't get data today for:</div>
+                {% for theater in failed_theaters %}
+                <span class="failed-theater-tag">{{ theater.name }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+
             <div class="time-navigation">
                 <button class="time-nav-btn" onclick="scrollToTimePeriod('morning')">🌅 Morning</button>
                 <button class="time-nav-btn" onclick="scrollToTimePeriod('afternoon')">☀️ Afternoon</button>
