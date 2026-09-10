@@ -22,9 +22,8 @@ class IMDBAPIClient:
     Client for fetching movie metadata from IMDB API
     """
     
-    def __init__(self, base_url: str = API_BASE_URL, use_fallback: bool = True):
+    def __init__(self, base_url: str = API_BASE_URL):
         self.base_url = base_url
-        self.use_fallback = use_fallback
         self.session = requests.Session()
         self.session.headers.update({
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
@@ -33,7 +32,6 @@ class IMDBAPIClient:
         self.last_request_time = 0
         self.min_request_interval = RATE_LIMIT_DELAY
         # Circuit breaker - skip API calls if service is down
-        self.api_available = True
         self.skip_api_calls = False
     
     def _rate_limit(self):
@@ -49,48 +47,36 @@ class IMDBAPIClient:
         
         self.last_request_time = time.time()
     
-    def _handle_api_failure(self, title: str, error_msg: str = "") -> Optional[Dict]:
-        """Handle API failures by disabling future calls and trying fallback"""
+    def _handle_api_failure(self, error_msg: str = "") -> None:
+        """Trip the circuit breaker so the rest of this run skips the API"""
         if error_msg:
             print(error_msg)
         print("API unavailable - disabling further API calls for this session")
         self.skip_api_calls = True
-        self.api_available = False
-        
-        if self.use_fallback:
-            return self._get_fallback_data(title)
         return None
-    
-    def search_movie(self, title: str, year: Optional[int] = None) -> Optional[Dict]:
+
+    def search_movie(self, title: str) -> Optional[Dict]:
         """
         Search for a movie by title
-        
-        Args:
-            title: Movie title to search for
-            year: Optional year to help narrow search
-            
+
         Returns:
             Movie data dictionary or None if not found
         """
         # Skip API calls if we've determined the service is down
         if self.skip_api_calls:
             print(f"Skipping API call for '{title}' - service appears to be down")
-            if self.use_fallback:
-                return self._get_fallback_data(title)
             return None
-        
+
         try:
             self._rate_limit()
-            
+
             # Clean up title for search
             search_title = self._clean_title_for_search(title)
-            
+
             # Try the search endpoint
             search_url = f"{self.base_url}/search/titles"
             params = {'query': search_title, 'limit': SEARCH_LIMIT}
-            if year:
-                params['year'] = year
-            
+
             print(f"Searching IMDB API for: '{search_title}'")
             response = self.session.get(search_url, params=params, timeout=REQUEST_TIMEOUT)
             
@@ -137,19 +123,16 @@ class IMDBAPIClient:
                 
                 # If we get consistent 404s or other errors, treat as API unavailable
                 if response.status_code in API_FAILURE_CODES:
-                    return self._handle_api_failure(title)
-                
+                    return self._handle_api_failure()
+
         except Exception as e:
             error_msg = f"Error searching for movie '{title}': {e}"
-            
+
             # If this is a timeout, mark API as unavailable
             if "timed out" in str(e).lower() or "timeout" in str(e).lower():
-                return self._handle_api_failure(title, error_msg)
-            else:
-                print(error_msg)
-                if self.use_fallback:
-                    return self._get_fallback_data(title)
-        
+                return self._handle_api_failure(error_msg)
+            print(error_msg)
+
         return None
 
     @staticmethod
@@ -248,12 +231,12 @@ class IMDBAPIClient:
 
             print(f"Title details API returned status {response.status_code} for {imdb_id}")
             if response.status_code in API_FAILURE_CODES:
-                self._handle_api_failure(imdb_id)
+                self._handle_api_failure()
 
         except Exception as e:
             error_msg = f"Error fetching title details for '{imdb_id}': {e}"
             if "timed out" in str(e).lower() or "timeout" in str(e).lower():
-                self._handle_api_failure(imdb_id, error_msg)
+                self._handle_api_failure(error_msg)
             else:
                 print(error_msg)
 
@@ -274,60 +257,7 @@ class IMDBAPIClient:
             title = title[4:]
         
         return title
-    
-    def _get_fallback_data(self, title: str) -> Optional[Dict]:
-        """
-        Provide fallback data for common movies when API is unavailable
-        """
-        fallback_movies = {
-            'before sunrise': {
-                'imdb_id': 'tt0112471',
-                'title': 'Before Sunrise',
-                'year': '1995',
-                'poster_url': 'https://m.media-amazon.com/images/M/MV5BZDdiZmI1ZTUtYWI3NC00NTMwLTk3NWMtNDc0OGNjM2I0ZjlmXkEyXkFqcGc@._V1_SX300.jpg',
-                'plot': 'A young man and woman meet on a train in Europe, and wind up spending one evening together in Vienna.',
-                'genres': ['Drama', 'Romance'],
-                'director': 'Richard Linklater',
-                'runtime': '101 min',
-                'rating': '8.1',
-                'votes': '300000',
-                'imdb_url': 'https://www.imdb.com/title/tt0112471/'
-            },
-            'before sunset': {
-                'imdb_id': 'tt0381681',
-                'title': 'Before Sunset',
-                'year': '2004',
-                'poster_url': 'https://m.media-amazon.com/images/M/MV5BMTQ1MjAwNTM5Ml5BMl5BanBnXkFtZTYwNDM0MTc3._V1_SX300.jpg',
-                'plot': 'Nine years after Jesse and Celine first met, they encounter each other again on the French leg of Jesse\'s book tour.',
-                'genres': ['Drama', 'Romance'],
-                'director': 'Richard Linklater',
-                'runtime': '80 min',
-                'rating': '8.1',
-                'votes': '250000',
-                'imdb_url': 'https://www.imdb.com/title/tt0381681/'
-            },
-            'before midnight': {
-                'imdb_id': 'tt2209418',
-                'title': 'Before Midnight',
-                'year': '2013',
-                'poster_url': 'https://m.media-amazon.com/images/M/MV5BMjA5NzgxODE2NF5BMl5BanBnXkFtZTcwNTI1NTI0OQ@@._V1_SX300.jpg',
-                'plot': 'We meet Jesse and Celine nine years on in Greece. Almost two decades have passed since their first meeting.',
-                'genres': ['Drama', 'Romance'],
-                'director': 'Richard Linklater',
-                'runtime': '109 min',
-                'rating': '7.9',
-                'votes': '180000',
-                'imdb_url': 'https://www.imdb.com/title/tt2209418/'
-            }
-        }
-        
-        title_key = title.lower().strip()
-        if title_key in fallback_movies:
-            print(f"Using fallback data for '{title}'")
-            return fallback_movies[title_key]
-        
-        return None
-    
+
     def enrich_movie_data(self, movie_dict: Dict) -> Dict:
         """
         Enrich existing movie data with IMDB API information
@@ -368,42 +298,13 @@ class IMDBAPIClient:
         return movie_dict
 
 
-def enrich_movies_with_imdb_data(movies: List[Dict]) -> List[Dict]:
-    """
-    Enrich a list of movies with IMDB API data
-    
-    Args:
-        movies: List of movie dictionaries
-        
-    Returns:
-        List of enhanced movie dictionaries
-    """
-    client = IMDBAPIClient()
-    enhanced_movies = []
-    
-    print(f"Enriching {len(movies)} movies with IMDB data...")
-    
-    for i, movie in enumerate(movies, 1):
-        print(f"Processing movie {i}/{len(movies)}: {movie.get('title', 'Unknown')}")
-        enhanced_movie = client.enrich_movie_data(movie.copy())
-        enhanced_movies.append(enhanced_movie)
-        
-        # Small delay between movies to be respectful
-        if i < len(movies):
-            time.sleep(0.5)
-    
-    print(f"Completed IMDB enrichment for {len(enhanced_movies)} movies")
-    return enhanced_movies
-
-
 # Test function
 if __name__ == "__main__":
     client = IMDBAPIClient()
-    
-    # Test with a known movie
+
     test_movie = {"title": "Before Sunrise", "description": "Test movie"}
     enhanced = client.enrich_movie_data(test_movie)
-    
+
     print(f"Enhanced movie data:")
     print(f"Title: {enhanced.get('title')}")
     print(f"Poster URL: {enhanced.get('poster_url')}")

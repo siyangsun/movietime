@@ -20,7 +20,7 @@ class BaseTheaterScraper:
         })
         return session
     
-    def scrape_showtimes(self, days_ahead: int = 3) -> List[Dict]:
+    def scrape_showtimes(self) -> List[Dict]:
         raise NotImplementedError("Subclasses must implement scrape_showtimes")
     
     def _make_request(self, url: str, timeout: int = 10) -> BeautifulSoup:
@@ -52,12 +52,5 @@ class BaseTheaterScraper:
         title = movie_data['title']
         if len(title) < 2 or len(title) > 200:
             return False
-        
+
         return True
-    
-    def get_theater_info(self) -> Dict:
-        return {
-            'name': self.theater_name,
-            'url': self.base_url,
-            'scraper_class': self.__class__.__name__
-        }

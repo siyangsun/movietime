@@ -71,42 +71,6 @@ class SiteBuilder:
         except:
             return time(0, 0)
     
-    def get_earliest_showtime(self, movie: Dict) -> time:
-        """Get the earliest showtime for a movie for sorting purposes"""
-        earliest = time(23, 59)  # Start with latest possible time
-        
-        # Check showtime_links first
-        if movie.get('showtime_links'):
-            for showtime_info in movie['showtime_links']:
-                parsed_time = self.parse_showtime(showtime_info.get('time', ''))
-                if parsed_time < earliest:
-                    earliest = parsed_time
-        
-        # Check showtimes if no showtime_links
-        elif movie.get('showtimes'):
-            for showtime in movie['showtimes']:
-                parsed_time = self.parse_showtime(showtime)
-                if parsed_time < earliest:
-                    earliest = parsed_time
-        
-        return earliest
-    
-    def organize_by_time(self, movies: List[Dict]) -> List[Dict]:
-        """Sort movies by their earliest showtime"""
-        # Add earliest_showtime to each movie for sorting
-        for movie in movies:
-            movie['_earliest_showtime'] = self.get_earliest_showtime(movie)
-        
-        # Sort by earliest showtime
-        sorted_movies = sorted(movies, key=lambda x: x['_earliest_showtime'])
-        
-        # Remove the helper field
-        for movie in sorted_movies:
-            if '_earliest_showtime' in movie:
-                del movie['_earliest_showtime']
-        
-        return sorted_movies
-    
     def create_showtimes_timeline(self, movies: List[Dict]) -> List[Dict]:
         """Create a chronological timeline grouped by distinct showtimes"""
         from collections import defaultdict

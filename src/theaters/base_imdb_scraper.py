@@ -5,16 +5,14 @@ import html
 from datetime import datetime
 import traceback
 from theaters.base_theater import BaseTheaterScraper
-from theaters.selenium_browser import fetch_with_selenium, cleanup_browser
+from theaters.selenium_browser import fetch_with_selenium
 from imdb_api import IMDBAPIClient
 
-MAX_MOVIES_TO_ENRICH = 50  # Limit for API calls
-MIN_SHOWTIME_LENGTH = 3  # Minimum characters for valid showtime
 IMDB_BASE_URL = "https://www.imdb.com/showtimes/cinema/US"
 
 class IMDBTheaterScraper(BaseTheaterScraper):
 
-    def __init__(self, theater_name: str, imdb_cinema_id: str, purchase_url: str = "https://filmforum.org/now_playing", theater_description: str = "", use_selenium: bool = True):
+    def __init__(self, theater_name: str, imdb_cinema_id: str, purchase_url: str = "https://filmforum.org/now_playing", use_selenium: bool = True):
         imdb_url = f"{IMDB_BASE_URL}/{imdb_cinema_id}/"
 
         super().__init__(
@@ -23,11 +21,10 @@ class IMDBTheaterScraper(BaseTheaterScraper):
         )
         self.imdb_cinema_id = imdb_cinema_id
         self.purchase_url = purchase_url
-        self.theater_description = theater_description
         self.api_client = IMDBAPIClient()
         self.use_selenium = use_selenium
-    
-    def scrape_showtimes(self, days_ahead: int = 3) -> List[Dict]:
+
+    def scrape_showtimes(self) -> List[Dict]:
         movies = []
 
         try:
