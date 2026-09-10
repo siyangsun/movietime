@@ -331,6 +331,18 @@
             color: var(--color-secondary);
             margin-bottom: 8px;
         }
+
+        .movie-credits {
+            font-size: 0.82em;
+            color: var(--color-text-light);
+            margin-bottom: 4px;
+            line-height: 1.5;
+        }
+
+        .credits-label {
+            color: var(--color-accent);
+            font-weight: 700;
+        }
         
         .summary {
             font-style: italic;
@@ -622,6 +634,18 @@
                             
                             {% if movie.imdb_genres %}
                             <div class="movie-genres">{{ movie.imdb_genres|join(', ') }}</div>
+                            {% endif %}
+
+                            {% if movie.directors %}
+                            <div class="movie-credits">
+                                <span class="credits-label">Director:</span> {{ movie.directors|join(', ') }}
+                            </div>
+                            {% endif %}
+
+                            {% if movie.cast %}
+                            <div class="movie-credits">
+                                <span class="credits-label">Starring:</span> {{ movie.cast|join(', ') }}
+                            </div>
                             {% endif %}
                         </div>
                     </div>

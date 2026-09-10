@@ -151,8 +151,114 @@ class IMDBAPIClient:
                     return self._get_fallback_data(title)
         
         return None
-    
-    
+
+    @staticmethod
+    def _people_names(people, limit: Optional[int] = None) -> List[str]:
+        """Extract display names from a list of person objects (or plain strings)"""
+        names = []
+        for person in people or []:
+            if isinstance(person, dict):
+                name = (person.get('displayName') or person.get('name')
+                        or person.get('primaryName') or person.get('fullName') or '')
+            else:
+                name = str(person)
+            name = name.strip()
+            if name and name not in names:
+                names.append(name)
+            if limit and len(names) >= limit:
+                break
+        return names
+
+    def _fetch_credits(self, imdb_id: str) -> Dict[str, List[str]]:
+        """Fallback: hit /titles/{id}/credits and bucket people by category"""
+        result = {'directors': [], 'cast': []}
+        try:
+            self._rate_limit()
+            url = f"{self.base_url}/titles/{imdb_id}/credits"
+            response = self.session.get(url, params={'pageSize': 50}, timeout=REQUEST_TIMEOUT)
+            if response.status_code != 200:
+                return result
+
+            credits = response.json().get('credits', [])
+            for credit in credits:
+                category = str(credit.get('category', '')).lower()
+                name = credit.get('name')
+                if isinstance(name, dict):
+                    name = (name.get('displayName') or name.get('name') or '')
+                name = (name or '').strip()
+                if not name:
+                    continue
+                if category == 'director':
+                    if name not in result['directors']:
+                        result['directors'].append(name)
+                elif category in ('actor', 'actress') and len(result['cast']) < 3:
+                    if name not in result['cast']:
+                        result['cast'].append(name)
+        except Exception as e:
+            print(f"  Error fetching credits for {imdb_id}: {e}")
+        return result
+
+    def get_title_details(self, imdb_id: str) -> Optional[Dict]:
+        """
+        Fetch full metadata for a title by IMDB id, including directors and
+        top-billed cast.
+
+        Args:
+            imdb_id: IMDB title id, e.g. "tt1375666"
+
+        Returns:
+            Dict with keys: directors (List[str]), cast (List[str] - top 3),
+            genres (List[str]), year (str), plot (str). Returns None on failure.
+        """
+        if not imdb_id or not imdb_id.startswith('tt'):
+            return None
+
+        if self.skip_api_calls:
+            print(f"Skipping title details for '{imdb_id}' - service appears to be down")
+            return None
+
+        try:
+            self._rate_limit()
+            url = f"{self.base_url}/titles/{imdb_id}"
+            print(f"Fetching IMDB title details for: {imdb_id}")
+            response = self.session.get(url, timeout=REQUEST_TIMEOUT)
+
+            if response.status_code == 200:
+                data = response.json()
+
+                # imdbapiTitle carries directors[] and stars[] as arrays of
+                # imdbapiName objects ({id, displayName, ...}).
+                directors = self._people_names(data.get('directors'))
+                cast = self._people_names(data.get('stars'), limit=3)
+
+                # Fall back to the dedicated credits endpoint if the title
+                # payload didn't carry people inline.
+                if not directors or not cast:
+                    fallback = self._fetch_credits(imdb_id)
+                    directors = directors or fallback['directors']
+                    cast = cast or fallback['cast']
+
+                return {
+                    'directors': directors,
+                    'cast': cast[:3],
+                    'genres': data.get('genres') or [],
+                    'year': str(data.get('startYear') or ''),
+                    'plot': data.get('plot') or '',
+                }
+
+            print(f"Title details API returned status {response.status_code} for {imdb_id}")
+            if response.status_code in API_FAILURE_CODES:
+                self._handle_api_failure(imdb_id)
+
+        except Exception as e:
+            error_msg = f"Error fetching title details for '{imdb_id}': {e}"
+            if "timed out" in str(e).lower() or "timeout" in str(e).lower():
+                self._handle_api_failure(imdb_id, error_msg)
+            else:
+                print(error_msg)
+
+        return None
+
     def _clean_title_for_search(self, title: str) -> str:
         """
         Clean movie title for better search results
