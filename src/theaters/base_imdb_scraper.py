@@ -53,11 +53,11 @@ class IMDBTheaterScraper(BaseTheaterScraper):
             
             print(f"Successfully scraped {len(movies)} movies from {self.theater_name}")
             return movies
-            
+
         except Exception as e:
             print(f"Error scraping {self.theater_name} from IMDB: {e}")
             traceback.print_exc()
-            return []
+            raise
     
     def _extract_json_ld_data(self, soup) -> Optional[Dict]:
         # Look for JSON-LD script tags
