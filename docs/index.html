@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>it's movie time!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Maiden+Orange&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Maiden%20Orange');
-        
+
         /* Layout constants */
         :root {
             --container-max-width: 1400px;
@@ -47,7 +49,23 @@
             line-height: 1.7;
             color: var(--color-text);
             background: var(--color-background) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="20" cy="20" r="1" fill="%23d4d0c7" opacity="0.3"/><circle cx="80" cy="40" r="1" fill="%23c8c3b8" opacity="0.2"/><circle cx="40" cy="70" r="1" fill="%23d4d0c7" opacity="0.4"/><circle cx="90" cy="90" r="1" fill="%23c8c3b8" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
-            min-height: 100vh;
+            min-height: 100dvh;
+        }
+
+        a:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+            }
+            .movie-poster:hover, .nav-link:hover, .table-of-contents a:hover,
+            .back-to-top a:hover, .showtime-link:hover {
+                transform: none;
+            }
         }
         
         .container {
@@ -238,25 +256,11 @@
         
         .movies-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: var(--grid-gap);
             margin-top: 20px;
         }
-        
-        /* Responsive grid adjustments */
-        @media (max-width: 1300px) {
-            .movies-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 900px) {
-            .movies-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-        }
-        
+
         .movie-card {
             background: var(--color-surface-alt);
             border: 1px dashed var(--color-border-light);
@@ -292,8 +296,10 @@
         
         .movie-poster {
             flex-shrink: 0;
-            width: var(--poster-width);
-            height: var(--poster-height);
+            width: 100%;
+            max-width: var(--poster-width);
+            height: auto;
+            aspect-ratio: 2 / 3;
             border-radius: 15px;
             object-fit: cover;
             border: 4px solid var(--color-border);
@@ -318,6 +324,7 @@
             margin-bottom: 8px;
             font-weight: 700;
             line-height: 1.3;
+            text-wrap: balance;
         }
         
         .movie-year {
@@ -511,8 +518,7 @@
             }
             
             .movie-poster {
-                width: 240px;
-                height: 360px;
+                max-width: 240px;
             }
         }
         
@@ -524,8 +530,7 @@
             }
             
             .movie-poster {
-                width: 200px;
-                height: 300px;
+                max-width: 200px;
                 margin-bottom: 15px;
             }
             
@@ -629,7 +634,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BZWE2Mjg1NzMtMzljMy00ZDhiLWE5NjYtNGZjODQxMWQyYjAwXkEyXkFqcGc@._V1_.jpg" alt="Atonement poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BZWE2Mjg1NzMtMzljMy00ZDhiLWE5NjYtNGZjODQxMWQyYjAwXkEyXkFqcGc@._V1_.jpg" alt="Atonement poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -688,7 +693,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BNTAyZDg2Y2YtMTYyYS00YTgzLWFhOTgtYmNkMGUyYmM0MWYzXkEyXkFqcGc@._V1_.jpg" alt="Big Girls Don&#39;t Cry poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNTAyZDg2Y2YtMTYyYS00YTgzLWFhOTgtYmNkMGUyYmM0MWYzXkEyXkFqcGc@._V1_.jpg" alt="Big Girls Don&#39;t Cry poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -731,7 +736,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BNjM2YTUzNzgtNWQ0MC00Y2EyLWFjZWEtNTkyNTdkNDlkNzdiXkEyXkFqcGc@._V1_.jpg" alt="Ha-Chan, Shake Your Booty! poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNjM2YTUzNzgtNWQ0MC00Y2EyLWFjZWEtNTkyNTdkNDlkNzdiXkEyXkFqcGc@._V1_.jpg" alt="Ha-Chan, Shake Your Booty! poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -778,7 +783,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMzc0NDdjYjctNWExNi00YWM0LWI2M2UtNmE3YmE1ZmM4MWZhXkEyXkFqcGc@._V1_.jpg" alt="If I Go Will They Miss Me poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMzc0NDdjYjctNWExNi00YWM0LWI2M2UtNmE3YmE1ZmM4MWZhXkEyXkFqcGc@._V1_.jpg" alt="If I Go Will They Miss Me poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -833,7 +838,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BNzQxNTIyODAxMV5BMl5BanBnXkFtZTgwNzQyMDA3OTE@._V1_.jpg" alt="Moonlight poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNzQxNTIyODAxMV5BMl5BanBnXkFtZTgwNzQyMDA3OTE@._V1_.jpg" alt="Moonlight poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -880,7 +885,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMzU2ZGE5YjgtMGRiMC00MDIyLTk4N2EtYTk3NTFiYWI4YWFhXkEyXkFqcGc@._V1_.jpg" alt="Musk poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMzU2ZGE5YjgtMGRiMC00MDIyLTk4N2EtYTk3NTFiYWI4YWFhXkEyXkFqcGc@._V1_.jpg" alt="Musk poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -927,7 +932,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BNzhkYjNjNjQtZmRmYy00MWM5LWIwMDMtYWE2NzFkYjI3MDJiXkEyXkFqcGc@._V1_.jpg" alt="Never After Dark poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNzhkYjNjNjQtZmRmYy00MWM5LWIwMDMtYWE2NzFkYjI3MDJiXkEyXkFqcGc@._V1_.jpg" alt="Never After Dark poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -970,7 +975,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BZjIwYzM5MzEtOTQ4Mi00N2JlLWExZDYtYTE5YTk3MDMwNjI2XkEyXkFqcGc@._V1_.jpg" alt="The Musical poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BZjIwYzM5MzEtOTQ4Mi00N2JlLWExZDYtYTE5YTk3MDMwNjI2XkEyXkFqcGc@._V1_.jpg" alt="The Musical poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -1013,7 +1018,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BZDEwMjk2MjMtMTI3ZS00ODg5LWI2ZDYtOTVkOGZlNzIyYzRjXkEyXkFqcGc@._V1_.jpg" alt="Your Mother Your Mother Your Mother poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BZDEwMjk2MjMtMTI3ZS00ODg5LWI2ZDYtOTVkOGZlNzIyYzRjXkEyXkFqcGc@._V1_.jpg" alt="Your Mother Your Mother Your Mother poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -1086,7 +1091,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BZDA3ZDBhZGMtYTkzNS00ODBhLWJkOGYtNWM1ZjI1ZTg3MDdlXkEyXkFqcGc@._V1_.jpg" alt="Danton poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BZDA3ZDBhZGMtYTkzNS00ODBhLWJkOGYtNWM1ZjI1ZTg3MDdlXkEyXkFqcGc@._V1_.jpg" alt="Danton poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -1129,7 +1134,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BYmU3YWJiZTUtZmEyNS00NjFiLWE0NDctMGJjNDM0MTA2MWE1XkEyXkFqcGc@._V1_.jpg" alt="Filipiñana poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BYmU3YWJiZTUtZmEyNS00NjFiLWE0NDctMGJjNDM0MTA2MWE1XkEyXkFqcGc@._V1_.jpg" alt="Filipiñana poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -1176,7 +1181,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMjAzOTc2NTY2MF5BMl5BanBnXkFtZTgwMjk1MzEyMTE@._V1_.jpg" alt="Korczak poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMjAzOTc2NTY2MF5BMl5BanBnXkFtZTgwMjk1MzEyMTE@._V1_.jpg" alt="Korczak poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -1219,7 +1224,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BYmNmZjZmZjQtM2MxNi00OTBkLWEzNDUtZGVhY2FmMTY3ZDFjXkEyXkFqcGc@._V1_.jpg" alt="Lotna poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BYmNmZjZmZjQtM2MxNi00OTBkLWEzNDUtZGVhY2FmMTY3ZDFjXkEyXkFqcGc@._V1_.jpg" alt="Lotna poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -1262,7 +1267,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BNzJlNDI0NmEtYjU0Yy00NTA0LTkyZDUtMjc1M2VkYzEyNGU1XkEyXkFqcGc@._V1_.jpg" alt="The Scout poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNzJlNDI0NmEtYjU0Yy00NTA0LTkyZDUtMjc1M2VkYzEyNGU1XkEyXkFqcGc@._V1_.jpg" alt="The Scout poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -1321,7 +1326,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BNjRlYzFmZjMtMmMzZC00NzVhLTlkOTctM2I2M2U4N2ZhZWNiXkEyXkFqcGc@._V1_.jpg" alt="Unzipped poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNjRlYzFmZjMtMmMzZC00NzVhLTlkOTctM2I2M2U4N2ZhZWNiXkEyXkFqcGc@._V1_.jpg" alt="Unzipped poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -1384,7 +1389,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMjAzNDU0NzIwMF5BMl5BanBnXkFtZTgwMjA0MjkwMTE@._V1_.jpg" alt="Wesele poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMjAzNDU0NzIwMF5BMl5BanBnXkFtZTgwMjA0MjkwMTE@._V1_.jpg" alt="Wesele poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -1427,7 +1432,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMGViODVkOTQtMGE4OC00YTJlLWJjNTEtYzFkMTkwY2FjNzQ0XkEyXkFqcGc@._V1_.jpg" alt="You Had to Be There: How the Toronto Godspell Ignited the Comedy Revolution, Spread Love &amp; Overalls, and Created a Community That Changed the World (in a Canadian Kind of Way) poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMGViODVkOTQtMGE4OC00YTJlLWJjNTEtYzFkMTkwY2FjNzQ0XkEyXkFqcGc@._V1_.jpg" alt="You Had to Be There: How the Toronto Godspell Ignited the Comedy Revolution, Spread Love &amp; Overalls, and Created a Community That Changed the World (in a Canadian Kind of Way) poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -1488,7 +1493,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BYmUzN2UwMzEtNjFhYS00MDJjLTkzM2MtNmIzM2ViNjhlYmI0XkEyXkFqcGc@._V1_.jpg" alt="9 Temples to Heaven poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BYmUzN2UwMzEtNjFhYS00MDJjLTkzM2MtNmIzM2ViNjhlYmI0XkEyXkFqcGc@._V1_.jpg" alt="9 Temples to Heaven poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -1531,7 +1536,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BN2EwY2E2MDYtOTljYy00OWZlLTgyZDktZDI4ZDRmMDQ0MjE2XkEyXkFqcGc@._V1_.jpg" alt="Everytime poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BN2EwY2E2MDYtOTljYy00OWZlLTgyZDktZDI4ZDRmMDQ0MjE2XkEyXkFqcGc@._V1_.jpg" alt="Everytime poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -1574,7 +1579,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMTU1MTU3NjAxMV5BMl5BanBnXkFtZTcwMDU4ODc2OQ@@._V1_.jpg" alt="Go Public: A Documentary Film Project poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMTU1MTU3NjAxMV5BMl5BanBnXkFtZTcwMDU4ODc2OQ@@._V1_.jpg" alt="Go Public: A Documentary Film Project poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -1617,7 +1622,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMTMxODA1MjUxOV5BMl5BanBnXkFtZTcwMjU4MTEyMQ@@._V1_.jpg" alt="Goodbye South, Goodbye poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMTMxODA1MjUxOV5BMl5BanBnXkFtZTcwMjU4MTEyMQ@@._V1_.jpg" alt="Goodbye South, Goodbye poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -1701,7 +1706,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BM2Y3MmIzZGUtMzgzMC00NjZkLTkzMGEtZThjNGY3NDU4YmRhXkEyXkFqcGc@._V1_.jpg" alt="Krynytsya dlya sprahlykh poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BM2Y3MmIzZGUtMzgzMC00NjZkLTkzMGEtZThjNGY3NDU4YmRhXkEyXkFqcGc@._V1_.jpg" alt="Krynytsya dlya sprahlykh poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -1744,7 +1749,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BYTBlMGQwYmYtZWRlZi00ZTMzLThkYjgtMjkwMzczZTllZDg3XkEyXkFqcGc@._V1_.jpg" alt="The Day She Returns poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BYTBlMGQwYmYtZWRlZi00ZTMzLThkYjgtMjkwMzczZTllZDg3XkEyXkFqcGc@._V1_.jpg" alt="The Day She Returns poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -1801,7 +1806,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMTU1MTU3NjAxMV5BMl5BanBnXkFtZTcwMDU4ODc2OQ@@._V1_.jpg" alt="Go Public: A Documentary Film Project poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMTU1MTU3NjAxMV5BMl5BanBnXkFtZTcwMDU4ODc2OQ@@._V1_.jpg" alt="Go Public: A Documentary Film Project poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -1844,7 +1849,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BNGFlOWJlZWItMGIwNi00ZjlhLWFkZjctMmUwM2EyMmM4ODYwXkEyXkFqcGc@._V1_.jpg" alt="Les roches rouges poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNGFlOWJlZWItMGIwNi00ZjlhLWFkZjctMmUwM2EyMmM4ODYwXkEyXkFqcGc@._V1_.jpg" alt="Les roches rouges poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -1887,7 +1892,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BOTJkOWY1ODAtZDM1Yy00MTEyLWI3NmMtNGVmMzc2NjU3YTJkXkEyXkFqcGc@._V1_.jpg" alt="The Diary of a Chambermaid poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BOTJkOWY1ODAtZDM1Yy00MTEyLWI3NmMtNGVmMzc2NjU3YTJkXkEyXkFqcGc@._V1_.jpg" alt="The Diary of a Chambermaid poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -1944,7 +1949,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMjA3ZmU3ZjEtMmJkNC00MzZjLWEzZTEtZDdmN2Y3OWJhMmFjXkEyXkFqcGc@._V1_.jpg" alt="Altered States poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMjA3ZmU3ZjEtMmJkNC00MzZjLWEzZTEtZDdmN2Y3OWJhMmFjXkEyXkFqcGc@._V1_.jpg" alt="Altered States poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -1987,7 +1992,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMDExMjJkMTAtNjYxZC00Y2ZmLTlkMDQtMGRjOTExYmIwNWZhXkEyXkFqcGc@._V1_.jpg" alt="André Leon Talley: Style Is Forever poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMDExMjJkMTAtNjYxZC00Y2ZmLTlkMDQtMGRjOTExYmIwNWZhXkEyXkFqcGc@._V1_.jpg" alt="André Leon Talley: Style Is Forever poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -2026,7 +2031,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BNmJkZjZjMzctZGVlOS00NDI1LWEzMjctMjk2Nzc1Nzk5NmZkXkEyXkFqcGc@._V1_.jpg" alt="Begotten poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNmJkZjZjMzctZGVlOS00NDI1LWEzMjctMjk2Nzc1Nzk5NmZkXkEyXkFqcGc@._V1_.jpg" alt="Begotten poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -2073,7 +2078,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMzAyOWUyNDgtZjYxOS00NTA3LThlZTItY2RkZmM3NTlmZDliXkEyXkFqcGc@._V1_.jpg" alt="Free Leonard Peltier poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMzAyOWUyNDgtZjYxOS00NTA3LThlZTItY2RkZmM3NTlmZDliXkEyXkFqcGc@._V1_.jpg" alt="Free Leonard Peltier poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -2124,7 +2129,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BZjc4YzQ1NzQtMTA0OS00MmUwLWJkNzktZmY1YmQ3NDVjNmUyXkEyXkFqcGc@._V1_.jpg" alt="Lisztomania poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BZjc4YzQ1NzQtMTA0OS00MmUwLWJkNzktZmY1YmQ3NDVjNmUyXkEyXkFqcGc@._V1_.jpg" alt="Lisztomania poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -2167,7 +2172,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMzA5YjdhYTYtNmY5ZS00Mzg1LTkyNDItOGQ1YzQ1MDYzNWJlXkEyXkFqcGc@._V1_.jpg" alt="Naza poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMzA5YjdhYTYtNmY5ZS00Mzg1LTkyNDItOGQ1YzQ1MDYzNWJlXkEyXkFqcGc@._V1_.jpg" alt="Naza poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -2230,7 +2235,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMzRhOTZhNGMtNDM2ZS00YTA1LTg1ZGItZDEyNTI1NTdlOTgzXkEyXkFqcGc@._V1_.jpg" alt="The History of Concrete poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMzRhOTZhNGMtNDM2ZS00YTA1LTg1ZGItZDEyNTI1NTdlOTgzXkEyXkFqcGc@._V1_.jpg" alt="The History of Concrete poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -2301,7 +2306,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMWNkYTBhZDctYjFmMi00Mjc3LTlkZGYtMzRiYzgxOGVhYmNmXkEyXkFqcGc@._V1_.jpg" alt="The Incomer poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMWNkYTBhZDctYjFmMi00Mjc3LTlkZGYtMzRiYzgxOGVhYmNmXkEyXkFqcGc@._V1_.jpg" alt="The Incomer poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -2348,7 +2353,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BM2M4MjlmMTItYmU4Ni00ZTM3LTk0MzYtODVkNzJlMDc0OTIzXkEyXkFqcGc@._V1_.jpg" alt="V/H/S/Mixtape poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BM2M4MjlmMTItYmU4Ni00ZTM3LTk0MzYtODVkNzJlMDc0OTIzXkEyXkFqcGc@._V1_.jpg" alt="V/H/S/Mixtape poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -2391,7 +2396,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BZTIxYmI3YzctMjI3NC00NDllLWIzYmYtYWQ0NmJjZmQ2NDVjXkEyXkFqcGc@._V1_.jpg" alt="Whore poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BZTIxYmI3YzctMjI3NC00NDllLWIzYmYtYWQ0NmJjZmQ2NDVjXkEyXkFqcGc@._V1_.jpg" alt="Whore poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -2448,7 +2453,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BNDMyNmU5ZGQtNzhiZi00NjRjLTk3NGUtMmQ5YWU4ODlkNTBhXkEyXkFqcGc@._V1_.jpg" alt="Alien: Resurrection poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNDMyNmU5ZGQtNzhiZi00NjRjLTk3NGUtMmQ5YWU4ODlkNTBhXkEyXkFqcGc@._V1_.jpg" alt="Alien: Resurrection poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -2491,7 +2496,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BNDQ4ZmYxODctZDVlZC00OTcxLWJjOGItZjRlMzk4MDA1Yjg1XkEyXkFqcGc@._V1_.jpg" alt="Chungking Express poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNDQ4ZmYxODctZDVlZC00OTcxLWJjOGItZjRlMzk4MDA1Yjg1XkEyXkFqcGc@._V1_.jpg" alt="Chungking Express poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -2534,7 +2539,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BNzljMjA3MTQtMjM1OS00OGJjLWJiYzctZDRiMTk1NWI5YzQ5XkEyXkFqcGc@._V1_.jpg" alt="Ghost in the Shell poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNzljMjA3MTQtMjM1OS00OGJjLWJiYzctZDRiMTk1NWI5YzQ5XkEyXkFqcGc@._V1_.jpg" alt="Ghost in the Shell poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -2577,7 +2582,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BZGJkYjkyMDUtM2U3ZC00NDM3LWI0MzItZjU5MmYwYjg2YmIwXkEyXkFqcGc@._V1_.jpg" alt="Paprika poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BZGJkYjkyMDUtM2U3ZC00NDM3LWI0MzItZjU5MmYwYjg2YmIwXkEyXkFqcGc@._V1_.jpg" alt="Paprika poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -2620,7 +2625,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMDI3M2FiMTUtZTBiNS00NWU3LWI4ZjMtOWQ4NjU5OTUxZDEwXkEyXkFqcGc@._V1_.jpg" alt="Peking Opera Blues poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMDI3M2FiMTUtZTBiNS00NWU3LWI4ZjMtOWQ4NjU5OTUxZDEwXkEyXkFqcGc@._V1_.jpg" alt="Peking Opera Blues poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -2663,7 +2668,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BN2I2OGQyYTMtOTc1Zi00YjljLTlhZDUtOGI5ZThjYWJhYTYxXkEyXkFqcGc@._V1_.jpg" alt="Ryuichi Sakamoto: Opus poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BN2I2OGQyYTMtOTc1Zi00YjljLTlhZDUtOGI5ZThjYWJhYTYxXkEyXkFqcGc@._V1_.jpg" alt="Ryuichi Sakamoto: Opus poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -2706,7 +2711,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BODJmNGZmMTYtNjA5NC00MjZjLWJkOGMtZWQyNmQ3YzRhMDU4XkEyXkFqcGc@._V1_.jpg" alt="Sympathy for Mr. Vengeance poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BODJmNGZmMTYtNjA5NC00MjZjLWJkOGMtZWQyNmQ3YzRhMDU4XkEyXkFqcGc@._V1_.jpg" alt="Sympathy for Mr. Vengeance poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -2749,7 +2754,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BNjE1YzNkY2YtMGI0Mi00OWJjLWExYmMtNDBmNzI5NjhmMGM1XkEyXkFqcGc@._V1_.jpg" alt="Ulysses&#39; Gaze poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNjE1YzNkY2YtMGI0Mi00OWJjLWExYmMtNDBmNzI5NjhmMGM1XkEyXkFqcGc@._V1_.jpg" alt="Ulysses&#39; Gaze poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -2806,7 +2811,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BN2E0YTg1M2YtOGQyYi00NDFkLTk3NzUtYmEyNTZhYThhZDQ0XkEyXkFqcGc@._V1_.jpg" alt="Digger poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BN2E0YTg1M2YtOGQyYi00NDFkLTk3NzUtYmEyNTZhYThhZDQ0XkEyXkFqcGc@._V1_.jpg" alt="Digger poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -2857,7 +2862,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMWJlY2JiNTMtYTAwYy00NGFiLTkwYTEtM2VmNDc4MzM5YmJiXkEyXkFqcGc@._V1_.jpg" alt="Forgotten Island poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMWJlY2JiNTMtYTAwYy00NGFiLTkwYTEtM2VmNDc4MzM5YmJiXkEyXkFqcGc@._V1_.jpg" alt="Forgotten Island poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -2908,7 +2913,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMDVlMTRhMjgtMjdmZi00NjJhLWExMmYtODExNWJkZGZjNjdhXkEyXkFqcGc@._V1_.jpg" alt="Heart of the Beast poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMDVlMTRhMjgtMjdmZi00NjJhLWExMmYtODExNWJkZGZjNjdhXkEyXkFqcGc@._V1_.jpg" alt="Heart of the Beast poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -2951,7 +2956,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMTcyZGI2NWQtOTU3NS00NTEyLTliNDItNTQyNmFkMGZmZGQzXkEyXkFqcGc@._V1_.jpg" alt="Primetime poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMTcyZGI2NWQtOTU3NS00NTEyLTliNDItNTQyNmFkMGZmZGQzXkEyXkFqcGc@._V1_.jpg" alt="Primetime poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -3002,7 +3007,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BOGZjZWI1NTItOGUwZC00YWZkLWIxZWEtNzE2ZTIxODdjNmZmXkEyXkFqcGc@._V1_.jpg" alt="Resident Evil poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BOGZjZWI1NTItOGUwZC00YWZkLWIxZWEtNzE2ZTIxODdjNmZmXkEyXkFqcGc@._V1_.jpg" alt="Resident Evil poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -3049,7 +3054,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMzRhOTZhNGMtNDM2ZS00YTA1LTg1ZGItZDEyNTI1NTdlOTgzXkEyXkFqcGc@._V1_.jpg" alt="The History of Concrete poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMzRhOTZhNGMtNDM2ZS00YTA1LTg1ZGItZDEyNTI1NTdlOTgzXkEyXkFqcGc@._V1_.jpg" alt="The History of Concrete poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -3100,7 +3105,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BYjdlZTgzZDUtMmVjYy00M2EyLWFlNGMtNjVhYjM2ODNmZjEzXkEyXkFqcGc@._V1_.jpg" alt="The Social Reckoning poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BYjdlZTgzZDUtMmVjYy00M2EyLWFlNGMtNjVhYjM2ODNmZjEzXkEyXkFqcGc@._V1_.jpg" alt="The Social Reckoning poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -3147,7 +3152,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BZDEwMjk2MjMtMTI3ZS00ODg5LWI2ZDYtOTVkOGZlNzIyYzRjXkEyXkFqcGc@._V1_.jpg" alt="Your Mother Your Mother Your Mother poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BZDEwMjk2MjMtMTI3ZS00ODg5LWI2ZDYtOTVkOGZlNzIyYzRjXkEyXkFqcGc@._V1_.jpg" alt="Your Mother Your Mother Your Mother poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -3212,7 +3217,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BN2E0YTg1M2YtOGQyYi00NDFkLTk3NzUtYmEyNTZhYThhZDQ0XkEyXkFqcGc@._V1_.jpg" alt="Digger poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BN2E0YTg1M2YtOGQyYi00NDFkLTk3NzUtYmEyNTZhYThhZDQ0XkEyXkFqcGc@._V1_.jpg" alt="Digger poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -3267,7 +3272,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMDVlMTRhMjgtMjdmZi00NjJhLWExMmYtODExNWJkZGZjNjdhXkEyXkFqcGc@._V1_.jpg" alt="Heart of the Beast poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMDVlMTRhMjgtMjdmZi00NjJhLWExMmYtODExNWJkZGZjNjdhXkEyXkFqcGc@._V1_.jpg" alt="Heart of the Beast poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -3310,7 +3315,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMDllNjIxZTYtYjIxZi00ZGNmLTliYTAtOTM0NTQ0OThkN2E4XkEyXkFqcGc@._V1_.jpg" alt="Once Upon a Time in the Middle East poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMDllNjIxZTYtYjIxZi00ZGNmLTliYTAtOTM0NTQ0OThkN2E4XkEyXkFqcGc@._V1_.jpg" alt="Once Upon a Time in the Middle East poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -3357,7 +3362,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BMTcyZGI2NWQtOTU3NS00NTEyLTliNDItNTQyNmFkMGZmZGQzXkEyXkFqcGc@._V1_.jpg" alt="Primetime poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMTcyZGI2NWQtOTU3NS00NTEyLTliNDItNTQyNmFkMGZmZGQzXkEyXkFqcGc@._V1_.jpg" alt="Primetime poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -3428,7 +3433,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BOTRlMWM2ZmQtNTljZC00MTg0LTlhNzQtZDg2N2FiMmU1NWY1XkEyXkFqcGc@._V1_.jpg" alt="Teenage Sex and Death at Camp Miasma poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BOTRlMWM2ZmQtNTljZC00MTg0LTlhNzQtZDg2N2FiMmU1NWY1XkEyXkFqcGc@._V1_.jpg" alt="Teenage Sex and Death at Camp Miasma poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -3475,7 +3480,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BY2Q3ZDYxMzYtNTRiOC00ODA0LTkyZTMtZWVjYzcxZjIzMGY5XkEyXkFqcGc@._V1_.jpg" alt="The Deputy poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BY2Q3ZDYxMzYtNTRiOC00ODA0LTkyZTMtZWVjYzcxZjIzMGY5XkEyXkFqcGc@._V1_.jpg" alt="The Deputy poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -3518,7 +3523,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BNTcyNmJlZmQtNDUwYy00NDBjLTg1NGQtYTY2Y2UxMWM3NmI1XkEyXkFqcGc@._V1_.jpg" alt="The Odyssey poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNTcyNmJlZmQtNDUwYy00NDBjLTg1NGQtYTY2Y2UxMWM3NmI1XkEyXkFqcGc@._V1_.jpg" alt="The Odyssey poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
@@ -3569,7 +3574,7 @@
                 <div class="movie-card">
                     <div class="movie-header">
                         
-                        <img src="https://m.media-amazon.com/images/M/MV5BYjdlZTgzZDUtMmVjYy00M2EyLWFlNGMtNjVhYjM2ODNmZjEzXkEyXkFqcGc@._V1_.jpg" alt="The Social Reckoning poster" class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BYjdlZTgzZDUtMmVjYy00M2EyLWFlNGMtNjVhYjM2ODNmZjEzXkEyXkFqcGc@._V1_.jpg" alt="The Social Reckoning poster" class="movie-poster" loading="lazy" decoding="async">
                         
                         
                         <div class="movie-info">
